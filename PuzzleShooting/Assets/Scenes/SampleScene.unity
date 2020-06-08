@@ -164,7 +164,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -188,7 +188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 919847670}
@@ -365,7 +365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1028805153}
-  - component: {fileID: 1028805152}
   - component: {fileID: 1028805154}
   m_Layer: 0
   m_Name: GameController
@@ -374,19 +373,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1028805152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028805151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 456dde5b36895864ca6b0021e3677489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 1476232620}
 --- !u!4 &1028805153
 Transform:
   m_ObjectHideFlags: 0
@@ -413,7 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b188d2a9b423e64f806f1eba35834ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 3820159632699325457, guid: e5f9b9147865a564397db3685795a09c, type: 3}
+  PlayerBullet: {fileID: 7142290111055938864, guid: 01246a8af6dcc9c48af42e03dd4273bd,
+    type: 3}
 --- !u!1 &1476232620
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +413,7 @@ GameObject:
   - component: {fileID: 1476232623}
   - component: {fileID: 1476232622}
   - component: {fileID: 1476232621}
+  - component: {fileID: 1476232625}
   m_Layer: 0
   m_Name: Player
   m_TagString: PLAYER
@@ -442,7 +430,7 @@ BoxCollider:
   m_GameObject: {fileID: 1476232620}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -506,3 +494,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1476232625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476232620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456dde5b36895864ca6b0021e3677489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
