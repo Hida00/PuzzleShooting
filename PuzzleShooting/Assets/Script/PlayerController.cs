@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
     float speed = 0.15f;
 
     //プレイヤーの体力
-    [NonSerialized]
-    public float health_Poiint = 100f;
+    public float health_Point = 100f;
 
     void Start()
     {
@@ -32,7 +31,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift)) speedMag = 0.3f;
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftShift)) speedMag = 1.0f;
 
-        if(health_Poiint <= 0.00f)
+        if(health_Point <= 0.00f)
         {
             UnityEditor.EditorApplication.isPlaying = false;
         }

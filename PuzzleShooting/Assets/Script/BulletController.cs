@@ -35,7 +35,7 @@ public class BulletController : MonoBehaviour
         {
             //ここにプレイヤーが弾に当たった時の処理を書く
             Debug.Log("Hit!");
-            _playerController.health_Poiint -= 10f;
+            _playerController.health_Point -= 10f;
         }
     }
 }
