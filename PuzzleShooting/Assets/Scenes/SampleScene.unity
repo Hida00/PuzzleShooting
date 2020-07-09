@@ -833,6 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456dde5b36895864ca6b0021e3677489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health_Point: 100
 --- !u!1 &1489992834
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,7 +952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d870d89bea35b8488ac9b58cfcd0ebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 1539917574}
 --- !u!114 &1539917574
 MonoBehaviour:
   m_ObjectHideFlags: 0
