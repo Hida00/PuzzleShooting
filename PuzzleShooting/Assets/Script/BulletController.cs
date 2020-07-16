@@ -21,8 +21,7 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         angleZ = this.transform.eulerAngles.z;
-        this.transform.position += transform.up * speed * (float)Math.Cos(angleZ * (Math.PI / 180)) * Time.deltaTime;
-        this.transform.position += transform.up * speed * (float)Math.Sin(angleZ * (Math.PI / 180)) * Time.deltaTime;
+        this.transform.position += transform.up * speed * Time.deltaTime;
 
         if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -20f || this.transform.position.x >= 20f)
         { 
@@ -39,3 +38,4 @@ public class BulletController : MonoBehaviour
         }
     }
 }
+

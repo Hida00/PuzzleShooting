@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class GameController : MonoBehaviour
     //弾の発射間隔
     int framcount = 0;
 
+    string fileName;
+
     void Start()
     {
         Application.targetFrameRate = 65;
@@ -27,11 +30,16 @@ public class GameController : MonoBehaviour
         var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
         var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
         framcount++;
+
         if(framcount == 10)
         {
             framcount = 0;
             Instantiate(PlayerBullet , one , Quaternion.identity);
             Instantiate(PlayerBullet , two , Quaternion.identity);
         }
+    }
+    public void Set()
+    {
+        fileName = SelectController.SelectName;
     }
 }

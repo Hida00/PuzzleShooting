@@ -18,7 +18,7 @@ public class PanelController : MonoBehaviour
 
     //スキル識別用の値、仮に０と１と２とする
     int Skill1_num = 0;
-    //int Skill2_num = 1;
+    int Skill2_num = 1;
     //int Skill3_num = 2;
 
     [NonSerialized]
@@ -46,11 +46,11 @@ public class PanelController : MonoBehaviour
     {
         //ウィンドウの横幅を取得,Panelの位置や大きさがウィンドウサイズに依存するようにする
         float Width = (float)Screen.width;
-        float width = 0.28f * (float)Screen.width;
-        float height = 0.42f * (float)Screen.height;
+        float width = 0.32f * (float)Screen.width;
+        float height = 0.40f * (float)Screen.height;
 
         //スキルキー入力を取得、Panelの有効化
-        if (Input.GetKeyDown(Skill1))
+        if (Input.GetKeyDown(Skill1) && !isSkill)
         {
             Panel.SetActive(true);
             //時間を遅くする
@@ -59,15 +59,16 @@ public class PanelController : MonoBehaviour
             Instantiate(Skills[Skill1_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル1の処理はここに書く
         }
-        else if (Input.GetKeyDown(Skill2))
+        else if (Input.GetKeyDown(Skill2) && !isSkill)
         {
             Panel.SetActive(true);
             //時間を遅くする
             Time.timeScale = 0.5f;
             isSkill = true;
+            Instantiate(Skills[Skill2_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル2の処理はここに書く
         }
-        else if (Input.GetKeyDown(Skill3))
+        else if (Input.GetKeyDown(Skill3) && !isSkill)
         {
             Panel.SetActive(true);
             //時間を遅くする
@@ -81,6 +82,7 @@ public class PanelController : MonoBehaviour
         //ウィンドウサイズに依存してPanelのサイズが変わるようにする
         Panel.GetComponent<RectTransform>().sizeDelta = new Vector2(width , height);
         Panel.GetComponent<RectTransform>().position = new Vector3(Width - (width / 2) - 20 , (height / 2) + 20 , 0);
+        Panel.GetComponent<Image>().color = new Color(0.8f , 0.8f , 0.8f , 0.0f);
     }
     public void PointerEnter()
     {
