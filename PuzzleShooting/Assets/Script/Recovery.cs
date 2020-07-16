@@ -30,6 +30,8 @@ public class Recovery : MonoBehaviour
 
     public TextMeshProUGUI ClearText;
 
+    public bool isSuccess = false;
+
     void Start()
     {
         //Panelの取得
@@ -39,12 +41,13 @@ public class Recovery : MonoBehaviour
 
         //パズルのImageオブジェクトを生成
         Create_Image();
+
+        Invoke("Finish" , 15f);
     }
 
     void Update()
     {
-        //終了時の処理
-        if(!_panelController.isSkill)
+        if(isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
@@ -136,10 +139,16 @@ public class Recovery : MonoBehaviour
     }
     void recovery()
     {
+        _playerController.health_Point += 30f;
+
+        Finish();
+    }
+    void Finish()
+    {
         panel.SetActive(false);
+        _panelController.isSkill = false;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
-        _playerController.health_Point += 30f;
 
         foreach (Transform n in panel.transform)
         {

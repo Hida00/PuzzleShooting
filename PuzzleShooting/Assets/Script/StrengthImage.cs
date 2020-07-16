@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillImage : MonoBehaviour
+public class StrengthImage : MonoBehaviour
 {
-    Skill skill;
+    Strength skill;
 
     PanelController _panelController;
 
@@ -16,7 +16,7 @@ public class SkillImage : MonoBehaviour
     void Start()
     {
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
-        skill = GameObject.Find("Skill(Clone)").GetComponent<Skill>();
+        skill = GameObject.Find("Strength(Clone)").GetComponent<Strength>();
     }
 
     void Update()
@@ -24,11 +24,6 @@ public class SkillImage : MonoBehaviour
         //Debug用。Escapeキーを押すとスキルの終了
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            _panelController.isSkill = false;
-        }
-        if(skill.isSuccess && _panelController.isSkill)
-        {
-            Debug.Log("Skill Succese");
             _panelController.isSkill = false;
         }
     }
@@ -44,7 +39,7 @@ public class SkillImage : MonoBehaviour
             skill.start = this.transform.localPosition;
             skill.isConnect[Num] = 1;
         }
-        var sprite = Resources.Load<Sprite>(@"Image/Skill/point_light");
+        var sprite = Resources.Load<Sprite>(@"Image/Strength/point_light");
         this.GetComponent<Image>().sprite = sprite;
     }
     public void Image_Move()

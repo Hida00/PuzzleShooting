@@ -73,8 +73,8 @@
     <Compile Include="Assets\Script\RecoveryImage.cs" />
     <Compile Include="Assets\Script\SelectController.cs" />
     <Compile Include="Assets\Script\SettingController.cs" />
-    <Compile Include="Assets\Script\Skill.cs" />
-    <Compile Include="Assets\Script\SkillImage.cs" />
+    <Compile Include="Assets\Script\Strength.cs" />
+    <Compile Include="Assets\Script\StrengthImage.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

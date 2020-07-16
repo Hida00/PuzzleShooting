@@ -37,7 +37,7 @@ public class RecoveryImage : MonoBehaviour
         if (Num == 5 && islight == 1 && _panelController.isSkill)
         {
             Debug.Log("Skill Succese");
-            _panelController.isSkill = false;
+            _recovery.isSuccess = true;
         }
 
         Light(islight);

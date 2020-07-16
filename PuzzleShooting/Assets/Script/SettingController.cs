@@ -97,6 +97,7 @@ public class SettingController : MonoBehaviour
 
     public void Exit_Click()
     {
+        PanelController.buf_keys = skill;
         SceneManager.LoadScene("Select");
     }
 }

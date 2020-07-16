@@ -8,9 +8,8 @@ using UnityEngine.UI;
 public class PanelController : MonoBehaviour
 {
     //スキルキー用のKeyCode
-    KeyCode Skill1;
-    KeyCode Skill2;
-    KeyCode Skill3;
+    KeyCode[] Skill_Keys = { KeyCode.Alpha1 , KeyCode.Alpha2 , KeyCode.Alpha1 };
+    public static KeyCode[] buf_keys;
 
     //PanelObject
     public GameObject Panel;
@@ -34,12 +33,11 @@ public class PanelController : MonoBehaviour
 
         //スキルのキー割り当て、設定画面作ったら消す
         //デフォルトで１～３キー(テンキーではない方)
-        Skill1 = KeyCode.Alpha1;
-        Skill2 = KeyCode.Alpha2;
-        Skill3 = KeyCode.Alpha3;
 
         //Panelを無効化、スキルキー入力で有効
         Panel.SetActive(false);
+
+        Skill_Keys = buf_keys;
     }
 
     void Update()
@@ -50,7 +48,7 @@ public class PanelController : MonoBehaviour
         float height = 0.40f * (float)Screen.height;
 
         //スキルキー入力を取得、Panelの有効化
-        if (Input.GetKeyDown(Skill1) && !isSkill)
+        if (Input.GetKeyDown(Skill_Keys[0]) && !isSkill)
         {
             Panel.SetActive(true);
             //時間を遅くする
@@ -59,7 +57,7 @@ public class PanelController : MonoBehaviour
             Instantiate(Skills[Skill1_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル1の処理はここに書く
         }
-        else if (Input.GetKeyDown(Skill2) && !isSkill)
+        else if (Input.GetKeyDown(Skill_Keys[1]) && !isSkill)
         {
             Panel.SetActive(true);
             //時間を遅くする
@@ -68,7 +66,7 @@ public class PanelController : MonoBehaviour
             Instantiate(Skills[Skill2_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル2の処理はここに書く
         }
-        else if (Input.GetKeyDown(Skill3) && !isSkill)
+        else if (Input.GetKeyDown(Skill_Keys[2]) && !isSkill)
         {
             Panel.SetActive(true);
             //時間を遅くする

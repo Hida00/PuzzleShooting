@@ -5,14 +5,17 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading;
 
-public class Skill : MonoBehaviour
+public class Strength : MonoBehaviour
 {
     public Image[] panels;
 
     GameObject panel;
 
     PanelController _panelController;
+
+    public PlayerController _playerController;
 
     [NonSerialized]
     public Vector3 start;
@@ -36,25 +39,28 @@ public class Skill : MonoBehaviour
     {
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         panel = GameObject.Find("Panel");
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         Create_Image();
+
+        Invoke("Finish" , 15f);
     }
 
     void Update()
     {
-        if (!_panelController.isSkill)
+        if (isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
-            Invoke("skill" , 0.8f);
+            Invoke("strength" , 0.8f);
         }
         Check_Connect();
     }
     void Create_Image()
     {
         int i = 0;
-        TextAsset csv = Resources.Load(@"CSV/Skill/Skill") as TextAsset;
+        TextAsset csv = Resources.Load(@"CSV/Strength/Strength") as TextAsset;
         StringReader st = new StringReader(csv.text);
         string[] info = st.ReadLine().Split(',');
         size = int.Parse(info[0]);
@@ -76,7 +82,7 @@ public class Skill : MonoBehaviour
 
             obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
 
-            obj.GetComponent<SkillImage>().Num = i;
+            obj.GetComponent<StrengthImage>().Num = i;
             i++;
         }
 
@@ -85,7 +91,7 @@ public class Skill : MonoBehaviour
         sample.rectTransform.anchoredPosition = new Vector2(-150f , 0f);
         //sample.rectTransform.sizeDelta *= new Vector2(prov , prov);
 
-        var sampleCSV = Resources.Load(@"CSV/Skill/sample") as TextAsset;
+        var sampleCSV = Resources.Load(@"CSV/Strength/sample") as TextAsset;
         StringReader st2 = new StringReader(sampleCSV.text);
         System.Random r = new System.Random();
         List<string[]> list = new List<string[]>();
@@ -101,13 +107,13 @@ public class Skill : MonoBehaviour
         {
             target[i] = int.Parse(list[num][i + 2]);
         }
-        sample.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/Skill/" + list[num][1]);
+        sample.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/Strength/" + list[num][1]);
 
     }
     void Check_Connect()
     {
         int count = 0;
-        for(int i = 0;i < size;i++)
+        for(int i = 0;i < target.Length;i++)
         {
             if (target[i] == isConnect[i])
             {
@@ -140,16 +146,30 @@ public class Skill : MonoBehaviour
         lineCount++;
         isConnect[num] = lineCount;
     }
-    void skill()
+    void strength()
     {
-
+        StartCoroutine("Player_Strength_Up");
+        Finish();
+    }
+    void Finish()
+    {
+        _panelController.isSkill = false;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
         foreach (Transform n in panel.transform)
         {
+         
             Destroy(n.gameObject);
         }
+        target = new int[0];
+        isSuccess = false;
+    }
+    private IEnumerator Player_Strength_Up()
+    {
+        _playerController.strength = 2.0f;
+        yield return new WaitForSeconds(20f);
+        _playerController.strength = 1.0f;
         Destroy(this.gameObject);
     }
 }
