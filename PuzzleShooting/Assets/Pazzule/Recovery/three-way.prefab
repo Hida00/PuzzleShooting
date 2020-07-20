@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6482503663419748899}
-  - component: {fileID: 3139385238435326374}
   - component: {fileID: 6071775070588889984}
   - component: {fileID: 8035667288733183836}
   - component: {fileID: 5232577585336414959}
+  - component: {fileID: 114862709666792888}
   m_Layer: 5
   m_Name: three-way
   m_TagString: Untagged
@@ -39,19 +39,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3139385238435326374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7901270994544250061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d5729babe51a3240b74f9c786325af6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Num: 4
 --- !u!222 &6071775070588889984
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -104,7 +91,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3139385238435326374}
+        - m_Target: {fileID: 0}
           m_MethodName: Click
           m_Mode: 1
           m_Arguments:
@@ -116,3 +103,17 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   delegates: []
+--- !u!114 &114862709666792888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7901270994544250061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b3439f49086a443a959784e567971f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Num: 4
+  originalNum: 0

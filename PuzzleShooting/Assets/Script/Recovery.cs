@@ -7,13 +7,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using TMPro;
 
 public class Recovery : MonoBehaviour
 {
     //Imageオブジェクトたち
     public Image[] panels;
 
-    ImageScript[] _imageObjects;
+    RecoveryImage[] _imageObjects;
 
     //生成したImageオブジェクトを子に持つ
     GameObject panel;
@@ -27,6 +28,10 @@ public class Recovery : MonoBehaviour
     //プレイヤーの体力回復用
     PlayerController _playerController;
 
+    public TextMeshProUGUI ClearText;
+
+    public bool isSuccess = false;
+
     void Start()
     {
         //Panelの取得
@@ -36,22 +41,19 @@ public class Recovery : MonoBehaviour
 
         //パズルのImageオブジェクトを生成
         Create_Image();
+
+        Invoke("Finish" , 15f);
     }
 
     void Update()
     {
-        //終了時の処理
-        if(!_panelController.isSkill)
+        if(isSuccess)
         {
-            panel.SetActive(false);
-            //スキル使用時に遅くなった時間を戻す
-            Time.timeScale = 1.0f;
-            recovery();
-            foreach(Transform n in panel.transform)
-            {
-                Destroy(n.gameObject);
-            }
-            Destroy(this.gameObject);
+            var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
+            obj.transform.SetParent(panel.transform , false);
+            obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
+
+            Invoke("recovery" , 0.8f);
         }
         CheckLight();
     }
@@ -64,22 +66,24 @@ public class Recovery : MonoBehaviour
         StringReader sr = new StringReader(csv.text);
         string[] info = sr.ReadLine().Split(',');
         int size = int.Parse(info[0]);
-        _imageObjects = new ImageScript[size];
+        _imageObjects = new RecoveryImage[size];
         //オブジェクトの種類、x座標、y座標、z回転
         while (sr.Peek() > -1)
         {
             string[] values = sr.ReadLine().Split(',');
             var obj = Instantiate(panels[int.Parse(values[0])] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(float.Parse(values[1]) , float.Parse(values[2]));
+            float prov = (float)Screen.height / 450;
+            obj.rectTransform.anchoredPosition = new Vector2(float.Parse(values[1]) * prov , float.Parse(values[2]) * prov);
+            obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
 
             Quaternion q = Quaternion.Euler(0 , 0 , float.Parse(values[3]));
             obj.transform.rotation *= q;
 
             isLight.Add(i , new int[4] { int.Parse(values[5]) , int.Parse(values[6]) , int.Parse(values[7]) , int.Parse(values[8]) });
-            _imageObjects[i] = obj.GetComponent<ImageScript>();
+            _imageObjects[i] = obj.GetComponent<RecoveryImage>();
 
-            obj.GetComponent<ImageScript>().originalNum = i;
+            obj.GetComponent<RecoveryImage>().originalNum = i;
             i++;
         }
     }
@@ -136,5 +140,20 @@ public class Recovery : MonoBehaviour
     void recovery()
     {
         _playerController.health_Point += 30f;
+
+        Finish();
+    }
+    void Finish()
+    {
+        panel.SetActive(false);
+        _panelController.isSkill = false;
+        //スキル使用時に遅くなった時間を戻す
+        Time.timeScale = 1.0f;
+
+        foreach (Transform n in panel.transform)
+        {
+            Destroy(n.gameObject);
+        }
+        Destroy(this.gameObject);
     }
 }

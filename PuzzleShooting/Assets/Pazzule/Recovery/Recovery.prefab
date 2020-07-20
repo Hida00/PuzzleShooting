@@ -45,8 +45,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panels:
   - {fileID: 524131600854776531, guid: 5069b49b9b67eef469f61fef0f63146e, type: 3}
-  - {fileID: 4335234857409610841, guid: 2c629ad1670874143ac28e45253d0afa, type: 3}
+  - {fileID: 1218752812116161085, guid: 2c629ad1670874143ac28e45253d0afa, type: 3}
   - {fileID: 6018207203245551329, guid: 93973a7111c7f5c478c43cb7b075b69b, type: 3}
   - {fileID: 247845439004084248, guid: 7de7da9e4f38a7a4da6d02bdb72b0f2b, type: 3}
   - {fileID: 8035667288733183836, guid: c5ddbfceb22a4554d9c0b776215a8f85, type: 3}
   - {fileID: 1293647426891079270, guid: 97332d1b85abfef4db8a2a726e4832e3, type: 3}
+  ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
+    type: 3}

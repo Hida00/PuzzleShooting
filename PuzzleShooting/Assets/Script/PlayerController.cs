@@ -13,9 +13,11 @@ public class PlayerController : MonoBehaviour
     //プレイヤーの体力
     public float health_Point = 100f;
 
+    public float strength;
+
     void Start()
     {
-        
+        strength = 1.0f;
     }
 
     void Update()
