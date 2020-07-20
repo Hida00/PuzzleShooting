@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class PanelController : MonoBehaviour
 {
     //スキルキー用のKeyCode
-    KeyCode[] Skill_Keys = { KeyCode.Alpha1 , KeyCode.Alpha2 , KeyCode.Alpha1 };
-    public static KeyCode[] buf_keys;
+    KeyCode[] Skill_Keys;
+    public static KeyCode[] buf_keys = { KeyCode.Alpha1 , KeyCode.Alpha2 , KeyCode.Alpha3 };
 
     //PanelObject
     public GameObject Panel;
@@ -18,7 +18,7 @@ public class PanelController : MonoBehaviour
     //スキル識別用の値、仮に０と１と２とする
     int Skill1_num = 0;
     int Skill2_num = 1;
-    //int Skill3_num = 2;
+    int Skill3_num = 2;
 
     [NonSerialized]
     public bool isSkill = false;
@@ -72,6 +72,7 @@ public class PanelController : MonoBehaviour
             //時間を遅くする
             Time.timeScale = 0.5f;
             isSkill = true;
+            Instantiate(Skills[Skill3_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル3の処理はここに書く
         }
 
