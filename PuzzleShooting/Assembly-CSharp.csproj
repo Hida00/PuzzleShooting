@@ -67,6 +67,8 @@
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\Generator.cs" />
     <Compile Include="Assets\Script\HPbarctrl.cs" />
+    <Compile Include="Assets\Script\Invisible.cs" />
+    <Compile Include="Assets\Script\InvisibleImage.cs" />
     <Compile Include="Assets\Script\PanelController.cs" />
     <Compile Include="Assets\Script\Placement.cs" />
     <Compile Include="Assets\Script\PlayerController.cs" />
