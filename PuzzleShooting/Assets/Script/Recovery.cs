@@ -30,6 +30,8 @@ public class Recovery : MonoBehaviour
 
     public TextMeshProUGUI ClearText;
 
+    public int Filesize;
+
     public bool isSuccess = false;
 
     void Start()
@@ -47,6 +49,7 @@ public class Recovery : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))Finish();
         if(isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
@@ -61,9 +64,13 @@ public class Recovery : MonoBehaviour
     void Create_Image()
     {
         int i = 0;
+        System.Random r = new System.Random();
+        int FileNum = r.Next(1 , Filesize);
         //CSVファイルから読み込み
-        TextAsset csv = Resources.Load(@"CSV/RecoveryCSV") as TextAsset;
+        TextAsset csv = Resources.Load(@"CSV/Recovery/Recovery" + FileNum.ToString()) as TextAsset;
         StringReader sr = new StringReader(csv.text);
+
+        float prov = (float)Screen.height / 450;
         string[] info = sr.ReadLine().Split(',');
         int size = int.Parse(info[0]);
         _imageObjects = new RecoveryImage[size];
@@ -73,7 +80,6 @@ public class Recovery : MonoBehaviour
             string[] values = sr.ReadLine().Split(',');
             var obj = Instantiate(panels[int.Parse(values[0])] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            float prov = (float)Screen.height / 450;
             obj.rectTransform.anchoredPosition = new Vector2(float.Parse(values[1]) * prov , float.Parse(values[2]) * prov);
             obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
 

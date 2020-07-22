@@ -45,5 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panels:
   - {fileID: 6244462852255100652, guid: 902f4794a45e4a44a882f78688bf5773, type: 3}
+  Lock: {fileID: 7209669795872686125, guid: df461130f0e189047b351bef70b89cf3, type: 3}
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
     type: 3}

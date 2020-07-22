@@ -20,6 +20,7 @@ public class Invisible : MonoBehaviour
 
     [NonSerialized]
     public int size;
+    public int Filesize;
     [NonSerialized]
     public int[] Numbers;
     public int[] Answer;
@@ -53,27 +54,30 @@ public class Invisible : MonoBehaviour
     void Create_Image()
     {
         System.Random r = new System.Random();
-        int FileNum = r.Next(1 , 3);
+        int FileNum = r.Next(1 , Filesize);
         Debug.Log(FileNum);
         int i = 0;
-        TextAsset csv = Resources.Load(@"CSV/invisible/Invisible" + FileNum.ToString()) as TextAsset;
+        TextAsset csv = Resources.Load(@"CSV/Invisible/Invisible" + FileNum.ToString()) as TextAsset;
         StringReader st = new StringReader(csv.text);
         string[] info = st.ReadLine().Split(',');
         size = int.Parse(info[1]);
         Numbers = new int[size];
         texts = new TextMeshProUGUI[size];
+        float prov = (float)Screen.height / 450;
         while(st.Peek() > -1)
         {
             string[] values = st.ReadLine().Split(',');
 
             var obj = Instantiate(image , new Vector3(0 , 0 , 0) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(float.Parse(values[1]) , float.Parse(values[2]));
+            obj.rectTransform.anchoredPosition = new Vector2(float.Parse(values[1]) * prov , float.Parse(values[2]) * prov);
+            obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
 
             var obj2 = Instantiate(number , new Vector3(0 , 0 , 0) , Quaternion.identity);
             obj2.transform.SetParent(obj.transform , false);
             obj2.GetComponent<InvisibleImage>().index = i;
             obj2.GetComponent<InvisibleImage>().Num = int.Parse(values[3]);
+            obj2.rectTransform.sizeDelta *= new Vector2(prov , prov);
             Numbers[i] = int.Parse(values[3]);
 
             if (values[3] == "0") EmptyNum = i;
