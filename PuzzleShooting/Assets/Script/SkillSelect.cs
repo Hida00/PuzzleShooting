@@ -64,7 +64,7 @@ public class SkillSelect : MonoBehaviour
             obj.rectTransform.anchoredPosition = new Vector2(ScrollView.GetComponent<RectTransform>().sizeDelta.x * -0.375f , 0f);
             obj.rectTransform.sizeDelta = new Vector2(panel.rectTransform.sizeDelta.y * 0.85f , panel.rectTransform.sizeDelta.y * 0.85f);
             obj.GetComponent<SkillPanels>().Num = i + 1;
-            Sprite sprite = Resources.Load<Sprite>(@"Image/sample/" + values[1]);
+            Sprite sprite = Resources.Load<Sprite>(@"Image/Skills/" + values[1]);
             obj.sprite = sprite;
 
             var obj2 = Instantiate(SkillName , new Vector3(0 , 0 , 0) , Quaternion.identity);
