@@ -16,7 +16,7 @@ public class PanelController : MonoBehaviour
     public GameObject[] Skills;
 
     //スキル識別用の値、仮に０と１と２とする
-    int Skill1_num = 0;
+    int Skill1_num = 4;
     int Skill2_num = 1;
     int Skill3_num = 2;
 
