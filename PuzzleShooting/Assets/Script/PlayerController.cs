@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,8 +18,12 @@ public class PlayerController : MonoBehaviour
     public float health_Point = 100f;
 
     public float strength;
+    float damage = 10f;
 
     int framcount = 0;
+    int attackSpeed = 10;
+
+    bool skill = false;
 
     void Start()
     {
@@ -33,11 +38,13 @@ public class PlayerController : MonoBehaviour
         var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
         framcount++;
 
-        if(framcount == 10)
+        if(framcount == attackSpeed)
         {
             framcount = 0;
-            Instantiate(PlayerBullet , one , Quaternion.identity);
-            Instantiate(PlayerBullet , two , Quaternion.identity);
+            var obj = Instantiate(PlayerBullet , one , Quaternion.identity);
+            obj.GetComponent<BulletController>().damagePoint = strength * damage;
+            obj = Instantiate(PlayerBullet , two , Quaternion.identity);
+            obj.GetComponent<BulletController>().damagePoint = strength * damage;
         }
         
         //移動キーの取得
@@ -45,16 +52,78 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) this.transform.position += Vector3.down * +1f * speed * speedMag;
         if (Input.GetKey(KeyCode.A)) this.transform.position += Vector3.left * +1f * speed * speedMag;
         if (Input.GetKey(KeyCode.D)) this.transform.position += Vector3.right * 1f * speed * speedMag;
+
         if (Input.GetKey(KeyCode.UpArrow)) this.transform.position += Vector3.down * -1f * speed * speedMag;
         if (Input.GetKey(KeyCode.DownArrow)) this.transform.position += Vector3.down * +1f * speed * speedMag;
         if (Input.GetKey(KeyCode.LeftArrow)) this.transform.position += Vector3.left * +1f * speed * speedMag;
         if (Input.GetKey(KeyCode.RightArrow)) this.transform.position += Vector3.right * 1f * speed * speedMag;
+
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift)) speedMag = 0.3f;
         if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftShift)) speedMag = 1.0f;
 
         if(health_Point <= 0.00f)
         {
+            Quit();
+        }
+    }
+    void Quit()
+    {
+        #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_STANDALONE
+            UnityEngin.Application.Quit();
+        #endif
+    }
+
+    public void Invisible()
+    {
+        if(skill)
+        {
+            this.gameObject.GetComponentInChildren<CapsuleCollider>().isTrigger = true;
+            skill = true;
+        }
+        else
+        {
+            this.gameObject.GetComponentInChildren<CapsuleCollider>().isTrigger = false;
+            skill = true;
+            Invoke("Invisible" , 10f);
+        }
+    }
+    public void AttackSpeed()
+    {
+        if(skill)
+        {
+            attackSpeed = 10;
+            skill = false;
+        }
+        else
+        {
+            attackSpeed = 5;
+            skill = true;
+            Invoke("AttackSpeed" , 10f);
+        }
+    }
+    public void RateDamage()
+    {
+        var Enemys = GameObject.FindGameObjectsWithTag("ENEMY");
+
+        foreach(var obj in Enemys)
+        {
+            obj.GetComponent<Viran>().ViranHealth -= obj.GetComponent<Viran>().maxHealth * 0.25f;
+        }
+    }
+    public void Strength()
+    {
+        if(skill)
+        {
+            strength = 1.0f;
+            skill = false;
+        }
+        else
+        {
+            strength = 2.0f;
+            skill = true;
+            Invoke("Strength" , 10f);
         }
     }
 }

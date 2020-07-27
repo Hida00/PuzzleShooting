@@ -25,6 +25,7 @@ public class AttackSpeedImage : MonoBehaviour , IDragHandler , IDropHandler
     public void OnDrag(PointerEventData eventData)
     {
         this.transform.position = eventData.position;
+        _attackSpeed.imageNum[Num - 1] = 0;
     }
     public void OnDrop(PointerEventData eventData)
     {

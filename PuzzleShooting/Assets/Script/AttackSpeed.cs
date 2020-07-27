@@ -10,6 +10,7 @@ public class AttackSpeed : MonoBehaviour
     GameObject panel;
 
     PanelController _panelController;
+    PlayerController _playerController;
 
     public Image peace;
     public Image frame;
@@ -26,6 +27,7 @@ public class AttackSpeed : MonoBehaviour
 
     void Start()
     {
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         panel = GameObject.Find("Panel");
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
 
@@ -124,6 +126,7 @@ public class AttackSpeed : MonoBehaviour
     }
     void _attackSpeed()
     {
+        _playerController.AttackSpeed();
         Finish();
     }
 }

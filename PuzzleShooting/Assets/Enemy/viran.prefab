@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5253196174610138127}
   - component: {fileID: 7280885136786994597}
   - component: {fileID: 6394168483524618531}
+  - component: {fileID: 3976338104466995600}
   m_Layer: 0
   m_Name: viran
   m_TagString: ENEMY
@@ -104,3 +105,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53a39c479aaf0c41865862734b3e648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3976338104466995600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570338655204721647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b694d0420f33e24e97103517d2187e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ViranHealth: 100

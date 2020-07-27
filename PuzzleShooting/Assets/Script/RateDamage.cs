@@ -15,6 +15,7 @@ public class RateDamage : MonoBehaviour
     GameObject panel;
 
     PanelController _panelController;
+    PlayerController _playerController;
 
     int size;
 
@@ -25,7 +26,8 @@ public class RateDamage : MonoBehaviour
     void Start()
     {
         panel = GameObject.Find("Panel");
-        _panelController = panel.GetComponent<PanelController>();
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
         Create_Image();
         Invoke("Finish" , 15f);
@@ -40,7 +42,7 @@ public class RateDamage : MonoBehaviour
             obj.transform.SetParent(panel.transform , false);
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
-            Invoke("rateDamage" , 0.8f);
+            Invoke("_rateDamage" , 0.8f);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -104,8 +106,9 @@ public class RateDamage : MonoBehaviour
             isSuccess = true;
         }
     }
-    void rateDamage()
+    void _rateDamage()
     {
+        _playerController.RateDamage();
         Finish();
     }
 }

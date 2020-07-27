@@ -7,7 +7,7 @@ public class BulletController : MonoBehaviour
 {
     public float speed = 12f;
 
-    float angleZ;
+     public float damagePoint = 1.0f;
 
     PlayerController _playerController;
 
@@ -20,7 +20,6 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
-        angleZ = this.transform.eulerAngles.z;
         this.transform.position += transform.up * speed * Time.deltaTime;
 
         if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -20f || this.transform.position.x >= 20f)
@@ -39,6 +38,8 @@ public class BulletController : MonoBehaviour
         if(other.gameObject.tag == "ENEMY" && isPlayer)
         {
             //Debug.Log("Hit");
+            float defense = other.gameObject.GetComponent<Viran>().defensePoint;
+            other.gameObject.GetComponent<Viran>().ViranHealth -= (damagePoint - defense);
         }
     }
 }

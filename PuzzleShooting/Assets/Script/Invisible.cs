@@ -15,6 +15,7 @@ public class Invisible : MonoBehaviour
     TextMeshProUGUI[] texts;
 
     GameObject panel;
+    PlayerController _playerController;
 
     PanelController _panelController;
 
@@ -32,12 +33,13 @@ public class Invisible : MonoBehaviour
 
     void Start()
     {
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         panel = GameObject.Find("Panel");
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         Create_Image();
         CreateAnswer(size);
 
-        Invoke("invisible" , 20f);
+        Invoke("Finish" , 20f);
     }
 
     void Update()
@@ -48,7 +50,7 @@ public class Invisible : MonoBehaviour
             obj.transform.SetParent(panel.transform , false);
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
-            Invoke("invisible" , 0.8f);
+            Invoke("_invisible" , 0.8f);
         }
         if (Input.GetKeyDown(KeyCode.Escape)) Finish();
         CheckAnswer();
@@ -57,7 +59,6 @@ public class Invisible : MonoBehaviour
     {
         System.Random r = new System.Random();
         int FileNum = r.Next(1 , Filesize);
-        Debug.Log(FileNum);
         int i = 0;
         TextAsset csv = Resources.Load(@"CSV/Invisible/Invisible" + FileNum.ToString()) as TextAsset;
         StringReader st = new StringReader(csv.text);
@@ -88,8 +89,9 @@ public class Invisible : MonoBehaviour
             i++;
         }
     }
-    void invisible()
+    void _invisible()
     {
+        _playerController.Invisible();
         Finish();
     }
     void Finish()
