@@ -37,9 +37,10 @@ public class Strength : MonoBehaviour
 
     void Start()
     {
-        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         panel = GameObject.Find("Panel");
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
         Create_Image();
 
         Invoke("Finish" , 15f);
@@ -54,7 +55,7 @@ public class Strength : MonoBehaviour
             obj.transform.SetParent(panel.transform , false);
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
-            Invoke("strength" , 0.8f);
+            Invoke("_strength" , 0.8f);
         }
         Check_Connect();
     }
@@ -141,9 +142,9 @@ public class Strength : MonoBehaviour
         lineCount++;
         isConnect[num] = lineCount;
     }
-    void strength()
+    void _strength()
     {
-        StartCoroutine("Player_Strength_Up");
+        _playerController.Strength();
         Finish();
     }
     void Finish()
@@ -159,12 +160,5 @@ public class Strength : MonoBehaviour
         }
         target = new int[0];
         isSuccess = false;
-    }
-    private IEnumerator Player_Strength_Up()
-    {
-        _playerController.strength = 2.0f;
-        yield return new WaitForSeconds(20f);
-        _playerController.strength = 1.0f;
-        Destroy(this.gameObject);
     }
 }
