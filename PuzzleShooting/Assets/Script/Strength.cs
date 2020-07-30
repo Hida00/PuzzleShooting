@@ -47,6 +47,7 @@ public class Strength : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) Finish();
         if (isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
@@ -65,12 +66,6 @@ public class Strength : MonoBehaviour
         string[] info = st.ReadLine().Split(',');
         size = int.Parse(info[0]);
         isConnect = new int[size];
-        //target = new int[size];
-        //string[] Target = st.ReadLine().Split(',');
-        //for (int j = 0; j < size; j++)
-        //{
-        //    target[j] = int.Parse(Target[j + 1]);
-        //}
         float prov = (float)Screen.height / 450;
 
         while (st.Peek() > -1 || i < size)
@@ -89,7 +84,7 @@ public class Strength : MonoBehaviour
         var sample = Instantiate(panels[3] , new Vector3(0 , 0 , 0) , Quaternion.identity);
         sample.transform.SetParent(panel.transform , false);
         sample.rectTransform.anchoredPosition = new Vector2(-150f , 0f);
-        //sample.rectTransform.sizeDelta *= new Vector2(prov , prov);
+        sample.rectTransform.sizeDelta *= new Vector2(prov * 0.8f, prov * 0.8f);
 
         var sampleCSV = Resources.Load(@"CSV/Strength/sample") as TextAsset;
         StringReader st2 = new StringReader(sampleCSV.text);

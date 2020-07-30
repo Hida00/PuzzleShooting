@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //プレイヤーの弾丸
+    public GameObject PlayerBullet;
+
     //Shift押下中速度を落とすための補正倍率
     float speedMag = 1.0f;
 
@@ -15,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     public float strength;
 
+    int framcount = 0;
+
     void Start()
     {
         strength = 1.0f;
@@ -22,6 +27,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Vector3
+        PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
+        var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
+        var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
+        framcount++;
+
+        if(framcount == 10)
+        {
+            framcount = 0;
+            Instantiate(PlayerBullet , one , Quaternion.identity);
+            Instantiate(PlayerBullet , two , Quaternion.identity);
+        }
+        
+        //移動キーの取得
         if (Input.GetKey(KeyCode.W)) this.transform.position += Vector3.down * -1f * speed * speedMag;
         if (Input.GetKey(KeyCode.S)) this.transform.position += Vector3.down * +1f * speed * speedMag;
         if (Input.GetKey(KeyCode.A)) this.transform.position += Vector3.left * +1f * speed * speedMag;

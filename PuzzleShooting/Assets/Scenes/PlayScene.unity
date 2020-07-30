@@ -680,8 +680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b188d2a9b423e64f806f1eba35834ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerBullet: {fileID: 7142290111055938864, guid: 01246a8af6dcc9c48af42e03dd4273bd,
-    type: 3}
 --- !u!1 &1318566208
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456dde5b36895864ca6b0021e3677489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerBullet: {fileID: 7142290111055938864, guid: 01246a8af6dcc9c48af42e03dd4273bd,
+    type: 3}
   health_Point: 100
   strength: 0
 --- !u!1 &1489992834
