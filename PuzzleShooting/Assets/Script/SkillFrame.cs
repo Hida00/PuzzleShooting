@@ -42,7 +42,6 @@ public class SkillFrame : MonoBehaviour
     public void ClickReset()
     {
         set_Image.transform.position = set_Image.GetComponent<SkillPanels>().StartPos;
-
     }
     public void SetImage(Image image)
     {

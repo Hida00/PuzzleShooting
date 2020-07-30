@@ -26,6 +26,7 @@ public class SkillSelect : MonoBehaviour
     void Start()
     {
         Numbers = SelectController.SetSkills;
+        Array.Sort(Numbers);
 
         float Width = Screen.width;
         float prov = (float)Screen.height / 450;
@@ -44,7 +45,7 @@ public class SkillSelect : MonoBehaviour
     }
     void Create_Image()
     {
-        int i = 0;
+        int i = 0,count = 0;
         float prov = (float)Screen.height / 450;
         TextAsset csv = Resources.Load(@"CSV/SkillData") as TextAsset;
         StringReader st = new StringReader(csv.text);
@@ -66,6 +67,12 @@ public class SkillSelect : MonoBehaviour
             obj.GetComponent<SkillPanels>().Num = i + 1;
             Sprite sprite = Resources.Load<Sprite>(@"Image/Skills/" + values[1]);
             obj.sprite = sprite;
+            if(count < 3 && Numbers[count] == i)
+            {
+                obj.GetComponent<SkillPanels>().select = true;
+                count++;
+            }
+
 
             var obj2 = Instantiate(SkillName , new Vector3(0 , 0 , 0) , Quaternion.identity);
             obj2.transform.SetParent(panel.transform , false);
@@ -84,6 +91,8 @@ public class SkillSelect : MonoBehaviour
             Obj.transform.SetParent(Frames[i].transform , false);
             Obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0 , 0);
             Obj.GetComponent<RectTransform>().sizeDelta = Frames[i].GetComponent<RectTransform>().sizeDelta * 0.75f;
+            Frames[i].GetComponent<SkillFrame>().set_Image = Obj;
+            Obj.GetComponent<SkillPanels>().Parent = skillPanels[index].GetComponent<SkillPanels>();
             i++;
         }
 

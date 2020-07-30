@@ -36,13 +36,15 @@ public class Invisible : MonoBehaviour
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         Create_Image();
         CreateAnswer(size);
+
+        Invoke("invisible" , 20f);
     }
 
     void Update()
     {
         if(isSuccess)
         {
-            var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
+            var obj = Instantiate(ClearText);
             obj.transform.SetParent(panel.transform , false);
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
@@ -105,7 +107,6 @@ public class Invisible : MonoBehaviour
     }
     public int ChangeNum(int index,int num)
     {
-        //Debug.Log("\nNumbers:" + string.Join("," , Numbers) + "\n" + "Answer:" + string.Join("," , Answer));
         int side = (int)Math.Sqrt(size);
         if (EmptyNum == index - 1 || EmptyNum == index + 1 || EmptyNum == index - side || EmptyNum == index + side)
         {

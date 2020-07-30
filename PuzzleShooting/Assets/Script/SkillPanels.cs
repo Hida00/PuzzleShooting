@@ -64,16 +64,5 @@ public class SkillPanels : MonoBehaviour , IDropHandler , IDragHandler , IBeginD
     }
     public void OnDrop(PointerEventData eventData)
     {
-        var raycastResult = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData , raycastResult);
-
-        foreach(var hit in raycastResult)
-        {
-            if(hit.gameObject.CompareTag("Frame"))
-            {
-                this.transform.position = hit.gameObject.transform.position;
-                this.enabled = false;
-            }
-        }
     }
 }

@@ -33,8 +33,12 @@ public class BulletController : MonoBehaviour
         if(other.gameObject.tag == "PLAYER" && !isPlayer)
         {
             //ここにプレイヤーが弾に当たった時の処理を書く
-            Debug.Log("Hit!");
+            //Debug.Log("Hit!");
             _playerController.health_Point -= 10f;
+        }
+        if(other.gameObject.tag == "ENEMY" && isPlayer)
+        {
+            //Debug.Log("Hit");
         }
     }
 }

@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\AttackSpeed.cs" />
+    <Compile Include="Assets\Script\AttackSpeedImage.cs" />
     <Compile Include="Assets\Script\BulletController.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\Generator.cs" />

@@ -13,16 +13,14 @@ public class HPbarctrl : MonoBehaviour
     //Sliderを入れる
     public Slider slider;
 
-    // Start is called before the first frame update
     void Start()
     {
         slider.value = 1;
         //nowHP = maxHP;
 
-  
+        this.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //HPの値
