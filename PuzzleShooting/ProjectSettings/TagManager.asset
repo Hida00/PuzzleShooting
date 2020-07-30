@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PLAYER
   - ENEMY
+  - Frame
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - 
   - 
-  - underUI
+  - overUI
   - 
   - 
   - 
@@ -40,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Image
+    uniqueID: 2521712757
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

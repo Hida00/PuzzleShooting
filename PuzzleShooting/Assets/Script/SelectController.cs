@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class SelectController : MonoBehaviour
 {
     public static string SelectName;
+    public static int[] SetSkills = { 0 , 1 , 2 };
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -24,5 +25,9 @@ public class SelectController : MonoBehaviour
     public void Click_Setting()
     {
         SceneManager.LoadScene("Setting");
+    }
+    public void Click_Skill()
+    {
+        SceneManager.LoadScene("SkillSelect");
     }
 }
