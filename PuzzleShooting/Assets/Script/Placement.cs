@@ -30,8 +30,6 @@ public class Placement: MonoBehaviour
             float x2 = float.Parse(line[1]);
             float y = float.Parse(line[2]);
 
-            Debug.Log($"{line[0]},{line[1]},{line[2]}");
-
             float a = UnityEngine.Random.Range(x2 , x);
 
             transform.position = new Vector2(a , y);
