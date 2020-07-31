@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SkillSelect.unity
     guid: a4582a5ccd7fba644861aa8e220b4c86
+  - enabled: 1
+    path: Assets/Scenes/Result.unity
+    guid: 7396e47ce6551fb4dae8cd2a80831e36
   m_configObjects: {}

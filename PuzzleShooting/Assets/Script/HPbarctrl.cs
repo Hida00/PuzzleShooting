@@ -17,8 +17,6 @@ public class HPbarctrl : MonoBehaviour
     {
         slider.value = 1;
         //nowHP = maxHP;
-
-        this.gameObject.SetActive(false);
     }
 
     void Update()

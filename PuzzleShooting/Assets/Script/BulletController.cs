@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float speed = 12f;
+    public float speed = 0.1f;
 
      public float damagePoint = 1.0f;
 
@@ -20,7 +20,14 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
-        this.transform.position += transform.up * speed * Time.deltaTime;
+        if(isPlayer)
+        {
+            this.transform.position += transform.up * speed * Time.deltaTime * 0.6f;
+        }
+        else
+        {
+            this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
+        }
 
         if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -20f || this.transform.position.x >= 20f)
         { 
@@ -34,12 +41,20 @@ public class BulletController : MonoBehaviour
             //ここにプレイヤーが弾に当たった時の処理を書く
             //Debug.Log("Hit!");
             _playerController.health_Point -= 10f;
+            Destroy(this.gameObject);
         }
         if(other.gameObject.tag == "ENEMY" && isPlayer)
         {
             //Debug.Log("Hit");
             float defense = other.gameObject.GetComponent<Viran>().defensePoint;
             other.gameObject.GetComponent<Viran>().ViranHealth -= (damagePoint - defense);
+            Destroy(this.gameObject);
+        }
+        if(other.gameObject.tag == "BOSS" && isPlayer)
+        {
+            float defence = other.gameObject.GetComponent<Boss>().defensePoint;
+            other.gameObject.GetComponent<Boss>().bossHealth -= (damagePoint - defence);
+            Destroy(this.gameObject);
         }
     }
 }

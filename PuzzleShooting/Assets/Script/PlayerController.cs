@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject PlayerBullet;
 
     //Shift押下中速度を落とすための補正倍率
-    float speedMag = 1.0f;
+    public float speedMag = 1.0f;
 
     float speed = 0.15f;
 
@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
     public float health_Point = 100f;
 
     public float strength;
-    float damage = 10f;
+    float damage = 15f;
 
-    int framcount = 0;
+    int framecount = 0;
     int attackSpeed = 10;
 
     bool skill = false;
@@ -32,18 +32,20 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Vector3
-        PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
+        Vector3 PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
         var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
         var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
-        framcount++;
+        var three = new Vector3(PlayerPosition.x , PlayerPosition.y + 1f , PlayerPosition.z);
+        framecount++;
 
-        if(framcount == attackSpeed)
+        if(framecount >= attackSpeed)
         {
-            framcount = 0;
+            framecount = 0;
             var obj = Instantiate(PlayerBullet , one , Quaternion.identity);
             obj.GetComponent<BulletController>().damagePoint = strength * damage;
             obj = Instantiate(PlayerBullet , two , Quaternion.identity);
+            obj.GetComponent<BulletController>().damagePoint = strength * damage;
+            obj = Instantiate(PlayerBullet , three , Quaternion.identity);
             obj.GetComponent<BulletController>().damagePoint = strength * damage;
         }
         
@@ -58,8 +60,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)) this.transform.position += Vector3.left * +1f * speed * speedMag;
         if (Input.GetKey(KeyCode.RightArrow)) this.transform.position += Vector3.right * 1f * speed * speedMag;
 
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift)) speedMag = 0.3f;
-        if (Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftShift)) speedMag = 1.0f;
+        if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speedMag = 0.3f;
+        }
+        if(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speedMag = 1.0f;
+        }
 
         if(health_Point <= 0.00f)
         {
@@ -71,7 +79,7 @@ public class PlayerController : MonoBehaviour
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #elif UNITY_STANDALONE
-            UnityEngin.Application.Quit();
+            Application.Quit();
         #endif
     }
 
@@ -94,11 +102,13 @@ public class PlayerController : MonoBehaviour
         if(skill)
         {
             attackSpeed = 10;
+            framecount = 0;
             skill = false;
         }
         else
         {
             attackSpeed = 5;
+            framecount = 0;
             skill = true;
             Invoke("AttackSpeed" , 10f);
         }
