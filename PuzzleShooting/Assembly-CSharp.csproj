@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\AttackSpeed.cs" />
     <Compile Include="Assets\Script\AttackSpeedImage.cs" />
+    <Compile Include="Assets\Script\Boss.cs" />
     <Compile Include="Assets\Script\BulletController.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\Generator.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Script\RateDamageImage.cs" />
     <Compile Include="Assets\Script\Recovery.cs" />
     <Compile Include="Assets\Script\RecoveryImage.cs" />
+    <Compile Include="Assets\Script\ResultController.cs" />
     <Compile Include="Assets\Script\SelectController.cs" />
     <Compile Include="Assets\Script\SettingController.cs" />
     <Compile Include="Assets\Script\SkillFrame.cs" />

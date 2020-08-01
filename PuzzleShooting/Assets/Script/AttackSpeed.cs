@@ -15,8 +15,6 @@ public class AttackSpeed : MonoBehaviour
     public Image peace;
     public Image frame;
 
-    public Text TestText;
-
     public TextMeshProUGUI ClearText;
 
     int size;
@@ -74,7 +72,7 @@ public class AttackSpeed : MonoBehaviour
             obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
             obj.rectTransform.anchoredPosition = new Vector2(r.Next(min , max) , r.Next(min , max));
             obj.GetComponent<AttackSpeedImage>().Num = i + 1;
-            Sprite sprite = Resources.Load<Sprite>(@"Image/AttackSpeed/");
+            Sprite sprite = Resources.Load<Sprite>(@"Image/AttackSpeed/image" + r.Next(1,1).ToString() + "[" + (i + 1).ToString() + "]");
             obj.sprite = sprite;
 
             var obj2 = Instantiate(frame);
@@ -82,11 +80,6 @@ public class AttackSpeed : MonoBehaviour
             obj2.rectTransform.anchoredPosition = new Vector2(float.Parse(values[2]) , float.Parse(values[3])) * prov;
             obj2.rectTransform.sizeDelta *= new Vector2(prov , prov);
             obj2.GetComponent<AttackSpeedImage>().frameNum = i;
-
-            var text = Instantiate(TestText);
-            text.transform.SetParent(obj.transform , false);
-            text.text = (i + 1).ToString();
-            text.rectTransform.anchoredPosition = new Vector2(0 , 0);
             i++;
         }
         foreach(var obj in frames)

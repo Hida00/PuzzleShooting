@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public class SelectController : MonoBehaviour
@@ -15,7 +16,7 @@ public class SelectController : MonoBehaviour
 
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.Escape)) Quit();
     }
     public void Click_One()
     {
@@ -29,5 +30,13 @@ public class SelectController : MonoBehaviour
     public void Click_Skill()
     {
         SceneManager.LoadScene("SkillSelect");
+    }
+    void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+        Application.Quit();
+#endif
     }
 }

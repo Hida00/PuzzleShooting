@@ -22,10 +22,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 711, y: 498}
-  m_MaxSize: {x: 18006, y: 14048}
+  m_MinSize: {x: 713, y: 498}
+  m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 3973
+  controlID: 23999
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 3974
+  controlID: 24000
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -189,7 +189,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: bc27ffffdc27ffff1829ffffe8e5ffff6cf2ffff10fbffffdefbffff0e37000044430000e4440000f4440000
+      m_ExpandedIDs: 346ef0ffdc72f0ff3473f0ff4c73f0ffdefbffff702a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -303,20 +303,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Pazzule/AttackSpeed
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Pazzule/AttackSpeed
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Hakuyou\Desktop\git\Unity\PuzzleShooting
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 98}
-    m_SelectedIDs: 482c0000
-    m_LastClickedID: 11336
-    m_ExpandedIDs: 000000008e260000ba2600007c270000322800001a29000000ca9a3b
+    scrollPos: {x: 0, y: 130}
+    m_SelectedIDs: 16280000
+    m_LastClickedID: 10262
+    m_ExpandedIDs: 00000000a0260000cc260000962700004c2800003c29000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -344,7 +344,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008e260000ba2600007c270000322800001a29000000ca9a3b
+    m_ExpandedIDs: 00000000a0260000cc260000962700004c2800003c29000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -369,9 +369,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 4c400000
-    m_LastClickedInstanceID: 16460
-    m_HadKeyboardFocusLastEvent: 1
+    m_SelectedInstanceIDs: e2290000
+    m_LastClickedInstanceID: 10722
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000822200008c2b0000000000004a270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 448}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-  controlID: 3895
+  controlID: 23959
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -481,9 +481,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 464.5, y: 369, z: 10}
+    m_Target: {x: 135.23653, y: 243.2861, z: -2.375}
     speed: 2
-    m_Value: {x: 464.5, y: 369, z: 10}
+    m_Value: {x: 135.23653, y: 243.2861, z: -2.375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -515,9 +515,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1074.5289
+    m_Target: 800.0418
     speed: 2
-    m_Value: 1074.5289
+    m_Value: 800.0418
   m_Ortho:
     m_Target: 1
     speed: 2

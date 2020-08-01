@@ -292,7 +292,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -527,7 +527,7 @@ Transform:
   m_GameObject: {fileID: 821678443}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.69, z: 0.3}
+  m_LocalScale: {x: 0.2, y: 1, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1476232624}
   m_RootOrder: 0
@@ -780,7 +780,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 10c58198e9d69fe4995fa7fb6f9c9f80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -837,6 +837,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerBullet: {fileID: 7142290111055938864, guid: 01246a8af6dcc9c48af42e03dd4273bd,
     type: 3}
+  speedMag: 1
   health_Point: 100
   strength: 0
 --- !u!1 &1489992834
@@ -1034,7 +1035,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e2d1817a54b57641935a29d2540f18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viran: {fileID: 1570338655204721647, guid: 2abc4a5dea271704fbd9310558b686d1, type: 3}
+  viran1: {fileID: 8597461197145111008, guid: 3edf998cd98d08547ab51595d4213d59, type: 3}
+  viran2: {fileID: 1570338655204721647, guid: 2abc4a5dea271704fbd9310558b686d1, type: 3}
+  boss: {fileID: 5076038994119031633, guid: fd557ed2cd7ffb646bc0c189d4523f9c, type: 3}
+  bossHP: {fileID: 1826830934}
 --- !u!4 &1565276045
 Transform:
   m_ObjectHideFlags: 0

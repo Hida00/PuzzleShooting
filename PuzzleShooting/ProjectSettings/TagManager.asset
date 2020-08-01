@@ -7,6 +7,7 @@ TagManager:
   - PLAYER
   - ENEMY
   - Frame
+  - BOSS
   layers:
   - Default
   - TransparentFX
