@@ -40,7 +40,7 @@ public class BulletController : MonoBehaviour
         {
             //ここにプレイヤーが弾に当たった時の処理を書く
             //Debug.Log("Hit!");
-            _playerController.health_Point -= 10f;
+            _playerController.health_Point -= 5f;
             Destroy(this.gameObject);
         }
         if(other.gameObject.tag == "ENEMY" && isPlayer)

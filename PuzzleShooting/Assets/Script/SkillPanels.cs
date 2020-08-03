@@ -14,14 +14,12 @@ public class SkillPanels : MonoBehaviour , IDropHandler , IDragHandler , IBeginD
     public Vector3 StartPos;
 
     public int Num = 1;
+    public int frameNum = 0;
 
     public bool select = false;
 
     void Start()
     {
-        float prov = (float)Screen.height / 450;
-        this.GetComponent<RectTransform>().sizeDelta *= new Vector2(prov , prov);
-
         _skillSelect = GameObject.Find("SkillSelect").GetComponent<SkillSelect>();
     }
     void Update()
@@ -44,17 +42,20 @@ public class SkillPanels : MonoBehaviour , IDropHandler , IDragHandler , IBeginD
         {
             if(hit.gameObject.CompareTag("Frame") && !select)
             {
-                var obj = Instantiate(this.gameObject);
+                if(hit.gameObject.GetComponent<SkillFrame>().frameNum != frameNum && frameNum == 0)
+                {
+                    var obj = Instantiate(this.gameObject , hit.gameObject.transform);
 
-                obj.GetComponent<SkillPanels>().Parent = this.gameObject.GetComponent<SkillPanels>();
-                obj.GetComponent<RectTransform>().sizeDelta = hit.gameObject.GetComponent<RectTransform>().sizeDelta * 0.75f;
-                obj.transform.SetParent(hit.gameObject.transform , false);
-                obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0 , 0);
+                    obj.GetComponent<SkillPanels>().Parent = this.gameObject.GetComponent<SkillPanels>();
+                    obj.GetComponent<RectTransform>().sizeDelta = hit.gameObject.GetComponent<RectTransform>().sizeDelta * 0.75f;
+                    obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(0 , 0);
+                    obj.GetComponent<SkillPanels>().frameNum = hit.gameObject.GetComponent<SkillFrame>().frameNum;
 
-                select = true;
-                hit.gameObject.GetComponent<SkillFrame>().SetImage(obj.GetComponent<Image>());
+                    select = true;
+                    hit.gameObject.GetComponent<SkillFrame>().SetImage(obj.GetComponent<Image>());
 
-                this.transform.position = StartPos;
+                    this.transform.position = StartPos;
+                }
             }
         }
     }

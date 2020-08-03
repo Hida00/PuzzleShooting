@@ -50,15 +50,14 @@ public class PlayerController : MonoBehaviour
         }
         
         //移動キーの取得
-        if (Input.GetKey(KeyCode.W)) this.transform.position += Vector3.down * -1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.S)) this.transform.position += Vector3.down * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.A)) this.transform.position += Vector3.left * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.D)) this.transform.position += Vector3.right * 1f * speed * speedMag;
-
-        if (Input.GetKey(KeyCode.UpArrow)) this.transform.position += Vector3.down * -1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.DownArrow)) this.transform.position += Vector3.down * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.LeftArrow)) this.transform.position += Vector3.left * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.RightArrow)) this.transform.position += Vector3.right * 1f * speed * speedMag;
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) 
+            this.transform.position += Vector3.down * -1f * speed * speedMag;
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            this.transform.position += Vector3.down * +1f * speed * speedMag;
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            this.transform.position += Vector3.left * +1f * speed * speedMag;
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            this.transform.position += Vector3.right * 1f * speed * speedMag;
 
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -71,18 +70,9 @@ public class PlayerController : MonoBehaviour
 
         if(health_Point <= 0.00f)
         {
-            Quit();
+            SceneManager.LoadScene("Result");
         }
     }
-    void Quit()
-    {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_STANDALONE
-            Application.Quit();
-        #endif
-    }
-
     public void Invisible()
     {
         if(skill)
