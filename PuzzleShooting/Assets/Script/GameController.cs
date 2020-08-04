@@ -5,11 +5,16 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     Slider bossHP;
     string fileName;
+
+    public TextMeshProUGUI scoreText;
+
+    public int _score = 0;
 
     void Start()
     {
@@ -17,11 +22,16 @@ public class GameController : MonoBehaviour
 
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         bossHP.gameObject.SetActive(false);
+
+        float prov = (float)Screen.height / 450;
+        scoreText.rectTransform.anchoredPosition *= prov;
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Backspace)) Quit();
+
+        scoreText.text = "Score:" + _score.ToString();
     }
     public void Set()
     {

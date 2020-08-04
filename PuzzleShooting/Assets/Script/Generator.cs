@@ -43,6 +43,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().Type = viranType[viranCount];
             obj.GetComponent<Viran>().ViranHealth = viranData[viranCount][10];
             obj.GetComponent<Viran>().interval = (int)viranData[viranCount][11];
+            obj.GetComponent<Viran>().score = (int)viranData[viranCount][12];
             viranCount++;
         }
         if(viranType[viranCount] == 2 && Math.Abs(dif - viranData[viranCount][6]) <= 0.1f)
@@ -58,6 +59,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().Type = viranType[viranCount];
             obj.GetComponent<Viran>().ViranHealth = viranData[viranCount][10];
             obj.GetComponent<Viran>().interval = (int)viranData[viranCount][11];
+            obj.GetComponent<Viran>().score = (int)viranData[viranCount][12];
             viranCount++;
         }
         if(viranType[viranCount] == 3 && Math.Abs(dif - viranData[viranCount][5]) <= 0.1f)//Boss
@@ -73,6 +75,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Boss>().bossHealth = viranData[viranCount][8];
             obj.GetComponent<Boss>().interval = (int)viranData[viranCount][9];
             obj.GetComponent<Boss>().skillCount = (int)viranData[viranCount][10];
+            obj.GetComponent<Boss>().score = (int)viranData[viranCount][11];
 
             obj.GetComponent<Boss>().skillData = BossSkill;
             viranCount++;
@@ -106,6 +109,7 @@ public class Generator : MonoBehaviour
                     float.Parse(values[16]),    //speed         ,9
                     float.Parse(values[18]),    //HealthPoint   ,10
                     float.Parse(values[20]),    //interval      ,11
+                    float.Parse(values[22]),    //score         ,12
                 };
                 viranData.Add(array);
             }
@@ -123,6 +127,7 @@ public class Generator : MonoBehaviour
                     float.Parse(values[14]),    //HealthPoint           ,8
                     float.Parse(values[16]),    //interval              ,9
                     float.Parse(values[18]),    //SkillCount            ,10
+                    float.Parse(values[20]),    //score                 ,11 
                 };
                 int Count = int.Parse(values[18]);
 

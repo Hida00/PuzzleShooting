@@ -7,6 +7,7 @@ using UnityEngine;
 public class Viran : MonoBehaviour
 {
     public GameObject bullet;
+    GameController _gameController;
 
     public float ViranHealth = 100f;
     public float maxHealth;
@@ -22,10 +23,13 @@ public class Viran : MonoBehaviour
     int frameCount = 0;
     public int interval = 15;
     public int Type;
+    public int score;
 
 
     void Start()
     {
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+
         maxHealth = ViranHealth;
         defensePoint = 2f;
         startTime = Time.time;
@@ -35,7 +39,8 @@ public class Viran : MonoBehaviour
     {
         if(ViranHealth <= 0f)
         {
-            //Debug.Log("KILL");
+            _gameController._score += score;
+
             Destroy(this.gameObject);
         }
         if(Time.time - startTime >= displaceTime)

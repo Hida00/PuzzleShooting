@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     public float strength;
     float damage = 15f;
+    float moveright = 1f;
+    float moveleft = 1f;
+    float moveup = 1f;
+    float movedown = 1f;
 
     int framecount = 0;
     int attackSpeed = 10;
@@ -48,16 +52,16 @@ public class PlayerController : MonoBehaviour
             obj = Instantiate(PlayerBullet , three , Quaternion.identity);
             obj.GetComponent<BulletController>().damagePoint = strength * damage;
         }
-        
+
         //移動キーの取得
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) 
-            this.transform.position += Vector3.down * -1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            this.transform.position += Vector3.down * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            this.transform.position += Vector3.left * +1f * speed * speedMag;
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup;
+        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown;
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft;
         if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            this.transform.position += Vector3.right * 1f * speed * speedMag;
+            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright;
 
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -72,13 +76,15 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene("Result");
         }
+
+        PositionOver(this.transform.position);
     }
     public void Invisible()
     {
         if(skill)
         {
             this.gameObject.GetComponentInChildren<CapsuleCollider>().isTrigger = true;
-            skill = true;
+            skill = false;
         }
         else
         {
@@ -125,5 +131,16 @@ public class PlayerController : MonoBehaviour
             skill = true;
             Invoke("Strength" , 10f);
         }
+    }
+    void PositionOver(Vector3 position)
+    {
+        if(position.x >= 20f) moveright = 0f;
+        else moveright = 1f;
+        if(position.x <= -20f) moveleft = 0f;
+        else moveleft = 1f;
+        if(position.y >= 10f) moveup = 0f;
+        else moveup = 1f;
+        if(position.y <= -10f) movedown = 0f;
+        else movedown = 1f;
     }
 }
