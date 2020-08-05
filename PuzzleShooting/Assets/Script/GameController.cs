@@ -9,7 +9,9 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject PlayArea;
     Slider bossHP;
+
     string fileName;
 
     public TextMeshProUGUI scoreText;
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour
 
         float prov = (float)Screen.height / 450;
         scoreText.rectTransform.anchoredPosition *= prov;
+        PlayArea.GetComponent<RectTransform>().sizeDelta *= prov;
     }
 
     void Update()

@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour
     Slider bossHP;
     GameObject _player;
 
+    Vector3 startPos;
+
     public float MoveAngle;
     public float BulletAngle;
     public float rotationCount;
@@ -20,6 +22,8 @@ public class Boss : MonoBehaviour
     public float defensePoint = 10f;
     float StartTime;
     float maxHealth;
+    float move = 1f;
+    float Angle;
 
     public List<float[]> skillData = new List<float[]>();
 
@@ -35,6 +39,9 @@ public class Boss : MonoBehaviour
         StartTime = Time.time;
         maxHealth = bossHealth;
         HPcolorChange(skillCount);
+
+        startPos = this.transform.position;
+        Angle = MoveAngle;
     }
 
     void Update()
@@ -80,12 +87,16 @@ public class Boss : MonoBehaviour
             StartTime = Time.time;
             MoveAngle += 360f / rotationCount;
         }
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0);
+        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * move;
 
         bossHP.value = bossHealth / maxHealth;
     }
     void CircleBullet()
     {
+        move = 0f;
+        this.transform.position = startPos;
+        MoveAngle = Angle;
+
         float radius = skillData[skillCount - 1][1] ;
         for(float x = -radius; x < radius;)
         {
@@ -106,10 +117,16 @@ public class Boss : MonoBehaviour
         else
         {
             skillCount--;
+            move = 1f;
+            StartTime = Time.time;
         }
     }
     void HexagramBullet()
     {
+        move = 0f;
+        this.transform.position = startPos;
+        MoveAngle = Angle;
+
         float radius = skillData[skillCount - 1][1];
         for(float x = 0;x < (int)radius * Math.Sqrt(3);)
         {
@@ -144,18 +161,33 @@ public class Boss : MonoBehaviour
             x += 0.5f;
         }
         skillCount--;
+        move = 1f;
+        StartTime = Time.time;
     }
     void OverCircleBullet()
     {
+        move = 0f;
+        this.transform.position = startPos;
+        MoveAngle = Angle;
+
         float radius = skillData[skillCount - 1][1];
-        for(float x = -10f; x <= 10f;)
+        for(float x = skillData[skillCount - 1][5]; x <= skillData[skillCount - 1][6];)
         {
             float y = (float)Math.Sqrt(radius * radius - x * x) - 17f;
             float angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
             Instantiate(Bullet , new Vector3(x, y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            x += 0.25f;
+            x += skillData[skillCount - 1][4];
         }
-        skillCount--;
+        skillData[skillCount - 1][2]--;
+        skillData[skillCount - 1][1] += skillData[skillCount - 1][3];
+
+        if(skillData[skillCount - 1][2] != 0) Invoke("OverCircleBullet" , 0.5f);
+        else
+        {
+            skillCount--;
+            move = 1f;
+            StartTime = Time.time;
+        }
     }
     void HPcolorChange(int count)
     {

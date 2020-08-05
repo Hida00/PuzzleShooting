@@ -113,9 +113,15 @@ public class PlayerController : MonoBehaviour
     {
         var Enemys = GameObject.FindGameObjectsWithTag("ENEMY");
 
-        foreach(var obj in Enemys)
+        if(Enemys.Length != 0)
         {
-            obj.GetComponent<Viran>().ViranHealth -= obj.GetComponent<Viran>().maxHealth * 0.25f;
+            int length = Enemys.Length;
+            System.Random r = new System.Random();
+            for(int i = 0; i < 4; i++)
+            {
+                int num = r.Next(0 , length);
+                Enemys[num].GetComponent<Viran>().ViranHealth -= Enemys[num].GetComponent<Viran>().ViranHealth * 0.5f;
+            }
         }
     }
     public void Strength()
@@ -134,13 +140,13 @@ public class PlayerController : MonoBehaviour
     }
     void PositionOver(Vector3 position)
     {
-        if(position.x >= 20f) moveright = 0f;
+        if(position.x >= 9f) moveright = 0f;
         else moveright = 1f;
-        if(position.x <= -20f) moveleft = 0f;
+        if(position.x <= -9f) moveleft = 0f;
         else moveleft = 1f;
-        if(position.y >= 10f) moveup = 0f;
+        if(position.y >= 9f) moveup = 0f;
         else moveup = 1f;
-        if(position.y <= -10f) movedown = 0f;
+        if(position.y <= -9f) movedown = 0f;
         else movedown = 1f;
     }
 }
