@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour
             this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
         }
 
-        if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -20f || this.transform.position.x >= 20f)
+        if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -10f || this.transform.position.x >= 10f)
         { 
             Destroy(this.gameObject);
         }

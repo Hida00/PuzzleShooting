@@ -17,6 +17,7 @@ public class SkillSelect : MonoBehaviour
 
     public GameObject ScrollView;
     public GameObject Content;
+    public GameObject ExplanationPanel;
 
     Image[] skillPanels;
     public Image[] Frames;
@@ -42,16 +43,14 @@ public class SkillSelect : MonoBehaviour
         
         Create_Image();
     }
-
     void Update()
     {
-
     }
     void Create_Image()
     {
         int i = 0,count = 0;
         float prov = (float)Screen.height / 450;
-        TextAsset csv = Resources.Load(@"CSV/SkillData") as TextAsset;
+        TextAsset csv = Resources.Load(@"CSV/SkillData/SkillData") as TextAsset;
         StringReader st = new StringReader(csv.text);
         string[] info = st.ReadLine().Split(',');
         skillPanels = new Image[int.Parse(info[1])];
@@ -106,5 +105,21 @@ public class SkillSelect : MonoBehaviour
     {
         SelectController.SetSkills = Numbers;
         SceneManager.LoadScene("Select");
+    }
+    public void ShowExplanation(string name)
+    {
+        float prov = (float)Screen.height / 450;
+        var obj = Instantiate(ExplanationPanel , GameObject.Find("Canvas").transform);
+        obj.name = name + "Explanation";
+        TextAsset csv = Resources.Load(@"CSV/SkillData/" + name) as TextAsset;
+        StringReader st = new StringReader(csv.text);
+        obj.transform.GetComponentInChildren<Text>().text = st.ReadToEnd();
+        obj.transform.GetComponentInChildren<Text>().fontSize = (int)((float)obj.transform.GetComponentInChildren<Text>().fontSize * prov);
+        obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-320f * prov , 0 , 0);
+        obj.GetComponent<RectTransform>().sizeDelta *= prov;
+    }
+    public void DeleteExplanation(string name)
+    {
+        Destroy(GameObject.Find(name + "Explanation"));
     }
 }

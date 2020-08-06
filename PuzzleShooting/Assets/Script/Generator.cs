@@ -16,6 +16,8 @@ public class Generator : MonoBehaviour
     List<float[]> viranData = new List<float[]>();
     List<float[]> BossSkill = new List<float[]>();
 
+    string fileName = "Normal1";
+
     int[] viranType;
     int viranCount = 0;
 
@@ -24,6 +26,7 @@ public class Generator : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        fileName = SelectController.SelectName;
         Create_Viran();
     }
 
@@ -32,7 +35,7 @@ public class Generator : MonoBehaviour
         float dif = Time.time - startTime;
         if(viranType[viranCount] == 1 && Math.Abs(dif - viranData[viranCount][6]) <= 0.1f)
         {
-            var obj = Instantiate(viran2);
+            var obj = Instantiate(viran1);
             obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
             obj.GetComponent<Viran>().MoveAngleZ1 = viranData[viranCount][3];
             obj.GetComponent<Viran>().MoveAngleZ2 = viranData[viranCount][4];
@@ -85,7 +88,7 @@ public class Generator : MonoBehaviour
     {
         int i = 0;
 
-        var csvFile = Resources.Load(@"CSV/StageData/Normal1") as TextAsset;
+        var csvFile = Resources.Load(@"CSV/StageData/" + fileName) as TextAsset;
         StringReader reader = new StringReader(csvFile.text);
 
         string[] info = reader.ReadLine().Split(',');
@@ -103,13 +106,13 @@ public class Generator : MonoBehaviour
                     float.Parse(values[6]),     //MoveAngle1     ,3
                     float.Parse(values[7]),     //MoveAngle2     ,4
                     float.Parse(values[9]),     //BulletRotation ,5
-                    float.Parse(values[11]),    //spawnTime     ,6
-                    float.Parse(values[12]),    //changeAngle   ,7
-                    float.Parse(values[14]),    //displaceTime  ,8
-                    float.Parse(values[16]),    //speed         ,9
-                    float.Parse(values[18]),    //HealthPoint   ,10
-                    float.Parse(values[20]),    //interval      ,11
-                    float.Parse(values[22]),    //score         ,12
+                    float.Parse(values[11]),    //spawnTime      ,6
+                    float.Parse(values[12]),    //changeAngle    ,7
+                    float.Parse(values[14]),    //displaceTime   ,8
+                    float.Parse(values[16]),    //speed          ,9
+                    float.Parse(values[18]),    //HealthPoint    ,10
+                    float.Parse(values[20]),    //interval       ,11
+                    float.Parse(values[22]),    //score          ,12
                 };
                 viranData.Add(array);
             }

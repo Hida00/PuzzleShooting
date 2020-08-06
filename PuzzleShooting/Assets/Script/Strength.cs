@@ -84,8 +84,8 @@ public class Strength : MonoBehaviour
 
         var sample = Instantiate(panels[3] , new Vector3(0 , 0 , 0) , Quaternion.identity);
         sample.transform.SetParent(panel.transform , false);
-        sample.rectTransform.anchoredPosition = new Vector2(-150f , 0f);
-        sample.rectTransform.sizeDelta *= new Vector2(prov * 0.8f, prov * 0.8f);
+        sample.rectTransform.anchoredPosition = new Vector2(50f * prov , 150f * prov);
+        sample.rectTransform.sizeDelta *= new Vector2(prov, prov);
 
         var sampleCSV = Resources.Load(@"CSV/Strength/sample") as TextAsset;
         StringReader st2 = new StringReader(sampleCSV.text);

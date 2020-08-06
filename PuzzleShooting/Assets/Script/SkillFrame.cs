@@ -34,4 +34,7 @@ public class SkillFrame : MonoBehaviour
         set_Image = image;
         _skillSelect.Numbers[frameNum - 1] =  image.GetComponent<SkillPanels>().Num;
     }
+    public void EnterPointer() => _skillSelect.ShowExplanation(this.GetComponent<Text>().text);
+
+    public void ExitPointer() => _skillSelect.DeleteExplanation(this.GetComponent<Text>().text);
 }
