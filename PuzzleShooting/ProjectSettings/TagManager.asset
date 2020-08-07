@@ -8,6 +8,7 @@ TagManager:
   - ENEMY
   - Frame
   - BOSS
+  - MIDBOSS
   layers:
   - Default
   - TransparentFX

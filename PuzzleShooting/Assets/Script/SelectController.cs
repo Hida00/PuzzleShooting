@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SelectController : MonoBehaviour
 {
-    public static string SelectName;
+    public static string SelectName = "Normal1";
     public static int[] SetSkills = { 0 , 1 , 2 };
 
     void Start()
@@ -20,7 +20,7 @@ public class SelectController : MonoBehaviour
     }
     public void Click_One()
     {
-        SelectName = "Normal";
+        SelectName = "Normal1";
         SceneManager.LoadScene("PlayScene");
     }
     public void Click_Setting()

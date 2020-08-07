@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour
 
     public float strength;
     float damage = 15f;
+    float moveright = 1f;
+    float moveleft = 1f;
+    float moveup = 1f;
+    float movedown = 1f;
 
     int framecount = 0;
     int attackSpeed = 10;
@@ -48,17 +52,16 @@ public class PlayerController : MonoBehaviour
             obj = Instantiate(PlayerBullet , three , Quaternion.identity);
             obj.GetComponent<BulletController>().damagePoint = strength * damage;
         }
-        
-        //移動キーの取得
-        if (Input.GetKey(KeyCode.W)) this.transform.position += Vector3.down * -1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.S)) this.transform.position += Vector3.down * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.A)) this.transform.position += Vector3.left * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.D)) this.transform.position += Vector3.right * 1f * speed * speedMag;
 
-        if (Input.GetKey(KeyCode.UpArrow)) this.transform.position += Vector3.down * -1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.DownArrow)) this.transform.position += Vector3.down * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.LeftArrow)) this.transform.position += Vector3.left * +1f * speed * speedMag;
-        if (Input.GetKey(KeyCode.RightArrow)) this.transform.position += Vector3.right * 1f * speed * speedMag;
+        //移動キーの取得
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup;
+        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown;
+        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft;
+        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright;
 
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -71,24 +74,17 @@ public class PlayerController : MonoBehaviour
 
         if(health_Point <= 0.00f)
         {
-            Quit();
+            SceneManager.LoadScene("Result");
         }
-    }
-    void Quit()
-    {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_STANDALONE
-            Application.Quit();
-        #endif
-    }
 
+        PositionOver(this.transform.position);
+    }
     public void Invisible()
     {
         if(skill)
         {
             this.gameObject.GetComponentInChildren<CapsuleCollider>().isTrigger = true;
-            skill = true;
+            skill = false;
         }
         else
         {
@@ -117,9 +113,16 @@ public class PlayerController : MonoBehaviour
     {
         var Enemys = GameObject.FindGameObjectsWithTag("ENEMY");
 
-        foreach(var obj in Enemys)
+        if(Enemys.Length != 0)
         {
-            obj.GetComponent<Viran>().ViranHealth -= obj.GetComponent<Viran>().maxHealth * 0.25f;
+            int length = Enemys.Length;
+            System.Random r = new System.Random();
+            
+            for(int i = 0; i < 4; i++)
+            {
+                int num = r.Next(0 , length);
+                Enemys[num].GetComponent<Viran>().ViranHealth -= Enemys[num].GetComponent<Viran>().ViranHealth * 0.5f;
+            }
         }
     }
     public void Strength()
@@ -135,5 +138,16 @@ public class PlayerController : MonoBehaviour
             skill = true;
             Invoke("Strength" , 10f);
         }
+    }
+    void PositionOver(Vector3 position)
+    {
+        if(position.x >= 9f) moveright = 0f;
+        else moveright = 1f;
+        if(position.x <= -9f) moveleft = 0f;
+        else moveleft = 1f;
+        if(position.y >= 9f) moveup = 0f;
+        else moveup = 1f;
+        if(position.y <= -9f) movedown = 0f;
+        else movedown = 1f;
     }
 }

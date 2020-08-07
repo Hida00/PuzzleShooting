@@ -29,7 +29,7 @@ public class BulletController : MonoBehaviour
             this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
         }
 
-        if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -20f || this.transform.position.x >= 20f)
+        if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -10f || this.transform.position.x >= 10f)
         { 
             Destroy(this.gameObject);
         }
@@ -40,7 +40,7 @@ public class BulletController : MonoBehaviour
         {
             //ここにプレイヤーが弾に当たった時の処理を書く
             //Debug.Log("Hit!");
-            _playerController.health_Point -= 10f;
+            _playerController.health_Point -= 5f;
             Destroy(this.gameObject);
         }
         if(other.gameObject.tag == "ENEMY" && isPlayer)
@@ -54,6 +54,12 @@ public class BulletController : MonoBehaviour
         {
             float defence = other.gameObject.GetComponent<Boss>().defensePoint;
             other.gameObject.GetComponent<Boss>().bossHealth -= (damagePoint - defence);
+            Destroy(this.gameObject);
+        }
+        if(other.gameObject.tag == "MIDBOSS" && isPlayer)
+        {
+            float defence = other.gameObject.GetComponent<MidBoss>().defencePoint;
+            other.gameObject.GetComponent<MidBoss>().HealthPoint -= (damagePoint - defence);
             Destroy(this.gameObject);
         }
     }

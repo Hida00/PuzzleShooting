@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour
     Slider bossHP;
     GameObject _player;
 
+    Vector3 startPos;
+
     public float MoveAngle;
     public float BulletAngle;
     public float rotationCount;
@@ -20,11 +22,14 @@ public class Boss : MonoBehaviour
     public float defensePoint = 10f;
     float StartTime;
     float maxHealth;
+    float move = 1f;
+    float Angle;
 
     public List<float[]> skillData = new List<float[]>();
 
     public int interval;
     public int skillCount;
+    public int score;
     int frameCount = 0;
 
     void Start()
@@ -33,6 +38,10 @@ public class Boss : MonoBehaviour
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         StartTime = Time.time;
         maxHealth = bossHealth;
+        HPcolorChange(skillCount);
+
+        startPos = this.transform.position;
+        Angle = MoveAngle;
     }
 
     void Update()
@@ -40,25 +49,28 @@ public class Boss : MonoBehaviour
         frameCount++;
         if(bossHealth <= 0f)
         {
+            HPcolorChange(skillCount);
             if(skillCount == 0)
             {
                 bossHP.gameObject.SetActive(false);
-                GameObject.Find("GameController").GetComponent<GameController>().Clear();
+                GameController _gameController =  GameObject.Find("GameController").GetComponent<GameController>();
+                _gameController._score += score;
+                _gameController.Clear();
                 Destroy(this.gameObject);
             }
             else if(skillData[skillCount - 1][0] == 1)
             {
                 CircleBullet();
-                bossHealth = maxHealth;
             }
             else if(skillData[skillCount - 1][0] == 2)
             {
-
+                HexagramBullet();
             }
             else if(skillData[skillCount - 1][0] == 3)
             {
-
+                OverCircleBullet();
             }
+            bossHealth = maxHealth;
         }
         if(frameCount == interval)
         {
@@ -75,12 +87,16 @@ public class Boss : MonoBehaviour
             StartTime = Time.time;
             MoveAngle += 360f / rotationCount;
         }
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0);
+        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * move;
 
         bossHP.value = bossHealth / maxHealth;
     }
     void CircleBullet()
     {
+        move = 0f;
+        this.transform.position = startPos;
+        MoveAngle = Angle;
+
         float radius = skillData[skillCount - 1][1] ;
         for(float x = -radius; x < radius;)
         {
@@ -101,6 +117,118 @@ public class Boss : MonoBehaviour
         else
         {
             skillCount--;
+            move = 1f;
+            StartTime = Time.time;
+        }
+    }
+    void HexagramBullet()
+    {
+        move = 0f;
+        this.transform.position = startPos;
+        MoveAngle = Angle;
+
+        float radius = skillData[skillCount - 1][1];
+        for(float x = 0;x < (int)radius * Math.Sqrt(3);)
+        {
+            float y = (float)Math.Sqrt(3) * x - 2f;
+            float angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+            Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+            y = -(float)Math.Sqrt(3) * x + 2;
+            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+            Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+            y = 1f;
+            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+            Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+            y = -1f;
+            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+            Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+            if(x != 0f)
+            {
+                float X = -x;
+                y = -(float)Math.Sqrt(3) * X + 2f;
+                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+                Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+                y = (float)Math.Sqrt(3) * X + 2;
+                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+                Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+                y = 1f;
+                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+                Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+                y = -1f;
+                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+                Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+            }
+            x += 0.5f;
+        }
+        skillCount--;
+        move = 1f;
+        StartTime = Time.time;
+    }
+    void OverCircleBullet()
+    {
+        move = 0f;
+        this.transform.position = startPos;
+        MoveAngle = Angle;
+
+        float radius = skillData[skillCount - 1][1];
+        for(float x = skillData[skillCount - 1][5]; x <= skillData[skillCount - 1][6];)
+        {
+            float y = (float)Math.Sqrt(radius * radius - x * x) - 17f;
+            float angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
+            Instantiate(Bullet , new Vector3(x, y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
+            x += skillData[skillCount - 1][4];
+        }
+        skillData[skillCount - 1][2]--;
+        skillData[skillCount - 1][1] += skillData[skillCount - 1][3];
+
+        if(skillData[skillCount - 1][2] != 0) Invoke("OverCircleBullet" , 0.5f);
+        else
+        {
+            skillCount--;
+            move = 1f;
+            StartTime = Time.time;
+        }
+    }
+    void HPcolorChange(int count)
+    {
+        float RGB = 255f;
+        switch(count)
+        {
+            case 1:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(255f / RGB , 0f / RGB , 0f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = new Color(155f / RGB , 155f / RGB , 155f / RGB);
+                break;
+            case 2:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(255f / RGB , 140f / RGB , 0f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = Color.red;
+                break;
+            case 3:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(0f / RGB , 255f / RGB , 0f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = new Color(255f / RGB , 140f / RGB , 0f / RGB);
+                break;
+            case 4:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(0f / RGB , 191f / RGB , 255f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = new Color(0f / RGB , 255f / RGB , 0f / RGB);
+                break;
+            case 5:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(0f / RGB , 0f / RGB , 255f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = new Color(0f / RGB , 191f / RGB , 255f / RGB);
+                break;
+            case 6:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(255f / RGB , 0f / RGB , 255f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = new Color(0f / RGB , 0f / RGB , 255f / RGB);
+                break;
+            case 7:
+                bossHP.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color
+                    = new Color(0f / RGB , 0f / RGB , 0f / RGB);
+                bossHP.transform.GetChild(0).GetComponent<Image>().color = new Color(255f / RGB , 0f / RGB , 255f / RGB);
+                break;
         }
     }
 }

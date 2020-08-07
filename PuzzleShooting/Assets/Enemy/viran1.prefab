@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8597461197145111008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,6 +109,11 @@ MonoBehaviour:
   maxHealth: 0
   defensePoint: 2
   displaceTime: 0
+  changeTime: 0
   speed: 4
-  BulletRotation: {x: 0, y: 0, z: 0, w: 0}
-  MoveAngleZ: 0
+  BulletAngle: 0
+  MoveAngleZ1: 0
+  MoveAngleZ2: 0
+  interval: 15
+  Type: 0
+  score: 0
