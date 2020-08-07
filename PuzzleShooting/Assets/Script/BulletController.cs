@@ -56,6 +56,12 @@ public class BulletController : MonoBehaviour
             other.gameObject.GetComponent<Boss>().bossHealth -= (damagePoint - defence);
             Destroy(this.gameObject);
         }
+        if(other.gameObject.tag == "MIDBOSS" && isPlayer)
+        {
+            float defence = other.gameObject.GetComponent<MidBoss>().defencePoint;
+            other.gameObject.GetComponent<MidBoss>().HealthPoint -= (damagePoint - defence);
+            Destroy(this.gameObject);
+        }
     }
 }
 

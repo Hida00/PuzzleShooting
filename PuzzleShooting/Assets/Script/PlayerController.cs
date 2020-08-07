@@ -117,6 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             int length = Enemys.Length;
             System.Random r = new System.Random();
+            
             for(int i = 0; i < 4; i++)
             {
                 int num = r.Next(0 , length);

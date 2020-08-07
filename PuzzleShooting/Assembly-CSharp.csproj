@@ -72,6 +72,7 @@
     <Compile Include="Assets\Script\HPbarctrl.cs" />
     <Compile Include="Assets\Script\Invisible.cs" />
     <Compile Include="Assets\Script\InvisibleImage.cs" />
+    <Compile Include="Assets\Script\MidBoss.cs" />
     <Compile Include="Assets\Script\PanelController.cs" />
     <Compile Include="Assets\Script\Placement.cs" />
     <Compile Include="Assets\Script\PlayerController.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Script\SkillSelect.cs" />
     <Compile Include="Assets\Script\Strength.cs" />
     <Compile Include="Assets\Script\StrengthImage.cs" />
+    <Compile Include="Assets\Script\TitleController.cs" />
     <Compile Include="Assets\Script\Viran.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

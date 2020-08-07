@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour
     public GameObject viran1;
     public GameObject viran2;
     public GameObject boss;
+    public GameObject midBoss;
 
     public Slider bossHP;
 
@@ -33,7 +34,7 @@ public class Generator : MonoBehaviour
     void Update()
     {
         float dif = Time.time - startTime;
-        if(viranType[viranCount] == 1 && Math.Abs(dif - viranData[viranCount][6]) <= 0.1f)
+        if(viranType[viranCount] == 1 && dif >= viranData[viranCount][6])
         {
             var obj = Instantiate(viran1);
             obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
@@ -49,7 +50,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().score = (int)viranData[viranCount][12];
             viranCount++;
         }
-        if(viranType[viranCount] == 2 && Math.Abs(dif - viranData[viranCount][6]) <= 0.1f)
+        if(viranType[viranCount] == 2 && dif >= viranData[viranCount][6])
         {
             var obj = Instantiate(viran2);
             obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
@@ -65,7 +66,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().score = (int)viranData[viranCount][12];
             viranCount++;
         }
-        if(viranType[viranCount] == 3 && Math.Abs(dif - viranData[viranCount][5]) <= 0.1f)//Boss
+        if(viranType[viranCount] == 3 && dif >= viranData[viranCount][5])//Boss
         {
             bossHP.gameObject.SetActive(true);
 
@@ -83,6 +84,17 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Boss>().skillData = BossSkill;
             viranCount++;
         }
+        if(viranType[viranCount] == 4 && dif >= viranData[viranCount][3])//MidBoss
+        {
+            var obj = Instantiate(midBoss);
+
+            obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
+            obj.GetComponent<MidBoss>().HealthPoint = viranData[viranCount][4];
+            obj.GetComponent<MidBoss>().interval = (int)viranData[viranCount][5];
+            obj.GetComponent<MidBoss>().score = (int)viranData[viranCount][6];
+
+            viranCount++;
+        }
     }
     void Create_Viran()
     {
@@ -98,11 +110,13 @@ public class Generator : MonoBehaviour
         {
             string[] values = reader.ReadLine().Split(',');
             viranType[i] = int.Parse(values[0]);
-            if(viranType[i] != 3)
+
+            if(viranType[i] == 1 || viranType[i] == 2)
             {
                 float[] array =
                 {
-                    float.Parse(values[2]),float.Parse(values[3]),float.Parse(values[4]),//position(x,y,z),(0,1,2)
+                    float.Parse(values[2]),float.Parse(values[3]),float.Parse(values[4]),
+                                                //position(x,y,z),(0,1,2)
                     float.Parse(values[6]),     //MoveAngle1     ,3
                     float.Parse(values[7]),     //MoveAngle2     ,4
                     float.Parse(values[9]),     //BulletRotation ,5
@@ -113,6 +127,19 @@ public class Generator : MonoBehaviour
                     float.Parse(values[18]),    //HealthPoint    ,10
                     float.Parse(values[20]),    //interval       ,11
                     float.Parse(values[22]),    //score          ,12
+                };
+                viranData.Add(array);
+            }
+            else if(viranType[i] == 4)
+            {
+                float[] array =
+                {
+                    float.Parse(values[2]),float.Parse(values[3]),float.Parse(values[4]),
+                                                //position(x,y,z),(0,1,2)
+                    float.Parse(values[6]),     //spawnTime     ,3
+                    float.Parse(values[8]),     //HealthPoint   ,4
+                    float.Parse(values[10]),    //interval      ,5
+                    float.Parse(values[12]),    //score         ,6
                 };
                 viranData.Add(array);
             }
