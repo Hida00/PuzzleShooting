@@ -31,11 +31,6 @@ public class Generator : MonoBehaviour
         startTime = Time.time;
         fileName = SelectController.SelectName;
         Create_Viran();
-
-        {//Debug用
-            startTime -= 245f;
-            viranCount = 65;
-        }
     }
 
     void Update()

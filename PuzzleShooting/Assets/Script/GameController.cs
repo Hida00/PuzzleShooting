@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         bossHP.gameObject.SetActive(false);
 
-        float prov = (float)Screen.height / 450;
+        float prov = (float)Screen.width / 928;
         LeftArea.GetComponent<RectTransform>().sizeDelta *= prov;
         LeftArea.GetComponent<RectTransform>().anchoredPosition *= prov;
         RightArea.GetComponent<RectTransform>().sizeDelta *= prov;
