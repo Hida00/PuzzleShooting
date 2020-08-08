@@ -56,4 +56,13 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene("Result");
     }
+    public void BossBulletMoveStart()
+    {
+        var Enemy = GameObject.FindGameObjectsWithTag("BULLET");
+
+        foreach(var obj in Enemy)
+        {
+            obj.GetComponent<BulletController>().isBoss = false;
+        }
+    }
 }

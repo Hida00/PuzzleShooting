@@ -11,14 +11,13 @@ public class PlayerController : MonoBehaviour
 
     //Shift押下中速度を落とすための補正倍率
     public float speedMag = 1.0f;
-
-    float speed = 0.15f;
+    readonly float speed = 0.15f;
 
     //プレイヤーの体力
-    public float health_Point = 100f;
+    public float health_Point = 1000f;
 
     public float strength;
-    float damage = 15f;
+    readonly float damage = 15f;
     float moveright = 1f;
     float moveleft = 1f;
     float moveup = 1f;

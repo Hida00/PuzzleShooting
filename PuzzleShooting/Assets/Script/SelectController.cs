@@ -9,10 +9,7 @@ public class SelectController : MonoBehaviour
     public static string SelectName = "Normal1";
     public static int[] SetSkills = { 0 , 1 , 2 };
 
-    void Start()
-    {
-
-    }
+    void Start() { }
 
     void Update()
     {

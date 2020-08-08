@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    public float speed = 0.1f;
-
-     public float damagePoint = 1.0f;
-
     PlayerController _playerController;
 
+    public float speed = 0.1f;
+    public float damagePoint = 1.0f;
+
+    public bool isBoss = false;
     public bool isPlayer;
 
     void Start()
@@ -26,7 +26,7 @@ public class BulletController : MonoBehaviour
         }
         else
         {
-            this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
+            if(!isBoss) this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
         }
 
         if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -10f || this.transform.position.x >= 10f)

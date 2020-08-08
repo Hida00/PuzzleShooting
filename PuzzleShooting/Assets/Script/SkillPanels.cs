@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class SkillPanels : MonoBehaviour , IDropHandler , IDragHandler , IBeginDragHandler , IEndDragHandler
 {
-    SkillSelect _skillSelect;
 
     public SkillPanels Parent;
 
@@ -20,7 +19,6 @@ public class SkillPanels : MonoBehaviour , IDropHandler , IDragHandler , IBeginD
 
     void Start()
     {
-        _skillSelect = GameObject.Find("SkillSelect").GetComponent<SkillSelect>();
     }
     void Update()
     {
