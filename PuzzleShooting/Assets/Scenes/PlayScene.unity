@@ -1345,6 +1345,8 @@ MonoBehaviour:
   viran2: {fileID: 1570338655204721647, guid: 2abc4a5dea271704fbd9310558b686d1, type: 3}
   boss: {fileID: 5076038994119031633, guid: fd557ed2cd7ffb646bc0c189d4523f9c, type: 3}
   midBoss: {fileID: 7212248598552030754, guid: 7b7c469ac2a6ebb4ab42591abc910840, type: 3}
+  BossAlert: {fileID: 5826046878881403975, guid: 0b946d41dc05a8e42825c07728937451,
+    type: 3}
   bossHP: {fileID: 1826830934}
 --- !u!4 &1565276045
 Transform:

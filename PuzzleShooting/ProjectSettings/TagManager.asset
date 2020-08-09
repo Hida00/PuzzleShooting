@@ -9,6 +9,7 @@ TagManager:
   - Frame
   - BOSS
   - MIDBOSS
+  - BULLET
   layers:
   - Default
   - TransparentFX

@@ -65,8 +65,8 @@ public class SkillSelect : MonoBehaviour
             var obj = Instantiate(SkillImage , panel.transform);
             obj.rectTransform.anchoredPosition = new Vector2(ScrollView.GetComponent<RectTransform>().sizeDelta.x * -0.375f , 0f);
             obj.rectTransform.sizeDelta = new Vector2(panel.rectTransform.sizeDelta.y * 0.75f , panel.rectTransform.sizeDelta.y * 0.75f);
-            obj.GetComponent<SkillPanels>().Num = i + 1;
-            Sprite sprite = Resources.Load<Sprite>(@"Image/Skills/" + values[1]);
+            obj.GetComponent<SkillPanels>().Num = i;
+            Sprite sprite = Resources.Load<Sprite>(@"Image/sample/" + values[1]);
             obj.sprite = sprite;
             if(count < 3 && Numbers[count] == i)
             {

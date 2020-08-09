@@ -7,7 +7,7 @@ public class MidBoss : MonoBehaviour
     public GameObject bullet;
 
     public float HealthPoint;
-    public float defencePoint = -5f;
+    public float defencePoint = -3.5f;
     float angle = -12.5f;
 
     public int interval;
@@ -16,7 +16,7 @@ public class MidBoss : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()

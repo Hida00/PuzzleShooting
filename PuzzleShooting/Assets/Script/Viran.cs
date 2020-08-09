@@ -19,12 +19,15 @@ public class Viran : MonoBehaviour
     public float BulletAngle;
     public float MoveAngleZ1;
     public float MoveAngleZ2;
+    public float AngleAbs;
+    float MoveAngle;
 
     int frameCount = 0;
     public int interval = 15;
     public int Type;
     public int score;
-
+    public int ChangeCount;
+    int count = 0;
 
     void Start()
     {
@@ -33,8 +36,9 @@ public class Viran : MonoBehaviour
         maxHealth = ViranHealth;
         defensePoint = 2f;
         startTime = Time.time;
+        MoveAngle = MoveAngleZ1;
     }
-
+    
     void Update()
     {
         if(ViranHealth <= 0f)
@@ -43,15 +47,23 @@ public class Viran : MonoBehaviour
 
             Destroy(this.gameObject);
         }
-        if(Time.time - startTime >= displaceTime)
-        {
-            Destroy(this.gameObject);
-        }
         if(Time.time - startTime >= changeTime)
         {
-            MoveAngleZ1 = MoveAngleZ2;
+            startTime = Time.time;
+
+            if(count % 2 == 1)
+            {
+                MoveAngle += MoveAngleZ2 * AngleAbs;
+            }
+            else MoveAngle += MoveAngleZ2;
+            count++;
+            if(count == ChangeCount)
+            {
+                Destroy(this.gameObject);
+            }
         }
         frameCount++;
+
         if(frameCount == interval && Type == 2 && speed != 0)
         {
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle));
@@ -75,10 +87,10 @@ public class Viran : MonoBehaviour
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 15f));
             frameCount = 0;
         }
-        if(this.transform.position.x >= 9.2f || this.transform.position.x <= -9.2f || this.transform.position.y >= 11f || this.transform.position.y <= -11f)
+        if(this.transform.position.x >= 13f || this.transform.position.x <= -13f || this.transform.position.y >= 15f || this.transform.position.y <= -15f)
         {
             Destroy(this.gameObject);
         }
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngleZ1 * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngleZ1 * Math.PI / 180) * speed * Time.deltaTime , 0);
+        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0);
     }
 }

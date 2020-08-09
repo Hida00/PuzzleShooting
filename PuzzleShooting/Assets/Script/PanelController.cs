@@ -25,6 +25,8 @@ public class PanelController : MonoBehaviour
 
     void Start()
     {
+        SetSkillNumber();
+
         //Panelのゲームオブジェクトを格納
         Panel = GameObject.Find("Panel");
 
@@ -94,5 +96,11 @@ public class PanelController : MonoBehaviour
         //カーソルを外すとPanelの背景っを白にする
         //見にくかっt(ry
         Panel.GetComponent<Image>().color = new Color(1f , 1f , 1f , 0.6f);
+    }
+    void SetSkillNumber()
+    {
+        Skill1_num = SelectController.SetSkills[0];
+        Skill2_num = SelectController.SetSkills[1];
+        Skill3_num = SelectController.SetSkills[2];
     }
 }

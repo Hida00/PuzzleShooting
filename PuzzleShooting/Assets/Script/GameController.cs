@@ -26,7 +26,7 @@ public class GameController : MonoBehaviour
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         bossHP.gameObject.SetActive(false);
 
-        float prov = (float)Screen.height / 450;
+        float prov = (float)Screen.width / 928;
         LeftArea.GetComponent<RectTransform>().sizeDelta *= prov;
         LeftArea.GetComponent<RectTransform>().anchoredPosition *= prov;
         RightArea.GetComponent<RectTransform>().sizeDelta *= prov;
@@ -55,5 +55,14 @@ public class GameController : MonoBehaviour
     public void Clear()
     {
         SceneManager.LoadScene("Result");
+    }
+    public void BossBulletMoveStart()
+    {
+        var Enemy = GameObject.FindGameObjectsWithTag("BULLET");
+
+        foreach(var obj in Enemy)
+        {
+            obj.GetComponent<BulletController>().isBoss = false;
+        }
     }
 }
