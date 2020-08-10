@@ -12,6 +12,7 @@ public class Generator : MonoBehaviour
     public GameObject viran2;
     public GameObject boss;
     public GameObject midBoss;
+
     public TextMeshProUGUI BossAlert;
 
     public Slider bossHP;
@@ -19,26 +20,34 @@ public class Generator : MonoBehaviour
     readonly List<float[]> viranData = new List<float[]>();
     readonly List<float[]> BossSkill = new List<float[]>();
 
-    string fileName = "Normal1";
+    string fileName = "Hard11";
 
+    public int Ecount = 0;
     int[] viranType;
     int viranCount = 0;
+    int count = 0;
 
-    float startTime;
+    public float startTime;
+
+    public bool wait = true;
 
     void Start()
     {
         startTime = Time.time;
         fileName = SelectController.SelectName;
         Create_Viran();
+        wait = true;
     }
 
     void Update()
     {
+        bool isSkill = GameObject.Find("PanelController").GetComponent<PanelController>().isSkill;
         float dif = Time.time - startTime;
-        if(viranType[viranCount] == 1 && dif >= viranData[viranCount][6])
+        if(viranType[viranCount] == 1 && (viranData[viranCount][6] - dif) <= 0.1f && wait && !isSkill)
         {
+            Debug.Log(dif);
             var obj = Instantiate(viran1);
+
             obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
             obj.GetComponent<Viran>().MoveAngleZ1 = viranData[viranCount][3];
             obj.GetComponent<Viran>().MoveAngleZ2 = viranData[viranCount][4];
@@ -51,12 +60,15 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().interval = (int)viranData[viranCount][11];
             obj.GetComponent<Viran>().score = (int)viranData[viranCount][12];
             obj.GetComponent<Viran>().AngleAbs = viranData[viranCount][13];
-            obj.GetComponent<Viran>().ChangeCount = (int)viranData[viranCount][14];
+            obj.GetComponent<Viran>().isFinal = (int)viranData[viranCount][14];
+            if((int)viranData[viranCount][14] == 1) wait = false;
             viranCount++;
+            count++;
         }
-        if(viranType[viranCount] == 2 && dif >= viranData[viranCount][6])
+        if(viranType[viranCount] == 2 && (viranData[viranCount][6] - dif) <= 0.1f && wait && !isSkill)
         {
             var obj = Instantiate(viran2);
+
             obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
             obj.GetComponent<Viran>().MoveAngleZ1 = viranData[viranCount][3];
             obj.GetComponent<Viran>().MoveAngleZ2 = viranData[viranCount][4];
@@ -69,10 +81,13 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().interval = (int)viranData[viranCount][11];
             obj.GetComponent<Viran>().score = (int)viranData[viranCount][12];
             obj.GetComponent<Viran>().AngleAbs = viranData[viranCount][13];
-            obj.GetComponent<Viran>().ChangeCount = (int)viranData[viranCount][14];
+            obj.GetComponent<Viran>().isFinal = (int)viranData[viranCount][14];
+            if((int)viranData[viranCount][14] == 1) wait = false;
+
             viranCount++;
+            count++;
         }
-        if(viranType[viranCount] == 3 && dif >= viranData[viranCount][5])//Boss
+        if(viranType[viranCount] == 3 && (viranData[viranCount][5] - dif) <= 0.1f && wait && !isSkill)//Boss
         {
             bossHP.gameObject.SetActive(true);
             Destroy(GameObject.Find("BossAlert"));
@@ -90,8 +105,9 @@ public class Generator : MonoBehaviour
 
             obj.GetComponent<Boss>().skillData = BossSkill;
             viranCount++;
+            count++;
         }
-        if(viranType[viranCount] == 4 && dif >= viranData[viranCount][3])//MidBoss
+        if(viranType[viranCount] == 4 && (viranData[viranCount][3] - dif) <= 0.1f && wait && !isSkill)//MidBoss
         {
             var obj = Instantiate(midBoss);
 
@@ -99,10 +115,13 @@ public class Generator : MonoBehaviour
             obj.GetComponent<MidBoss>().HealthPoint = viranData[viranCount][4];
             obj.GetComponent<MidBoss>().interval = (int)viranData[viranCount][5];
             obj.GetComponent<MidBoss>().score = (int)viranData[viranCount][6];
+            obj.GetComponent<MidBoss>().isFinal = (int)viranData[viranCount][7];
 
             viranCount++;
+            count++;
+            if((int)viranData[viranCount][7] == 1) wait = false;
         }
-        if(viranType[viranCount] == 5 && dif >= viranData[viranCount][3])
+        if(viranType[viranCount] == 5 && (dif - viranData[viranCount][3]) <= 0.1f && wait && !isSkill)
         {
             float prov = (float)Screen.height / 450;
 
@@ -116,6 +135,12 @@ public class Generator : MonoBehaviour
             obj.name = "BossAlert";
             
             viranCount++;
+            count++;
+        }
+        if(count == Ecount && !wait)
+        {
+            startTime = Time.time;
+            wait = true;
         }
     }
     void Create_Viran()
@@ -127,6 +152,8 @@ public class Generator : MonoBehaviour
 
         string[] info = reader.ReadLine().Split(',');
         viranType = new int[int.Parse(info[2])];
+
+        reader.ReadLine().Split(',');
 
         while(reader.Peek() != -1)
         {
@@ -150,7 +177,7 @@ public class Generator : MonoBehaviour
                     float.Parse(values[20]),    //interval       ,11
                     float.Parse(values[22]),    //score          ,12
                     float.Parse(values[24]),    //AngleAbs       ,13
-                    float.Parse(values[26]),    //ChangeCount    ,14
+                    float.Parse(values[26]),    //isFinal        ,14
                 };
                 viranData.Add(array);
             }
@@ -165,6 +192,7 @@ public class Generator : MonoBehaviour
                     float.Parse(values[10]),    //interval      ,5
                     float.Parse(values[12]),    //score         ,6
                     float.Parse(values[14]),    //ImageNum      ,7
+                    float.Parse(values[16]),    //isFanal       ,8
                 };
                 viranData.Add(array);
             }
@@ -178,7 +206,7 @@ public class Generator : MonoBehaviour
                 };
                 viranData.Add(array);
             }
-            else
+            else if(viranType[i] == 3)
             {
                 float[] array =
                 {

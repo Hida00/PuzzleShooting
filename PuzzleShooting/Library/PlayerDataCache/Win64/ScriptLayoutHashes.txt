@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/2020.8.9/PuzzleShooting.exe
+C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/2020.8.9(2)/PuzzleShooting.exe
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/Select.unity
@@ -123,7 +123,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
-3d6912cb537935c73eeb574049cbcaea Assembly-CSharp.dll:.Viran
+4ca23b07823cd6ffade17c704577c088 Assembly-CSharp.dll:.Viran
 4daf54f41ebc84774040accfd5f5c477 Assembly-CSharp.dll:.SkillFrame
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
@@ -135,10 +135,10 @@ d30b12f508c0fbc234fa9aa05701c95e Assembly-CSharp.dll:.Strength
 758a9887c094330d98b7aed5df000c6a Assembly-CSharp.dll:.InvisibleImage
 2a13b6707f687c370e732358149c7656 Assembly-CSharp.dll:.RateDamage
 b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
-f86ac3c0b2649e66200ee260a5d8ad32 Assembly-CSharp.dll:.Generator
+8501b610d761f7dbf4f406acddc4be74 Assembly-CSharp.dll:.Generator
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
-210e0350e3ce1f6afe3afbf2111e4099 Assembly-CSharp.dll:.MidBoss
+cabc39e77aae08cc86135811be537c4d Assembly-CSharp.dll:.MidBoss
 1f08db315b3a65ce60f817d1601183cc Assembly-CSharp.dll:.SettingController
 58fc46ee8a317ef1e0c9726d604c742e Assembly-CSharp.dll:.SkillPanels
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer

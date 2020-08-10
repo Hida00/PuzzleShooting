@@ -39,9 +39,9 @@ public class AttackSpeed : MonoBehaviour
         {
             var obj = Instantiate(ClearText);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(0 , 0);
+            obj.rectTransform.anchoredPosition = new Vector2(0 , -70f);
 
-            Invoke("_attackSpeed" , 0.8f);
+            Invoke("Succese" , 0.8f);
         }
         Check_Array();
     }
@@ -54,8 +54,10 @@ public class AttackSpeed : MonoBehaviour
 
         float prov = (float)Screen.height / 450f;
         System.Random r = new System.Random();
-        int min = int.Parse(info[2]);
-        int max = int.Parse(info[3]) + 1;
+        int minX = int.Parse(info[2]);
+        int maxX = int.Parse(info[3]) + 1;
+        int minY = int.Parse(info[4]);
+        int maxY = int.Parse(info[5]) + 1;
 
         size = int.Parse(info[1]);
         target = new int[size];
@@ -70,7 +72,7 @@ public class AttackSpeed : MonoBehaviour
             var obj = Instantiate(peace);
             peaces.Add(obj);
             obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
-            obj.rectTransform.anchoredPosition = new Vector2(r.Next(min , max) , r.Next(min , max));
+            obj.rectTransform.anchoredPosition = new Vector2(r.Next(minX , maxX) , r.Next(minY , maxY));
             obj.GetComponent<AttackSpeedImage>().Num = i + 1;
             Sprite sprite = Resources.Load<Sprite>(@"Image/AttackSpeed/image" + r.Next(1,1).ToString() + "[" + (i + 1).ToString() + "]");
             obj.sprite = sprite;
@@ -98,7 +100,7 @@ public class AttackSpeed : MonoBehaviour
     void Finish()
     {
         panel.SetActive(false);
-        _panelController.isSkill = false;
+        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
@@ -106,6 +108,7 @@ public class AttackSpeed : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        _panelController.FinishTimeSet();
         Destroy(this.gameObject);
     }
     void Check_Array()
@@ -117,7 +120,7 @@ public class AttackSpeed : MonoBehaviour
         }
         if(count == size) isSuccess = true;
     }
-    void _attackSpeed()
+    void Succese()
     {
         _playerController.AttackSpeed();
         Finish();

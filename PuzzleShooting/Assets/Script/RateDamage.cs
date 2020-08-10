@@ -43,9 +43,9 @@ public class RateDamage : MonoBehaviour
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
+            obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
 
-            Invoke("_rateDamage" , 0.8f);
+            Invoke("Succese" , 0.8f);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -91,7 +91,7 @@ public class RateDamage : MonoBehaviour
     }
     void Finish()
     {
-        _panelController.isSkill = false;
+        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
@@ -99,6 +99,7 @@ public class RateDamage : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        _panelController.FinishTimeSet();
         Destroy(this.gameObject);
     }
     public bool Check_Image(int shape,int num,bool boolen)
@@ -114,7 +115,7 @@ public class RateDamage : MonoBehaviour
         }
         return false;
     }
-    void _rateDamage()
+    void Succese()
     {
         _playerController.RateDamage();
         Finish();

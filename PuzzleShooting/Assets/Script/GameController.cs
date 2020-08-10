@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +21,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 65;
+
+        float scale = (Screen.height / 20f) * (40f / Screen.width);
+        GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize *= scale;
 
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         bossHP.gameObject.SetActive(false);
@@ -46,11 +48,7 @@ public class GameController : MonoBehaviour
     }
     void Quit()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_STANDALONE
-            Application.Quit();
-        #endif
+        SceneManager.LoadScene("Select");
     }
     public void Clear()
     {

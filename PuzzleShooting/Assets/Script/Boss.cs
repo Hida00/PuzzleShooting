@@ -10,6 +10,8 @@ public class Boss : MonoBehaviour
     Slider bossHP;
     GameObject _player;
 
+    PanelController _panelController;
+
     Vector3 startPos;
 
     public float MoveAngle;
@@ -20,7 +22,8 @@ public class Boss : MonoBehaviour
     public float speed;
     public float skillInterval;
     public float defensePoint = 10f;
-    float StartTime;
+    public float StartTime;
+    public float difTime;
     float maxHealth;
     float move = 1f;
     float Angle;
@@ -34,6 +37,7 @@ public class Boss : MonoBehaviour
 
     void Start()
     {
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _player = GameObject.Find("Player");
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         StartTime = Time.time;
@@ -46,8 +50,8 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        frameCount++;
-        if(bossHealth <= 0f)
+        if(!_panelController.isSkill)frameCount++;
+        if(bossHealth <= 0f && !_panelController.isSkill)
         {
             HPcolorChange(skillCount);
             if(skillCount == 0)
@@ -72,7 +76,7 @@ public class Boss : MonoBehaviour
             }
             bossHealth = maxHealth;
         }
-        if(frameCount == interval)
+        if(frameCount == interval && !_panelController.isSkill)
         {
             BulletAngle = (float)Math.Atan2(this.transform.position.y - _player.transform.position.y , this.transform.position.x - _player.transform.position.x) * 180f / (float)Math.PI;
             Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 90f));
@@ -82,12 +86,13 @@ public class Boss : MonoBehaviour
             Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 76f));
             frameCount = 0;
         }
-        if(Time.time - StartTime >= timeSpan)
+        if(Time.time - StartTime >= timeSpan && !_panelController.isSkill)
         {
             StartTime = Time.time;
             MoveAngle += 360f / rotationCount;
         }
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * move;
+        float skill = _panelController.skillSpeed;
+        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * move * skill;
 
         bossHP.value = bossHealth / maxHealth;
     }

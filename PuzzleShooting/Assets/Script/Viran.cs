@@ -8,29 +8,32 @@ public class Viran : MonoBehaviour
 {
     public GameObject bullet;
     GameController _gameController;
+    PanelController _panelController;
 
     public float ViranHealth = 100f;
     public float maxHealth;
     public float defensePoint = 2f;
     public float displaceTime;
     public float changeTime;
-    float startTime;
+    public float startTime;
     public float speed = 4f;
     public float BulletAngle;
     public float MoveAngleZ1;
     public float MoveAngleZ2;
     public float AngleAbs;
+    public float difTime;
     float MoveAngle;
 
     int frameCount = 0;
     public int interval = 15;
     public int Type;
     public int score;
-    public int ChangeCount;
+    public int isFinal;
     int count = 0;
 
     void Start()
     {
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
 
         maxHealth = ViranHealth;
@@ -41,13 +44,15 @@ public class Viran : MonoBehaviour
     
     void Update()
     {
+        if(!_panelController.isSkill) frameCount++;
         if(ViranHealth <= 0f)
         {
+            GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             _gameController._score += score;
 
             Destroy(this.gameObject);
         }
-        if(Time.time - startTime >= changeTime)
+        if(Time.time - startTime >= changeTime && !_panelController.isSkill)
         {
             startTime = Time.time;
 
@@ -57,19 +62,19 @@ public class Viran : MonoBehaviour
             }
             else MoveAngle += MoveAngleZ2;
             count++;
-            if(count == ChangeCount)
-            {
-                Destroy(this.gameObject);
-            }
         }
-        frameCount++;
-
-        if(frameCount == interval && Type == 2 && speed != 0)
+        if((Time.time - startTime) >= displaceTime && !_panelController.isSkill)
+        {
+            GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
+            Destroy(this.gameObject);
+        }
+        if(frameCount == interval && Type == 2 && speed != 0
+            && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
         {
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle));
             frameCount = 0;
         }
-        if(frameCount == interval && speed == 0)
+        if(frameCount == interval && speed == 0 && !_panelController.isSkill)
         {
             frameCount = 0;
             Vector3 pos = GameObject.Find("Player").transform.position;
@@ -80,7 +85,7 @@ public class Viran : MonoBehaviour
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 105f + angle));
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 75f + angle));
         }
-        if(frameCount == interval && Type == 1 && speed != 0)
+        if(frameCount == interval && Type == 1 && speed != 0 && !_panelController.isSkill)
         {
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle));
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 15f));
@@ -89,8 +94,10 @@ public class Viran : MonoBehaviour
         }
         if(this.transform.position.x >= 13f || this.transform.position.x <= -13f || this.transform.position.y >= 15f || this.transform.position.y <= -15f)
         {
+            GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             Destroy(this.gameObject);
         }
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0);
+        float skill = _panelController.skillSpeed;
+        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * skill;
     }
 }

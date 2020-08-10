@@ -209,18 +209,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374467538}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 542306203}
-  m_RootOrder: 4
+  m_Father: {fileID: 630619706}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -120, y: 120}
-  m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -83.75, y: 0}
+  m_SizeDelta: {x: 167.5, y: 0}
+  m_Pivot: {x: 0.5, y: 0.2}
 --- !u!114 &374467540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +433,6 @@ RectTransform:
   - {fileID: 630619706}
   - {fileID: 1826830931}
   - {fileID: 1539917572}
-  - {fileID: 374467539}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -470,14 +469,15 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 374467539}
   m_Father: {fileID: 542306203}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 510.40002, y: 0}
+  m_SizeDelta: {x: 335, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630619707
 MonoBehaviour:
@@ -709,7 +709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -150, y: -35}
+  m_AnchoredPosition: {x: -150, y: -50}
   m_SizeDelta: {x: 300, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &979047308
@@ -949,7 +949,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 510.4, y: 0}
+  m_SizeDelta: {x: 335, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1049415900
 MonoBehaviour:
@@ -1022,6 +1022,8 @@ MonoBehaviour:
   - {fileID: 3945387701227061274, guid: 1faa2e6eb0615bd4fa34bb42c77eb3ef, type: 3}
   - {fileID: 1144751985484154454, guid: 0185fbedfbcb42b428f959144b0be7d1, type: 3}
   - {fileID: 27494764824534553, guid: 3e4961c1c0e5bff429ffd6aef4799ad1, type: 3}
+  difTime: 0
+  skillSpeed: 1
 --- !u!4 &1318566210
 Transform:
   m_ObjectHideFlags: 0
@@ -1144,7 +1146,8 @@ MonoBehaviour:
   PlayerBullet: {fileID: 7142290111055938864, guid: 01246a8af6dcc9c48af42e03dd4273bd,
     type: 3}
   speedMag: 1
-  health_Point: 100
+  health_Point: 200
+  maxHealth: 0
   strength: 0
 --- !u!1 &1489992834
 GameObject:
@@ -1348,6 +1351,9 @@ MonoBehaviour:
   BossAlert: {fileID: 5826046878881403975, guid: 0b946d41dc05a8e42825c07728937451,
     type: 3}
   bossHP: {fileID: 1826830934}
+  Ecount: 0
+  startTime: 0
+  wait: 0
 --- !u!4 &1565276045
 Transform:
   m_ObjectHideFlags: 0

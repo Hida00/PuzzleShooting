@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
 
     public float speed = 0.1f;
     public float damagePoint = 1.0f;
+    float moveOverY;
 
     public bool isBoss = false;
     public bool isPlayer;
@@ -16,6 +17,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        moveOverY = (19.2f * ((float)Screen.height / (float)Screen.width)) + 1f;
     }
 
     void Update()
@@ -29,7 +31,7 @@ public class BulletController : MonoBehaviour
             if(!isBoss) this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
         }
 
-        if (this.transform.position.y >= 15f || this.transform.position.y <= -15f || this.transform.position.x <= -10f || this.transform.position.x >= 10f)
+        if (this.transform.position.y >= moveOverY || this.transform.position.y <= -moveOverY || this.transform.position.x <= -13f || this.transform.position.x >= 13f)
         { 
             Destroy(this.gameObject);
         }

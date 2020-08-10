@@ -34,6 +34,6 @@ public class PlayerHP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = _playerController.health_Point / 100f;
+        slider.value = _playerController.health_Point / _playerController.maxHealth;
     }
 }

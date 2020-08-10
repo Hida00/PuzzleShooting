@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     //プレイヤーの体力
     public float health_Point = 1000f;
+    public float maxHealth;
 
     public float strength;
     readonly float damage = 15f;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     float moveleft = 1f;
     float moveup = 1f;
     float movedown = 1f;
+    float moveOverY;
 
     int framecount = 0;
     int attackSpeed = 10;
@@ -30,19 +33,23 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        maxHealth = health_Point;
+
         strength = 1.0f;
+
+        moveOverY = 19.2f * ((float)Screen.height / (float)Screen.width);
     }
 
     void Update()
     {
-        Vector3 PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
-        var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
-        var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
-        var three = new Vector3(PlayerPosition.x , PlayerPosition.y + 1f , PlayerPosition.z);
         framecount++;
 
-        if(framecount >= attackSpeed)
+        if(framecount >= attackSpeed && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
         {
+            Vector3 PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
+            var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
+            var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
+            var three = new Vector3(PlayerPosition.x , PlayerPosition.y + 1f , PlayerPosition.z);
             framecount = 0;
             var obj = Instantiate(PlayerBullet , one , Quaternion.identity);
             obj.GetComponent<BulletController>().damagePoint = strength * damage;
@@ -51,16 +58,16 @@ public class PlayerController : MonoBehaviour
             obj = Instantiate(PlayerBullet , three , Quaternion.identity);
             obj.GetComponent<BulletController>().damagePoint = strength * damage;
         }
-
+        float skill = GameObject.Find("PanelController").GetComponent<PanelController>().skillSpeed;
         //移動キーの取得
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup;
+            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup * skill;
         if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown;
+            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown * skill;
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft;
+            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft * skill;
         if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright;
+            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright * skill;
 
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -140,13 +147,13 @@ public class PlayerController : MonoBehaviour
     }
     void PositionOver(Vector3 position)
     {
-        if(position.x >= 9f) moveright = 0f;
+        if(position.x >= 12f) moveright = 0f;
         else moveright = 1f;
-        if(position.x <= -9f) moveleft = 0f;
+        if(position.x <= -12f) moveleft = 0f;
         else moveleft = 1f;
-        if(position.y >= 9f) moveup = 0f;
+        if(position.y >= moveOverY) moveup = 0f;
         else moveup = 1f;
-        if(position.y <= -9f) movedown = 0f;
+        if(position.y <= -moveOverY) movedown = 0f;
         else movedown = 1f;
     }
 }

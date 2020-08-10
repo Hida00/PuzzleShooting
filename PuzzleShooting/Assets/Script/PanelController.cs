@@ -15,75 +15,64 @@ public class PanelController : MonoBehaviour
     public GameObject Panel;
     public GameObject[] Skills;
 
-    //スキル識別用の値、仮に０と１と２とする
-    int Skill1_num = 0;
-    int Skill2_num = 1;
+    public float difTime;
+
+    //スキル識別用の値
+    int Skill1_num = 3;
+    int Skill2_num = 4;
     int Skill3_num = 2;
+    public int skillSpeed = 1;
 
     [NonSerialized]
     public bool isSkill = false;
 
     void Start()
     {
+        var area = Panel.transform.parent.gameObject.GetComponent<RectTransform>();
+        Panel.GetComponent<RectTransform>().sizeDelta = new Vector2(area.sizeDelta.x * 0.5f , area.sizeDelta.y);
+        Panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-Panel.GetComponent<RectTransform>().sizeDelta.x * 0.5f , 0);
         SetSkillNumber();
 
         //Panelのゲームオブジェクトを格納
         Panel = GameObject.Find("Panel");
 
         //Panelの色を白に変更
-        Panel.GetComponent<Image>().color = Color.white;
-
-        //スキルのキー割り当て、設定画面作ったら消す
-        //デフォルトで１～３キー(テンキーではない方)
+        Panel.GetComponent<Image>().color = Color.clear;
 
         //Panelを無効化、スキルキー入力で有効
         Panel.SetActive(false);
 
         Skill_Keys = buf_keys;
+        skillSpeed = 1;
     }
 
     void Update()
     {
-        //ウィンドウの横幅を取得,Panelの位置や大きさがウィンドウサイズに依存するようにする
-        float Width = (float)Screen.width;
-        float width = 0.32f * (float)Screen.width;
-        float height = 0.40f * (float)Screen.height;
-
         //スキルキー入力を取得、Panelの有効化
         if (Input.GetKeyDown(Skill_Keys[0]) && !isSkill)
         {
             Panel.SetActive(true);
-            //時間を遅くする
-            Time.timeScale = 0.5f;
-            isSkill = true;
+
+            EnemyTimeSet();
             Instantiate(Skills[Skill1_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル1の処理はここに書く
         }
         else if (Input.GetKeyDown(Skill_Keys[1]) && !isSkill)
         {
             Panel.SetActive(true);
-            //時間を遅くする
-            Time.timeScale = 0.5f;
-            isSkill = true;
+
+            EnemyTimeSet();
             Instantiate(Skills[Skill2_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル2の処理はここに書く
         }
         else if (Input.GetKeyDown(Skill_Keys[2]) && !isSkill)
         {
             Panel.SetActive(true);
-            //時間を遅くする
-            Time.timeScale = 0.5f;
-            isSkill = true;
+
+            EnemyTimeSet();
             Instantiate(Skills[Skill3_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル3の処理はここに書く
         }
-
-        //   ※※変更※※
-        //ここよくわかってない
-        //ウィンドウサイズに依存してPanelのサイズが変わるようにする
-        Panel.GetComponent<RectTransform>().sizeDelta = new Vector2(width , height);
-        Panel.GetComponent<RectTransform>().position = new Vector3(Width - (width / 2) - 20 , (height / 2) + 20 , 0);
-        Panel.GetComponent<Image>().color = new Color(0.8f , 0.8f , 0.8f , 0.0f);
     }
     public void PointerEnter()
     {
@@ -102,5 +91,46 @@ public class PanelController : MonoBehaviour
         Skill1_num = SelectController.SetSkills[0];
         Skill2_num = SelectController.SetSkills[1];
         Skill3_num = SelectController.SetSkills[2];
+    }
+    public void FinishTimeSet()
+    {
+        EnemyTimeSet();
+        GameObject.Find("Generator").GetComponent<Generator>().startTime = Time.time - difTime;
+    }
+    void EnemyTimeSet()
+    {
+        if(isSkill)
+        {
+            var Enemy = GameObject.FindGameObjectsWithTag("ENEMY");
+
+            foreach(var obj in Enemy)
+            {
+                obj.GetComponent<Viran>().startTime = Time.time - obj.GetComponent<Viran>().difTime;
+            }
+            var Boss = GameObject.FindGameObjectsWithTag("BOSS");
+
+            if(Boss.Length != 0)
+                Boss[0].GetComponent<Boss>().StartTime = Time.time - Boss[0].GetComponent<Boss>().difTime;
+
+            isSkill = false;
+        }
+        else
+        {
+            var Enemy = GameObject.FindGameObjectsWithTag("ENEMY");
+
+            foreach(var obj in Enemy)
+            {
+                obj.GetComponent<Viran>().difTime = Time.time - obj.GetComponent<Viran>().startTime;
+            }
+            var Boss = GameObject.FindGameObjectsWithTag("BOSS");
+
+            if(Boss.Length != 0)
+                Boss[0].GetComponent<Boss>().difTime = Time.time - Boss[0].GetComponent<Boss>().StartTime;
+
+            Time.timeScale = 1f;
+            skillSpeed = 0;
+            isSkill = true;
+            difTime = Time.time - GameObject.Find("Generator").GetComponent<Generator>().startTime;
+        }
     }
 }
