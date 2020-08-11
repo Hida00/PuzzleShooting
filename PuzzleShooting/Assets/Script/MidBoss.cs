@@ -5,6 +5,7 @@ using UnityEngine;
 public class MidBoss : MonoBehaviour
 {
     public GameObject bullet;
+    public ParticleSystem particle;
 
     PanelController _panelController;
 
@@ -48,6 +49,7 @@ public class MidBoss : MonoBehaviour
         if(HealthPoint <= 0f && !_panelController.isSkill)
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
+            Instantiate(particle , this.transform.position , Quaternion.Euler(90 , 0 , 0));
             Destroy(this.gameObject);
         }
     }

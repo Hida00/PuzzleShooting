@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: 247845439004084248, guid: 7de7da9e4f38a7a4da6d02bdb72b0f2b, type: 3}
   - {fileID: 8035667288733183836, guid: c5ddbfceb22a4554d9c0b776215a8f85, type: 3}
   - {fileID: 1293647426891079270, guid: 97332d1b85abfef4db8a2a726e4832e3, type: 3}
+  Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
+    type: 3}
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
     type: 3}
   Filesize: 4

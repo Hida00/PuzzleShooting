@@ -9,6 +9,7 @@ using TMPro;
 public class Strength : MonoBehaviour
 {
     public Image[] panels;
+    public Text Explanation;
 
     GameObject panel;
 
@@ -109,6 +110,17 @@ public class Strength : MonoBehaviour
         }
         sample.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/Strength/" + list[num][1]);
 
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TextAsset explanation = Resources.Load(@"CSV/Strength/Explanation") as TextAsset;
+        StringReader sr = new StringReader(explanation.text);
+        while(sr.Peek() > -1)
+        {
+            string s = sr.ReadLine();
+            text.text = s;
+        }
     }
     void Check_Connect()
     {

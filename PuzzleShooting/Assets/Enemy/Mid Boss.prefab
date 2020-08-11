@@ -105,6 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7414274325956033526, guid: 7f89db974b7098149a36e51e0ad03b97, type: 3}
+  particle: {fileID: 5566179456618252004, guid: 19ef41b734b7fee4e89c698b0d341c37,
+    type: 3}
   HealthPoint: 0
+  defencePoint: -3.5
   interval: 0
   score: 0
+  isFinal: 0

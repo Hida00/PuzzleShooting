@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class SelectController : MonoBehaviour
 {
+    public static float volume = 0.7f;
+
     public static string SelectName = "Normal1";
-    public static int[] SetSkills = { 3 , 4 , 2 };
+    public static int[] SetSkills = { 0 , 1 , 2 };
 
     void Start() { }
 

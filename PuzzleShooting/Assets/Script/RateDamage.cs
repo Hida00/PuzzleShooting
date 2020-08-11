@@ -9,6 +9,7 @@ using TMPro;
 public class RateDamage : MonoBehaviour
 {
     public Image[] panels;
+    public Text Explanation;
 
     RateDamageImage[] images;
 
@@ -19,7 +20,7 @@ public class RateDamage : MonoBehaviour
 
     public string[] Names;
 
-    int count;
+    public int count;
     int size;
     int shape;
     int num;
@@ -43,7 +44,7 @@ public class RateDamage : MonoBehaviour
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
+            obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
             Invoke("Succese" , 0.8f);
         }
@@ -88,6 +89,21 @@ public class RateDamage : MonoBehaviour
             }
             i++;
         }
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TextAsset explanation = Resources.Load(@"CSV/RateDamage/Explanation") as TextAsset;
+        StringReader sr = new StringReader(explanation.text);
+        while(sr.Peek() > -1)
+        {
+            text.text = sr.ReadLine();
+        }
+    }
+    void Succese()
+    {
+        _playerController.RateDamage();
+        Finish();
     }
     void Finish()
     {
@@ -114,10 +130,5 @@ public class RateDamage : MonoBehaviour
             count--;
         }
         return false;
-    }
-    void Succese()
-    {
-        _playerController.RateDamage();
-        Finish();
     }
 }

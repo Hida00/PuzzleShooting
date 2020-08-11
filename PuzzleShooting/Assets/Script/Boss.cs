@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Boss : MonoBehaviour
 {
     public GameObject Bullet;
+    public ParticleSystem particle;
     Slider bossHP;
     GameObject _player;
 
@@ -60,6 +61,7 @@ public class Boss : MonoBehaviour
                 GameController _gameController =  GameObject.Find("GameController").GetComponent<GameController>();
                 _gameController._score += score;
                 _gameController.Clear();
+                Instantiate(particle,this.transform.position,Quaternion.Euler(90 , 0 , 0));
                 Destroy(this.gameObject);
             }
             else if(skillData[skillCount - 1][0] == 1)

@@ -12,30 +12,45 @@ public class SettingController : MonoBehaviour
     public GameObject Camera;
     public GameObject setting;
 
-    public TextMeshProUGUI Setting;
-    public TextMeshProUGUI SkillKey;
-    public TextMeshProUGUI Save;
+    public Text Setting;
+    public Text SkillKey;
     public TextMeshProUGUI Exit;
 
-    public TextMeshProUGUI[] Skill;
+    public Text SkillSelect;
+    public Text JumpSkillSelect;
+
+    public Text volumeText;
+    public Text valueText;
+    public Slider volumeSlider;
+
+    public Text MuteText;
+    public Toggle MuteToggle;
+
+    public Text[] Skill;
 
     int num;
 
     bool isFunc = false;
+    bool Mute = false;
 
     public static KeyCode[] skill = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
     KeyCode[] buf;
 
     void Start()
     {
+        volumeSlider.value = (int)(SelectController.volume * 10f + 0.5f);
+        valueText.text = volumeSlider.value.ToString();
         buf = skill;
-        Save.enabled = false;
-        Exit.enabled = true;
     }
 
 
     void Update()
     {
+        volumeSlider.value = (int)(volumeSlider.value + 0.5f);
+        valueText.text = volumeSlider.value.ToString();
+
+        ClickMute();
+
         if (!isFunc)
         {
             Skill[0].text = "Skill1:" + buf[0].ToString();
@@ -53,22 +68,16 @@ public class SettingController : MonoBehaviour
     public void Skill1_KeySet()
     {
         isFunc = true;
-        Save.enabled = true;
-        Exit.enabled = false;
         num = 0;
     }
     public void Skill2_KeySet()
     {
         isFunc = true;
-        Save.enabled = true;
-        Exit.enabled = false;
         num = 1;
     }
     public void Skill3_KeySet()
     {
         isFunc = true;
-        Save.enabled = true;
-        Exit.enabled = false;
         num = 2;
     }
     void SkillKey_Set(int num)
@@ -87,17 +96,21 @@ public class SettingController : MonoBehaviour
         }
     }
 
-    public void Save_Click()
-    {
-        Save.enabled = false;
-        Exit.enabled = true;
-
-        skill = buf;
-    }
-
     public void Exit_Click()
     {
+        skill = buf;
         PanelController.buf_keys = skill;
         SceneManager.LoadScene("Select");
+        SelectController.volume = volumeSlider.value / 10f;
+        if(Mute) SelectController.volume = 0f;
+    }
+    public void ClickMute()
+    {
+        if(MuteToggle.GetComponent<Toggle>().isOn) Mute = true;
+        else Mute = false;
+    }
+    public void SetSkill()
+    {
+        SceneManager.LoadScene("SkillSelect");
     }
 }

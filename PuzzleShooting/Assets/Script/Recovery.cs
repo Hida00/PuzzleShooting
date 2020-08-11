@@ -11,8 +11,9 @@ using TMPro;
 
 public class Recovery : MonoBehaviour
 {
-    //Imageオブジェクトたち
+    //Imageオブジェクト
     public Image[] panels;
+    public Text Explanation;
 
     RecoveryImage[] _imageObjects;
 
@@ -74,6 +75,7 @@ public class Recovery : MonoBehaviour
         string[] info = sr.ReadLine().Split(',');
         int size = int.Parse(info[0]);
         _imageObjects = new RecoveryImage[size];
+
         //オブジェクトの種類、x座標、y座標、z回転
         while (sr.Peek() > -1)
         {
@@ -91,6 +93,18 @@ public class Recovery : MonoBehaviour
 
             obj.GetComponent<RecoveryImage>().originalNum = i;
             i++;
+        }
+
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TextAsset explanation = Resources.Load(@"CSV/Recovery/Explanation") as TextAsset;
+        StringReader st = new StringReader(explanation.text);
+        while(st.Peek() > -1)
+        {
+            string s = st.ReadLine();
+            text.text = s;
         }
     }
 

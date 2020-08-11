@@ -7,6 +7,7 @@ using UnityEngine;
 public class Viran : MonoBehaviour
 {
     public GameObject bullet;
+    public ParticleSystem particle;
     GameController _gameController;
     PanelController _panelController;
 
@@ -49,7 +50,7 @@ public class Viran : MonoBehaviour
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             _gameController._score += score;
-
+            Instantiate(particle , this.transform.position , Quaternion.Euler(90 , 0 , 0));
             Destroy(this.gameObject);
         }
         if(Time.time - startTime >= changeTime && !_panelController.isSkill)

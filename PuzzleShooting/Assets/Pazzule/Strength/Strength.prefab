@@ -49,7 +49,8 @@ MonoBehaviour:
   - {fileID: 8349628799997162934, guid: a0e86b4e8934d10459a498bc4b9f6c24, type: 3}
   - {fileID: 714896290842438274, guid: e056343afe776a848906f9eb7abc1c64, type: 3}
   - {fileID: 3638101058224688482, guid: a493c6d5b145c9b44a814e4738ff2bd8, type: 3}
-  _playerController: {fileID: 0}
+  Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
+    type: 3}
   isClick: 0
   isSuccess: 0
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,

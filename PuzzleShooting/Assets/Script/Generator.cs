@@ -45,7 +45,6 @@ public class Generator : MonoBehaviour
         float dif = Time.time - startTime;
         if(viranType[viranCount] == 1 && (viranData[viranCount][6] - dif) <= 0.1f && wait && !isSkill)
         {
-            Debug.Log(dif);
             var obj = Instantiate(viran1);
 
             obj.transform.position = new Vector3(viranData[viranCount][0] , viranData[viranCount][1] , viranData[viranCount][2]);
