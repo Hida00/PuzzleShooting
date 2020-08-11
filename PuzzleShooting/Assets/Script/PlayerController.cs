@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
 
         if(health_Point <= 0.00f)
         {
+            GameObject.Find("GameController").GetComponent<GameController>().FinishGame(false);
             SceneManager.LoadScene("Result");
         }
 

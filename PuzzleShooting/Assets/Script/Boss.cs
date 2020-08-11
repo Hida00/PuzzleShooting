@@ -61,6 +61,7 @@ public class Boss : MonoBehaviour
                 GameController _gameController =  GameObject.Find("GameController").GetComponent<GameController>();
                 _gameController._score += score;
                 _gameController.Clear();
+                _gameController.FinishGame(true);
                 Instantiate(particle,this.transform.position,Quaternion.Euler(90 , 0 , 0));
                 Destroy(this.gameObject);
             }

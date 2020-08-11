@@ -25,7 +25,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 498}
   m_MaxSize: {x: 18008, y: 14048}
   vertical: 0
-  controlID: 17755
+  controlID: 5495
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 498}
   m_MaxSize: {x: 10002, y: 14048}
   vertical: 1
-  controlID: 17756
+  controlID: 5435
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -189,7 +189,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 465effff185fffff2260ffff9a85ffffb085ffffda87ffff8688ffffb88bffffbe8bffff688effff588fffff6899ffff7499ffff8099ffff34b1ffff7eb3ffffc0b6ffffa2b8ffffacb9ffff7ac1ffffd6cbffffcefbffffc6330000fa330000043400000e340000e2370000ba3a0000c23a0000d43a0000de3a00000a3b0000383b0000d6480000e84800001c4900002649000034490000584a0000604a0000724a0000b24a0000e64a0000fa4a0000b0510000b8510000ca5100000a5200003452000044520000706c0000
+      m_ExpandedIDs: defbffff222b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -303,20 +303,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/SkillSelect
+    - Assets/Script
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/SkillSelect
+  - Assets/Script
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\Hakuyou\Desktop\git\Unity\PuzzleShooting
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 140}
-    m_SelectedIDs: 44270000
-    m_LastClickedID: 10052
-    m_ExpandedIDs: 00000000bc260000f6260000dc270000ae280000f2280000b629000000ca9a3b
+    m_SelectedIDs: a6280000
+    m_LastClickedID: 10406
+    m_ExpandedIDs: 00000000b6260000f0260000d8270000aa280000f0280000b629000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -344,7 +344,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000bc260000f6260000dc270000ae280000f2280000b629000000ca9a3b
+    m_ExpandedIDs: 00000000b6260000f0260000d8270000aa280000f0280000b629000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -369,8 +369,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 706c0000
-    m_LastClickedInstanceID: 27760
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000822200008c2b00004a27000000000000
     m_RenameOverlay:
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_MinSize: {x: 204, y: 348}
   m_MaxSize: {x: 4004, y: 8048}
   vertical: 1
-  controlID: 17738
+  controlID: 5496
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52

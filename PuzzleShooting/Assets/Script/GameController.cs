@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
     public GameObject LeftArea;
     public GameObject RightArea;
     Slider bossHP;
-
 
     public TextMeshProUGUI scoreText;
 
@@ -61,6 +61,18 @@ public class GameController : MonoBehaviour
         foreach(var obj in Enemy)
         {
             obj.GetComponent<BulletController>().isBoss = false;
+        }
+    }
+    public void FinishGame(bool isClear)
+    {
+        ResultController.score = _score;
+        if(isClear)
+        {
+            ResultController.isClear = true;
+        }
+        else
+        {
+            ResultController.isClear = false;
         }
     }
 }
