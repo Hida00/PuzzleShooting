@@ -1145,6 +1145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerBullet: {fileID: 7142290111055938864, guid: 01246a8af6dcc9c48af42e03dd4273bd,
     type: 3}
+  TrackingBullet: {fileID: 6882125527540467668, guid: af3c21d1736055f43b5e9b88157cec83,
+    type: 3}
   speedMag: 1
   health_Point: 200
   maxHealth: 0

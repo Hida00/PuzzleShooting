@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class Boss : MonoBehaviour
 {
     public GameObject Bullet;
+    public GameObject Placer;
     public ParticleSystem particle;
     Slider bossHP;
     GameObject _player;
+    GameObject[] placer;
 
     PanelController _panelController;
 
@@ -26,7 +28,6 @@ public class Boss : MonoBehaviour
     public float StartTime;
     public float difTime;
     float maxHealth;
-    float move = 1f;
     float Angle;
 
     public List<float[]> skillData = new List<float[]>();
@@ -35,6 +36,8 @@ public class Boss : MonoBehaviour
     public int skillCount;
     public int score;
     int frameCount = 0;
+
+    public bool isPlaceFinish;
 
     void Start()
     {
@@ -47,6 +50,7 @@ public class Boss : MonoBehaviour
 
         startPos = this.transform.position;
         Angle = MoveAngle;
+        placer = new GameObject[6];
     }
 
     void Update()
@@ -54,6 +58,8 @@ public class Boss : MonoBehaviour
         if(!_panelController.isSkill)frameCount++;
         if(bossHealth <= 0f && !_panelController.isSkill)
         {
+            foreach(var placers in placer) Destroy(placers);
+            GameObject.Find("GameController").GetComponent<GameController>().BossBulletMoveStart();
             HPcolorChange(skillCount);
             if(skillCount == 0)
             {
@@ -71,7 +77,7 @@ public class Boss : MonoBehaviour
             }
             else if(skillData[skillCount - 1][0] == 2)
             {
-                HexagramBullet();
+                StarBullet();
             }
             else if(skillData[skillCount - 1][0] == 3)
             {
@@ -79,7 +85,7 @@ public class Boss : MonoBehaviour
             }
             bossHealth = maxHealth;
         }
-        if(frameCount == interval && !_panelController.isSkill)
+        if(frameCount == interval && !_panelController.isSkill && !isPlaceFinish)
         {
             BulletAngle = (float)Math.Atan2(this.transform.position.y - _player.transform.position.y , this.transform.position.x - _player.transform.position.x) * 180f / (float)Math.PI;
             Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 90f));
@@ -94,122 +100,50 @@ public class Boss : MonoBehaviour
             StartTime = Time.time;
             MoveAngle += 360f / rotationCount;
         }
-        float skill = _panelController.skillSpeed;
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * move * skill;
 
         bossHP.value = bossHealth / maxHealth;
     }
-    void CircleBullet()     //Num,半径,円の数,各円の半径の差
+    void CircleBullet()         //Num,半径,円の数,各円の半径の差
     {
-        move = 0f;
-        this.transform.position = startPos;
-        MoveAngle = Angle;
+        placer[0] = Instantiate(Placer);
+        placer[0].GetComponent<BulletPlacer>().skillData = skillData[skillCount - 1];
+        placer[0].GetComponent<BulletPlacer>()._boss = this.gameObject;
+        placer[0].GetComponent<BulletPlacer>().speed = 2f;
+        placer[0].GetComponent<BulletPlacer>().interval = 10;
+        placer[0].GetComponent<BulletPlacer>().dif = 0f;
 
-        float radius = skillData[skillCount - 1][1] ;
-        for(float x = -radius; x < radius;)
-        {
-            float y = (float)Math.Sqrt(radius * radius - x * x) + this.transform.position.y;
-            float angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            var obj = Instantiate(Bullet , new Vector3(x + this.transform.position.x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
+        placer[1] = Instantiate(Placer);
+        placer[1].GetComponent<BulletPlacer>().skillData = skillData[skillCount - 1];
+        placer[1].GetComponent<BulletPlacer>()._boss = this.gameObject;
+        placer[1].GetComponent<BulletPlacer>().speed = 2f;
+        placer[1].GetComponent<BulletPlacer>().interval = 10;
+        placer[1].GetComponent<BulletPlacer>().dif = -2f;
 
-            y = -(float)Math.Sqrt(radius * radius - x * x) + this.transform.position.y;
-            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            obj = Instantiate(Bullet , new Vector3(x + this.transform.position.x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
-
-            x += 0.5f;
-        }
-        skillData[skillCount - 1][2]--;
-        skillData[skillCount - 1][1] += skillData[skillCount - 1][3];
-
-        if(skillData[skillCount - 1][2] != 0) Invoke("CircleBullet" , 0.5f);
-        else
-        {
-            skillCount--;
-            move = 1f;
-            StartTime = Time.time;
-            GameObject.Find("GameController").GetComponent<GameController>().BossBulletMoveStart();
-        }
-    }
-    void HexagramBullet()   //Num,半径
-    {
-        move = 0f;
-        this.transform.position = startPos;
-        MoveAngle = Angle;
-
-        float radius = skillData[skillCount - 1][1];
-        for(float x = 0;x < (int)radius * Math.Sqrt(3);)
-        {
-            float y = (float)Math.Sqrt(3) * x - 2f;
-            float angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            var obj = Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
-            y = -(float)Math.Sqrt(3) * x + 2;
-            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            obj = Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
-            y = 1f;
-            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            obj = Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
-            y = -1f;
-            angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            obj = Instantiate(Bullet , new Vector3(x , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
-            if(x != 0f)
-            {
-                float X = -x;
-                y = -(float)Math.Sqrt(3) * X + 2f;
-                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-                obj = Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-                obj.GetComponent<BulletController>().isBoss = true;
-                y = (float)Math.Sqrt(3) * X + 2;
-                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-                obj = Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-                obj.GetComponent<BulletController>().isBoss = true;
-                y = 1f;
-                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-                obj = Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-                obj.GetComponent<BulletController>().isBoss = true;
-                y = -1f;
-                angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-                obj = Instantiate(Bullet , new Vector3(X , y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-                obj.GetComponent<BulletController>().isBoss = true;
-            }
-            x += 0.25f;
-        }
+        isPlaceFinish = true;
         skillCount--;
-        move = 1f;
-        StartTime = Time.time;
-        GameObject.Find("GameController").GetComponent<GameController>().BossBulletMoveStart();
     }
-    void OverCircleBullet()//Num,半径,円の数,半径の差,弾の間隔,生成する弾のX座標の最小値,生成する弾のX座標の最大値,time,
+    void StarBullet()
     {
-        move = 0f;
-        this.transform.position = startPos;
-        MoveAngle = Angle;
+        placer[0] = Instantiate(Placer);
+        placer[0].GetComponent<BulletPlacer>().skillData = skillData[skillCount - 1];
+        placer[0].GetComponent<BulletPlacer>()._boss = this.gameObject;
+        placer[0].GetComponent<BulletPlacer>().speed = 8f;
+        placer[0].GetComponent<BulletPlacer>().interval = 7;
 
-        float radius = skillData[skillCount - 1][1];
-        for(float x = skillData[skillCount - 1][5]; x <= skillData[skillCount - 1][6];)
-        {
-            float y = (float)Math.Sqrt(radius * radius - x * x) - 17f;
-            float angle = (float)Math.Atan2(y - _player.transform.position.y , x - _player.transform.position.x) * 180f / (float)Math.PI;
-            var obj = Instantiate(Bullet , new Vector3(x, y , 0) , Quaternion.Euler(0 , 0 , 90f + angle));
-            obj.GetComponent<BulletController>().isBoss = true;
-            x += skillData[skillCount - 1][4];
-        }
-        skillData[skillCount - 1][2]--;
-        skillData[skillCount - 1][1] += skillData[skillCount - 1][3];
+        isPlaceFinish = true;
+        skillCount--;
+    }
+    void OverCircleBullet()     //Num,半径,円の数,半径の差,弾の間隔,生成する弾のX座標の最小値,生成する弾のX座標の最大値,time,
+    {
+        placer[0] = Instantiate(Placer);
+        placer[0].GetComponent<BulletPlacer>().skillData = skillData[skillCount - 1];
+        placer[0].GetComponent<BulletPlacer>()._boss = _player;
+        placer[0].GetComponent<BulletPlacer>().speed = 4f;
+        placer[0].GetComponent<BulletPlacer>().interval = 10;
+        placer[0].GetComponent<BulletPlacer>().dif = 0f;
 
-        if(skillData[skillCount - 1][2] != 0) Invoke("OverCircleBullet" , 0.5f);
-        else
-        {
-            skillCount--;
-            move = 1f;
-            StartTime = Time.time;
-            GameObject.Find("GameController").GetComponent<GameController>().BossBulletMoveStart();
-        }
+        isPlaceFinish = true;
+        skillCount--;
     }
     void HPcolorChange(int count)
     {

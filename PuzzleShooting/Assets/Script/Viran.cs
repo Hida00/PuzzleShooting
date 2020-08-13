@@ -11,6 +11,7 @@ public class Viran : MonoBehaviour
     GameController _gameController;
     PanelController _panelController;
 
+    public float[] MoveAngles;
     public float ViranHealth = 100f;
     public float maxHealth;
     public float defensePoint = 2f;
@@ -19,11 +20,9 @@ public class Viran : MonoBehaviour
     public float startTime;
     public float speed = 4f;
     public float BulletAngle;
-    public float MoveAngleZ1;
-    public float MoveAngleZ2;
     public float AngleAbs;
     public float difTime;
-    float MoveAngle;
+    public float MoveAngle;
 
     int frameCount = 0;
     public int interval = 15;
@@ -31,6 +30,7 @@ public class Viran : MonoBehaviour
     public int score;
     public int isFinal;
     int count = 0;
+    int maxCount;
 
     void Start()
     {
@@ -40,7 +40,7 @@ public class Viran : MonoBehaviour
         maxHealth = ViranHealth;
         defensePoint = 2f;
         startTime = Time.time;
-        MoveAngle = MoveAngleZ1;
+        maxCount = MoveAngles.Length;
     }
     
     void Update()
@@ -56,12 +56,7 @@ public class Viran : MonoBehaviour
         if(Time.time - startTime >= changeTime && !_panelController.isSkill)
         {
             startTime = Time.time;
-
-            if(count % 2 == 1)
-            {
-                MoveAngle += MoveAngleZ2 * AngleAbs;
-            }
-            else MoveAngle += MoveAngleZ2;
+            MoveAngle = MoveAngles[count];
             count++;
         }
         if((Time.time - startTime) >= displaceTime && !_panelController.isSkill)
@@ -73,27 +68,34 @@ public class Viran : MonoBehaviour
             && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
         {
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle + 25));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle - 25f));
             frameCount = 0;
         }
         if(frameCount == interval && speed == 0 && !_panelController.isSkill)
         {
             frameCount = 0;
             Vector3 pos = GameObject.Find("Player").transform.position;
-
             float angle = (float)(Math.Atan2(this.transform.position.y - pos.y , this.transform.position.x - pos.x) * 180f / Math.PI);
 
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 90f + angle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 105f + angle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 75f + angle));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  90f + angle));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 115f + angle));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 140f + angle));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  65f + angle));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  40f + angle));
         }
         if(frameCount == interval && Type == 1 && speed != 0 && !_panelController.isSkill)
         {
             Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 15f));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 15f));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 20f));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 20f));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 40f));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 40f));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 60f));
+            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 60f));
             frameCount = 0;
         }
-        if(this.transform.position.x >= 13f || this.transform.position.x <= -13f || this.transform.position.y >= 15f || this.transform.position.y <= -15f)
+        if(this.transform.position.x >= 13f || this.transform.position.x <= -13f || this.transform.position.y >= 15f || this.transform.position.y <= -15f || count >= maxCount)
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             Destroy(this.gameObject);

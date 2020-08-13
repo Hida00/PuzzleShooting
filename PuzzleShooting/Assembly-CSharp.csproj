@@ -67,6 +67,7 @@
     <Compile Include="Assets\Script\AttackSpeedImage.cs" />
     <Compile Include="Assets\Script\Boss.cs" />
     <Compile Include="Assets\Script\BulletController.cs" />
+    <Compile Include="Assets\Script\BulletPlacer.cs" />
     <Compile Include="Assets\Script\Defeat.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\Generator.cs" />

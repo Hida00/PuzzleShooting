@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //プレイヤーの弾丸
     public GameObject PlayerBullet;
+    public GameObject TrackingBullet;
 
     //Shift押下中速度を落とすための補正倍率
     public float speedMag = 1.0f;
@@ -19,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float maxHealth;
 
     public float strength;
-    readonly float damage = 15f;
+    readonly float damage = 25f;
     float moveright = 1f;
     float moveleft = 1f;
     float moveup = 1f;
@@ -27,9 +28,10 @@ public class PlayerController : MonoBehaviour
     float moveOverY;
 
     int framecount = 0;
-    int attackSpeed = 10;
+    int attackSpeed = 15;
 
     bool skill = false;
+    bool isShift = false;
 
     void Start()
     {
@@ -49,14 +51,33 @@ public class PlayerController : MonoBehaviour
             Vector3 PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
             var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
             var two = new Vector3(PlayerPosition.x + 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
-            var three = new Vector3(PlayerPosition.x , PlayerPosition.y + 1f , PlayerPosition.z);
+            var three = new Vector3(PlayerPosition.x - 0.5f , PlayerPosition.y + 1f , PlayerPosition.z);
+            var four = new Vector3(PlayerPosition.x , PlayerPosition.y + 1.5f , PlayerPosition.z);
+            var five = new Vector3(PlayerPosition.x + 0.5f , PlayerPosition.y + 1f , PlayerPosition.z);
+
+            if(!isShift)
+            {
+                var obj = Instantiate(PlayerBullet , three , Quaternion.Euler(0 , 0 , 5f));
+                obj.GetComponent<BulletController>().damagePoint = strength * damage;
+                obj = Instantiate(PlayerBullet , four , Quaternion.identity);
+                obj.GetComponent<BulletController>().damagePoint = strength * damage;
+                obj = Instantiate(PlayerBullet , five , Quaternion.Euler(0 , 0 , -5f));
+                obj.GetComponent<BulletController>().damagePoint = strength * damage;
+                obj = Instantiate(TrackingBullet , one , Quaternion.Euler(0 , 0 , 15f));
+                obj.GetComponent<BulletController>().damagePoint = strength * damage / 2f;
+                obj = Instantiate(TrackingBullet , two , Quaternion.Euler(0 , 0 , -15f));
+                obj.GetComponent<BulletController>().damagePoint = strength * damage / 2f;
+            }
+            else if(isShift)
+            {
+                var obj = Instantiate(PlayerBullet , three , Quaternion.identity);
+                obj.GetComponent<BulletController>().damagePoint = strength * damage;
+                obj = Instantiate(PlayerBullet , four , Quaternion.identity);
+                obj.GetComponent<BulletController>().damagePoint = strength * damage;
+                obj = Instantiate(PlayerBullet , five , Quaternion.identity);
+                obj.GetComponent<BulletController>().damagePoint = strength * damage;
+            }
             framecount = 0;
-            var obj = Instantiate(PlayerBullet , one , Quaternion.identity);
-            obj.GetComponent<BulletController>().damagePoint = strength * damage;
-            obj = Instantiate(PlayerBullet , two , Quaternion.identity);
-            obj.GetComponent<BulletController>().damagePoint = strength * damage;
-            obj = Instantiate(PlayerBullet , three , Quaternion.identity);
-            obj.GetComponent<BulletController>().damagePoint = strength * damage;
         }
         float skill = GameObject.Find("PanelController").GetComponent<PanelController>().skillSpeed;
         //移動キーの取得
@@ -72,10 +93,12 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {
             speedMag = 0.3f;
+            isShift = true;
         }
         if(Input.GetMouseButtonUp(0) || Input.GetKeyUp(KeyCode.LeftShift))
         {
             speedMag = 1.0f;
+            isShift = false;
         }
 
         if(health_Point <= 0.00f)
