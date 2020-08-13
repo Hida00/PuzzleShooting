@@ -11,8 +11,9 @@ using TMPro;
 
 public class Recovery : MonoBehaviour
 {
-    //Imageオブジェクトたち
+    //Imageオブジェクト
     public Image[] panels;
+    public Text Explanation;
 
     RecoveryImage[] _imageObjects;
 
@@ -54,9 +55,9 @@ public class Recovery : MonoBehaviour
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
+            obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
 
-            Invoke("recovery" , 0.8f);
+            Invoke("Succese" , 0.8f);
         }
         CheckLight();
     }
@@ -74,6 +75,7 @@ public class Recovery : MonoBehaviour
         string[] info = sr.ReadLine().Split(',');
         int size = int.Parse(info[0]);
         _imageObjects = new RecoveryImage[size];
+
         //オブジェクトの種類、x座標、y座標、z回転
         while (sr.Peek() > -1)
         {
@@ -91,6 +93,18 @@ public class Recovery : MonoBehaviour
 
             obj.GetComponent<RecoveryImage>().originalNum = i;
             i++;
+        }
+
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TextAsset explanation = Resources.Load(@"CSV/Recovery/Explanation") as TextAsset;
+        StringReader st = new StringReader(explanation.text);
+        while(st.Peek() > -1)
+        {
+            string s = st.ReadLine();
+            text.text = s;
         }
     }
 
@@ -143,16 +157,15 @@ public class Recovery : MonoBehaviour
         isLight[Num][1] = buf;
         _imageObjects[Num].islight = 0;
     }
-    void recovery()
+    public void Succese()
     {
         _playerController.health_Point += 30f;
-
         Finish();
     }
     void Finish()
     {
         panel.SetActive(false);
-        _panelController.isSkill = false;
+        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
@@ -160,6 +173,7 @@ public class Recovery : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        _panelController.FinishTimeSet();
         Destroy(this.gameObject);
     }
 }

@@ -46,7 +46,7 @@ public class RateDamageImage : MonoBehaviour
                 if(shape == -1) shape = 3;
             }
         }
-        ImageSet = _rateDamage.Check_Image(shape , num,ImageSet);
+        ImageSet = _rateDamage.Check_Image(shape , num , ImageSet);
     }
     void Change_Image()
     {

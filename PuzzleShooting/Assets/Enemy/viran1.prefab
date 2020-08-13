@@ -105,15 +105,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7414274325956033526, guid: 7f89db974b7098149a36e51e0ad03b97, type: 3}
+  particle: {fileID: 5566179456618252004, guid: 19ef41b734b7fee4e89c698b0d341c37,
+    type: 3}
   ViranHealth: 200
   maxHealth: 0
   defensePoint: 2
   displaceTime: 0
   changeTime: 0
+  startTime: 0
   speed: 4
   BulletAngle: 0
   MoveAngleZ1: 0
   MoveAngleZ2: 0
+  AngleAbs: 0
+  difTime: 0
   interval: 15
   Type: 0
   score: 0
+  isFinal: 0

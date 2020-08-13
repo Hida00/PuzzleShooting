@@ -9,6 +9,7 @@ using TMPro;
 public class RateDamage : MonoBehaviour
 {
     public Image[] panels;
+    public Text Explanation;
 
     RateDamageImage[] images;
 
@@ -19,7 +20,7 @@ public class RateDamage : MonoBehaviour
 
     public string[] Names;
 
-    int count;
+    public int count;
     int size;
     int shape;
     int num;
@@ -45,7 +46,7 @@ public class RateDamage : MonoBehaviour
             obj.transform.SetParent(panel.transform , false);
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
-            Invoke("_rateDamage" , 0.8f);
+            Invoke("Succese" , 0.8f);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -88,10 +89,25 @@ public class RateDamage : MonoBehaviour
             }
             i++;
         }
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TextAsset explanation = Resources.Load(@"CSV/RateDamage/Explanation") as TextAsset;
+        StringReader sr = new StringReader(explanation.text);
+        while(sr.Peek() > -1)
+        {
+            text.text = sr.ReadLine();
+        }
+    }
+    void Succese()
+    {
+        _playerController.RateDamage();
+        Finish();
     }
     void Finish()
     {
-        _panelController.isSkill = false;
+        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
@@ -99,6 +115,7 @@ public class RateDamage : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        _panelController.FinishTimeSet();
         Destroy(this.gameObject);
     }
     public bool Check_Image(int shape,int num,bool boolen)
@@ -113,10 +130,5 @@ public class RateDamage : MonoBehaviour
             count--;
         }
         return false;
-    }
-    void _rateDamage()
-    {
-        _playerController.RateDamage();
-        Finish();
     }
 }

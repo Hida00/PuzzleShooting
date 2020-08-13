@@ -21,7 +21,6 @@ public class StrengthImage : MonoBehaviour
 
     void Update()
     {
-        //Debug用。Escapeキーを押すとスキルの終了
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             _panelController.isSkill = false;
@@ -31,24 +30,15 @@ public class StrengthImage : MonoBehaviour
     {
         if(skill.isClick)
         {
-            skill.DrawLine(this.transform.localPosition , this.Num);
+            Debug.Log(skill.isClick);
+            skill.DrawLine(this.GetComponent<RectTransform>().anchoredPosition , this.Num);
         }
         else
         {
             skill.isClick = true;
-            skill.start = this.transform.localPosition;
+            skill.start = this.transform.GetComponent<RectTransform>().anchoredPosition;
             skill.isConnect[Num] = 1;
         }
-        var sprite = Resources.Load<Sprite>(@"Image/Strength/point_light");
-        this.GetComponent<Image>().sprite = sprite;
-    }
-    public void Image_Move()
-    {
-        skill.start = this.transform.localPosition;
-        skill.buf = this.Num;
-    }
-    public void Image_Enter()
-    {
-        skill.DrawLine(this.transform.localPosition,this.Num);
+        skill.PointLight(this.GetComponent<RectTransform>());
     }
 }

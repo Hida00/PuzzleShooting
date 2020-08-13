@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     public GameObject RightArea;
     Slider bossHP;
 
-
     public TextMeshProUGUI scoreText;
 
     public int _score = 0;
@@ -22,6 +21,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 65;
+
+        float scale = (Screen.height / 20f) * (40f / Screen.width);
+        GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize *= scale;
 
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
         bossHP.gameObject.SetActive(false);
@@ -46,11 +48,7 @@ public class GameController : MonoBehaviour
     }
     void Quit()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_STANDALONE
-            Application.Quit();
-        #endif
+        SceneManager.LoadScene("Select");
     }
     public void Clear()
     {
@@ -63,6 +61,18 @@ public class GameController : MonoBehaviour
         foreach(var obj in Enemy)
         {
             obj.GetComponent<BulletController>().isBoss = false;
+        }
+    }
+    public void FinishGame(bool isClear)
+    {
+        ResultController.score = _score;
+        if(isClear)
+        {
+            ResultController.isClear = true;
+        }
+        else
+        {
+            ResultController.isClear = false;
         }
     }
 }

@@ -39,7 +39,7 @@ public class Invisible : MonoBehaviour
         Create_Image();
         CreateAnswer(size);
 
-        Invoke("Finish" , 20f);
+        Invoke("Finish" , 40f);
     }
 
     void Update()
@@ -48,9 +48,9 @@ public class Invisible : MonoBehaviour
         {
             var obj = Instantiate(ClearText);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
+            obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
 
-            Invoke("_invisible" , 0.8f);
+            Invoke("Succese" , 0.8f);
         }
         if (Input.GetKeyDown(KeyCode.Escape)) Finish();
         CheckAnswer();
@@ -79,17 +79,17 @@ public class Invisible : MonoBehaviour
             var obj2 = Instantiate(number , new Vector3(0 , 0 , 0) , Quaternion.identity);
             obj2.transform.SetParent(obj.transform , false);
             obj2.GetComponent<InvisibleImage>().index = i;
-            obj2.GetComponent<InvisibleImage>().Num = int.Parse(values[3]);
+            obj2.GetComponent<InvisibleImage>().Num = int.Parse(values[4]);
             obj2.rectTransform.sizeDelta *= new Vector2(prov , prov);
-            Numbers[i] = int.Parse(values[3]);
+            Numbers[i] = int.Parse(values[4]);
 
-            if (values[3] == "0") EmptyNum = i;
+            if (values[4] == "0") EmptyNum = i;
 
             texts[i] = obj2;
             i++;
         }
     }
-    void _invisible()
+    void Succese()
     {
         _playerController.Invisible();
         Finish();
@@ -97,7 +97,7 @@ public class Invisible : MonoBehaviour
     void Finish()
     {
         panel.SetActive(false);
-        _panelController.isSkill = false;
+        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
@@ -105,6 +105,7 @@ public class Invisible : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        _panelController.FinishTimeSet();
         Destroy(this.gameObject);
     }
     public int ChangeNum(int index,int num)

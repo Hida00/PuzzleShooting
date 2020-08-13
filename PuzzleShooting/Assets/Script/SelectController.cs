@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SelectController : MonoBehaviour
 {
+    public static float volume = 0.7f;
+
     public static string SelectName = "Normal1";
     public static int[] SetSkills = { 0 , 1 , 2 };
 
@@ -20,6 +22,11 @@ public class SelectController : MonoBehaviour
         SelectName = "Normal1";
         SceneManager.LoadScene("PlayScene");
     }
+    public void Click_Two()
+    {
+        SelectName = "Hard1";
+        SceneManager.LoadScene("PlayScene");
+    }
     public void Click_Setting()
     {
         SceneManager.LoadScene("Setting");
@@ -30,10 +37,6 @@ public class SelectController : MonoBehaviour
     }
     void Quit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-        Application.Quit();
-#endif
+        SceneManager.LoadScene("Title");
     }
 }

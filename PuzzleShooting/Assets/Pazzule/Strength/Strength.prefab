@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 18235276829122632}
   - component: {fileID: 1212251171987547460}
   m_Layer: 0
-  m_Name: Skill
+  m_Name: Strength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,11 @@ MonoBehaviour:
   - {fileID: 2299491888907840611, guid: 6f4fc905c86cc0a4b93e7f53a9a424d4, type: 3}
   - {fileID: 8349628799997162934, guid: a0e86b4e8934d10459a498bc4b9f6c24, type: 3}
   - {fileID: 714896290842438274, guid: e056343afe776a848906f9eb7abc1c64, type: 3}
+  - {fileID: 3638101058224688482, guid: a493c6d5b145c9b44a814e4738ff2bd8, type: 3}
+  Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
+    type: 3}
   isClick: 0
   isSuccess: 0
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
     type: 3}
+  Delete: {fileID: 6651833149543583771, guid: a5f1b855465a7a74784792977fe25b2b, type: 3}

@@ -5,17 +5,17 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Threading;
 
 public class Strength : MonoBehaviour
 {
     public Image[] panels;
+    public Text Explanation;
 
     GameObject panel;
 
     PanelController _panelController;
 
-    public PlayerController _playerController;
+    PlayerController _playerController;
 
     [NonSerialized]
     public Vector3 start;
@@ -34,9 +34,11 @@ public class Strength : MonoBehaviour
     public bool isSuccess = false;
 
     public TextMeshProUGUI ClearText;
+    public TextMeshProUGUI Delete;
 
     void Start()
     {
+        isClick = false;
         panel = GameObject.Find("Panel");
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -53,9 +55,9 @@ public class Strength : MonoBehaviour
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
-            obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
+            obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
 
-            Invoke("_strength" , 0.8f);
+            Invoke("Succese" , 0.8f);
         }
         Check_Connect();
     }
@@ -81,10 +83,13 @@ public class Strength : MonoBehaviour
             obj.GetComponent<StrengthImage>().Num = i;
             i++;
         }
+        var delete = Instantiate(Delete , panel.transform);
+        delete.rectTransform.anchoredPosition = new Vector2(0f , -160f * prov);
+        delete.fontSize *= prov;
 
         var sample = Instantiate(panels[3] , new Vector3(0 , 0 , 0) , Quaternion.identity);
         sample.transform.SetParent(panel.transform , false);
-        sample.rectTransform.anchoredPosition = new Vector2(50f * prov , 150f * prov);
+        sample.rectTransform.anchoredPosition = new Vector2(0f , 60f * prov);
         sample.rectTransform.sizeDelta *= new Vector2(prov, prov);
 
         var sampleCSV = Resources.Load(@"CSV/Strength/sample") as TextAsset;
@@ -105,6 +110,17 @@ public class Strength : MonoBehaviour
         }
         sample.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/Strength/" + list[num][1]);
 
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TextAsset explanation = Resources.Load(@"CSV/Strength/Explanation") as TextAsset;
+        StringReader sr = new StringReader(explanation.text);
+        while(sr.Peek() > -1)
+        {
+            string s = sr.ReadLine();
+            text.text = s;
+        }
     }
     void Check_Connect()
     {
@@ -142,23 +158,42 @@ public class Strength : MonoBehaviour
         lineCount++;
         isConnect[num] = lineCount;
     }
-    void _strength()
+    public void PointLight(RectTransform rectTransform)
+    {
+        var obj = Instantiate(panels[4] , panel.transform);
+        obj.rectTransform.anchoredPosition = rectTransform.anchoredPosition;
+        obj.rectTransform.sizeDelta = rectTransform.sizeDelta * 1.01f;
+    }
+    void Succese()
     {
         _playerController.Strength();
         Finish();
     }
     void Finish()
     {
-        _panelController.isSkill = false;
+        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
 
         foreach (Transform n in panel.transform)
         {
-         
             Destroy(n.gameObject);
         }
+        _panelController.FinishTimeSet();
         target = new int[0];
         isSuccess = false;
+    }
+    public void Clear()
+    {
+        var skill = GameObject.Find("Strength(Clone)").GetComponent<Strength>();
+        skill.isConnect = new int[skill.size];
+        skill.isClick = false;
+
+        var lines = GameObject.FindGameObjectsWithTag("LINE");
+        foreach(var obj in lines)
+        {
+            Destroy(obj.gameObject);
+        }
+        Debug.Log("Delete");
     }
 }

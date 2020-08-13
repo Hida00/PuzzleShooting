@@ -41,4 +41,12 @@ public class TitleController : MonoBehaviour
             Application.Quit();
 #endif
     }
+    public void ClickSetting()
+    {
+        SceneManager.LoadScene("Setting");
+    }
+    public void ClickStaff()
+    {
+
+    }
 }
