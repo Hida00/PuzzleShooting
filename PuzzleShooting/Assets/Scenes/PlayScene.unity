@@ -1022,6 +1022,7 @@ MonoBehaviour:
   - {fileID: 3945387701227061274, guid: 1faa2e6eb0615bd4fa34bb42c77eb3ef, type: 3}
   - {fileID: 1144751985484154454, guid: 0185fbedfbcb42b428f959144b0be7d1, type: 3}
   - {fileID: 27494764824534553, guid: 3e4961c1c0e5bff429ffd6aef4799ad1, type: 3}
+  - {fileID: 7464916947351626005, guid: 062917459bd612a449bb08badfac5e00, type: 3}
   difTime: 0
   skillSpeed: 1
 --- !u!4 &1318566210
@@ -1032,7 +1033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1318566208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 302.89285, y: 178.26974, z: -5.7792435}
+  m_LocalPosition: {x: 0, y: 0, z: -5.7792435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1364,7 +1365,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565276043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 302.89285, y: 178.26974, z: -5.7792435}
+  m_LocalPosition: {x: 0, y: 0, z: -5.7792435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

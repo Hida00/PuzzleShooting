@@ -23,6 +23,7 @@ public class Viran : MonoBehaviour
     public float AngleAbs;
     public float difTime;
     public float MoveAngle;
+    public float damage;
 
     int frameCount = 0;
     public int interval = 15;
@@ -67,9 +68,12 @@ public class Viran : MonoBehaviour
         if(frameCount == interval && Type == 2 && speed != 0
             && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
         {
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle + 25));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle - 25f));
+            var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle));
+            obj.GetComponent<BulletController>().damagePoint = 1f;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle + 25));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle - 25f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
             frameCount = 0;
         }
         if(frameCount == interval && speed == 0 && !_panelController.isSkill)
@@ -78,21 +82,33 @@ public class Viran : MonoBehaviour
             Vector3 pos = GameObject.Find("Player").transform.position;
             float angle = (float)(Math.Atan2(this.transform.position.y - pos.y , this.transform.position.x - pos.x) * 180f / Math.PI);
 
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  90f + angle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 115f + angle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 140f + angle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  65f + angle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  40f + angle));
+            var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  90f + angle));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 115f + angle));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 140f + angle));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  65f + angle));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  40f + angle));
+            obj.GetComponent<BulletController>().damagePoint = damage;
         }
         if(frameCount == interval && Type == 1 && speed != 0 && !_panelController.isSkill)
         {
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 20f));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 20f));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 40f));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 40f));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 60f));
-            Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 60f));
+            var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 20f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 20f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 40f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 40f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 60f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle - 60f));
+            obj.GetComponent<BulletController>().damagePoint = damage;
             frameCount = 0;
         }
         if(this.transform.position.x >= 13f || this.transform.position.x <= -13f || this.transform.position.y >= 15f || this.transform.position.y <= -15f || count >= maxCount)

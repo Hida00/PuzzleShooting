@@ -251,6 +251,7 @@ MonoBehaviour:
   Title: {fileID: 1054886492}
   Play: {fileID: 81873127}
   Quit: {fileID: 1162836363}
+  Setting: {fileID: 1947045129}
 --- !u!4 &661399796
 Transform:
   m_ObjectHideFlags: 0

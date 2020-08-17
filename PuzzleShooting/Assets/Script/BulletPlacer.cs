@@ -14,6 +14,7 @@ public class BulletPlacer : MonoBehaviour
     public float[] skillData;
     public float dif;
     public float speed;
+    public float damage;
     float x, y;
     float[] data;
 

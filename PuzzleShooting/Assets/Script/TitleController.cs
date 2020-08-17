@@ -10,6 +10,7 @@ public class TitleController : MonoBehaviour
     public TextMeshProUGUI Title;
     public Text Play;
     public Text Quit;
+    public Text Setting;
     
     void Start()
     {
@@ -17,12 +18,15 @@ public class TitleController : MonoBehaviour
         Title.rectTransform.sizeDelta *= prov;
         Play.rectTransform.sizeDelta *= prov;
         Quit.rectTransform.sizeDelta *= prov;
+        Setting.rectTransform.sizeDelta *= prov;
         Title.rectTransform.anchoredPosition *= prov;
         Play.rectTransform.anchoredPosition *= prov;
         Quit.rectTransform.anchoredPosition *= prov;
+        Setting.rectTransform.anchoredPosition *= prov;
         Title.fontSize *= prov;
         Play.fontSize = (int)(Play.fontSize * prov);
         Quit.fontSize = (int)(Quit.fontSize * prov);
+        Setting.fontSize = (int)(Setting.fontSize * prov);
     }
 
     void Update()

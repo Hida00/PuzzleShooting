@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float maxHealth;
 
     public float strength;
+    public float defence;
     readonly float damage = 25f;
     float moveright = 1f;
     float moveleft = 1f;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         maxHealth = health_Point;
 
         strength = 1.0f;
+        defence = 1.0f;
 
         moveOverY = 19.2f * ((float)Screen.height / (float)Screen.width);
     }
@@ -167,6 +169,20 @@ public class PlayerController : MonoBehaviour
             strength = 2.0f;
             skill = true;
             Invoke("Strength" , 10f);
+        }
+    }
+    public void Defence()
+    {
+        if(skill)
+        {
+            defence /= 2f;
+            skill = false;
+        }
+        else
+        {
+            defence *= 2f;
+            skill = true;
+            Invoke("Defence" , 10f);
         }
     }
     void PositionOver(Vector3 position)

@@ -30,6 +30,8 @@ public class AttackSpeed : MonoBehaviour
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
 
         Create_Image();
+
+        Invoke("Finish" , 15f);
     }
 
     void Update()
