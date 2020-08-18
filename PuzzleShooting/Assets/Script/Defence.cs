@@ -32,7 +32,7 @@ public class Defence : MonoBehaviour
         panel = GameObject.Find("Panel");
         Create_peace();
 
-        Invoke("Finish" , 200f);
+        Invoke("Finish" , 22f);
     }
 
     void Update()

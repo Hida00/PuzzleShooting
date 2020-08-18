@@ -6,12 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class SelectController : MonoBehaviour
 {
+    public AudioSource BGM;
+
     public static float volume = 0.7f;
 
     public static string SelectName = "Normal1";
-    public static int[] SetSkills = { 5 , 1 , 2 };
+    public static int[] SetSkills = { 4 , 1 , 2 };
 
-    void Start() { }
+    void Start()
+    {
+        BGM.volume = volume;
+        BGM.Play();
+    }
 
     void Update()
     {
@@ -20,23 +26,28 @@ public class SelectController : MonoBehaviour
     public void Click_One()
     {
         SelectName = "Normal1";
+        BGM.Stop();
         SceneManager.LoadScene("PlayScene");
     }
     public void Click_Two()
     {
         SelectName = "Hard1";
+        BGM.Stop();
         SceneManager.LoadScene("PlayScene");
     }
     public void Click_Setting()
     {
+        BGM.Stop();
         SceneManager.LoadScene("Setting");
     }
     public void Click_Skill()
     {
+        BGM.Stop();
         SceneManager.LoadScene("SkillSelect");
     }
     void Quit()
     {
+        BGM.Stop();
         SceneManager.LoadScene("Title");
     }
 }

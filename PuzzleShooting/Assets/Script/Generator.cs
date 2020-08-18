@@ -59,6 +59,7 @@ public class Generator : MonoBehaviour
         if(float.Parse(Data[0]) == 1f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill)
         {
             var obj = Instantiate(viran1);
+            
 
             obj.transform.position = new Vector3(float.Parse(Data[1]) , float.Parse(Data[2]) , float.Parse(Data[3]));
             obj.GetComponent<Viran>().MoveAngle = float.Parse(Data[4]);
@@ -74,10 +75,12 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().isFinal = int.Parse(Data[14]);
             obj.GetComponent<Viran>().damage = float.Parse(Data[15]);
             obj.GetComponent<Viran>().MoveAngles = new float[int.Parse(Data[16])];
-            for(int i = 0; i < int.Parse(Data[16]); i++)
+            int add = int.Parse(Data[16]);
+            for(int i = 0; i < add; i++)
             {
                 obj.GetComponent<Viran>().MoveAngles[i] = float.Parse(Data[17 + i]);
             }
+            obj.GetComponent<Viran>().imageName = Data[17 + add];
 
             if((int)float.Parse(Data[14]) == 1)
             {
@@ -106,10 +109,13 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().isFinal = int.Parse(Data[14]);
             obj.GetComponent<Viran>().damage = float.Parse(Data[15]);
             obj.GetComponent<Viran>().MoveAngles = new float[int.Parse(Data[16])];
+            int add = int.Parse(Data[16]);
             for(int i = 0;i < int.Parse(Data[16]);i++)
             {
-                obj.GetComponent<Viran>().MoveAngles[i] = float.Parse(Data[17 + i]);
+                try { obj.GetComponent<Viran>().MoveAngles[i] = float.Parse(Data[17 + i]); }
+                catch { Debug.Log(viranCount); }
             }
+            obj.GetComponent<Viran>().imageName = Data[17 + add];
             if(int.Parse(Data[14]) == 1)
             {
                 wait = false;
@@ -135,6 +141,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Boss>().skillCount = int.Parse(Data[11]);
             obj.GetComponent<Boss>().score = int.Parse(Data[12]);
             obj.GetComponent<Boss>().damage = float.Parse(Data[14]);
+            obj.GetComponent<Boss>().imageName = Data[15];
 
             for(int i = 0; i < int.Parse(Data[11]); i++)
             {
@@ -159,6 +166,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<MidBoss>().TimeSpan = float.Parse(Data[9]);
             obj.GetComponent<MidBoss>().scale = new Vector3(float.Parse(Data[10]) , float.Parse(Data[10]) , float.Parse(Data[10]));
             obj.GetComponent<MidBoss>().damage = float.Parse(Data[11]);
+            obj.GetComponent<MidBoss>().imageName = Data[11];
 
             isReader = true;
             viranCount++;

@@ -1089,7 +1089,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 10c58198e9d69fe4995fa7fb6f9c9f80, type: 2}
+  - {fileID: 2100000, guid: 57746e49bd0c88c4a8c6e02f855b59ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1152,6 +1152,7 @@ MonoBehaviour:
   health_Point: 200
   maxHealth: 0
   strength: 0
+  defence: 0
 --- !u!1 &1489992834
 GameObject:
   m_ObjectHideFlags: 0

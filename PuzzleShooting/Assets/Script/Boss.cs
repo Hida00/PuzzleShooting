@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class Boss : MonoBehaviour
 {
     public GameObject Bullet;
+    public Image image;
+    Image img;
     public GameObject Placer;
     public ParticleSystem particle;
     Slider bossHP;
     GameObject _player;
+    GameObject canvas;
     GameObject[] placer;
 
     PanelController _panelController;
@@ -30,6 +33,7 @@ public class Boss : MonoBehaviour
     public float damage;
     float maxHealth;
     float Angle;
+    float Y;
 
     public List<float[]> skillData = new List<float[]>();
 
@@ -38,10 +42,20 @@ public class Boss : MonoBehaviour
     public int score;
     int frameCount = 0;
 
+    public string imageName;
+
     public bool isPlaceFinish;
 
     void Start()
     {
+        Y = 19.2f * ((float)Screen.height / (float)Screen.width);
+
+        canvas = GameObject.Find("canvas");
+        img = Instantiate(image , canvas.transform);
+        img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
+        img.rectTransform.anchoredPosition =
+            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _player = GameObject.Find("Player");
         bossHP = GameObject.Find("bossHP").GetComponent<Slider>();
@@ -56,6 +70,9 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
+        img.rectTransform.anchoredPosition =
+            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+
         if(!_panelController.isSkill)frameCount++;
         if(bossHealth <= 0f && !_panelController.isSkill)
         {
@@ -70,6 +87,7 @@ public class Boss : MonoBehaviour
                 _gameController.Clear();
                 _gameController.FinishGame(true);
                 Instantiate(particle,this.transform.position,Quaternion.Euler(90 , 0 , 0));
+                Destroy(img);
                 Destroy(this.gameObject);
             }
             else if(skillData[skillCount - 1][0] == 1)

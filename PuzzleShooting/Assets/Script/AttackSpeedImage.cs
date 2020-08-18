@@ -10,12 +10,12 @@ public class AttackSpeedImage : MonoBehaviour , IDragHandler , IDropHandler
     Vector3 StartPos;
 
     public int Num;
-    public int? frameNum;
+    public int frameNum;
 
     void Start()
     {
         _attackSpeed = GameObject.Find("AttackSpeed(Clone)").GetComponent<AttackSpeed>();
-        if(frameNum != null) this.enabled = false;
+        if(frameNum != 0) this.enabled = false;
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class AttackSpeedImage : MonoBehaviour , IDragHandler , IDropHandler
         {
             if(hit.gameObject.CompareTag("Frame"))
             {
-                _attackSpeed.imageNum[Num - 1] = Num;
+                _attackSpeed.imageNum[hit.gameObject.GetComponent<AttackSpeedImage>().frameNum] = Num;
                 this.GetComponent<RectTransform>().anchoredPosition = hit.gameObject.GetComponent<RectTransform>().anchoredPosition;
             }
         }
