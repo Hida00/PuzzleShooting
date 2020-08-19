@@ -38,7 +38,7 @@ public class MidBoss : MonoBehaviour
         canvas = GameObject.Find("canvas");
         var img = Instantiate(image , canvas.transform);
         img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
-        img.rectTransform.anchoredPosition =
+        img.rectTransform.position =
             new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
 
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
@@ -47,7 +47,7 @@ public class MidBoss : MonoBehaviour
 
     void Update()
     {
-        img.rectTransform.anchoredPosition =
+        img.rectTransform.position =
             new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
 
         if(!_panelController.isSkill) frameCount++;

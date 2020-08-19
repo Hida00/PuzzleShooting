@@ -32,6 +32,7 @@ public class Strength : MonoBehaviour
 
     public bool isClick = false;
     public bool isSuccess = false;
+    bool b = false;
 
     public TextMeshProUGUI ClearText;
     public TextMeshProUGUI Delete;
@@ -46,11 +47,13 @@ public class Strength : MonoBehaviour
         Create_Image();
 
         Invoke("Finish" , 150f);
+
+        b = true;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) Finish();
+        if(Input.GetKeyDown(KeyCode.Escape) && b) Finish();
         if(isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
@@ -166,6 +169,18 @@ public class Strength : MonoBehaviour
     }
     void Finish()
     {
+        if(isSuccess)
+        {
+            GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(1 , _panelController.skillnum , 15f);
+        }
+        else
+        {
+            GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(1 , _panelController.skillnum , 25f);
+        }
+
+        _panelController.canskill[_panelController.skillnum] = false;
+
+        panel.SetActive(false);
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
@@ -177,6 +192,7 @@ public class Strength : MonoBehaviour
         _panelController.FinishTimeSet();
         target = new int[0];
         isSuccess = false;
+        Destroy(this.gameObject);
     }
     public void Clear()
     {

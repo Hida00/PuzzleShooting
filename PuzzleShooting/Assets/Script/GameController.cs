@@ -10,13 +10,22 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject canvas;
     public GameObject LeftArea;
     public GameObject RightArea;
+    public GameObject DataArea;
+    public GameObject[] SkillInterval;
     Slider bossHP;
+
+    PanelController _panelController;
 
     public TextMeshProUGUI scoreText;
 
+    public float[] intervalTimes;
+
     public int _score = 0;
+
+    bool[] boolen = new bool[3];
 
     void Start()
     {
@@ -38,11 +47,66 @@ public class GameController : MonoBehaviour
         scoreText.rectTransform.anchoredPosition -= new Vector2(10f , 5f);
         scoreText.rectTransform.sizeDelta *= prov;
         scoreText.fontSize *= (prov * 3f / 4f);
+
+        canvas.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + SelectController.StageImage);
+        canvas.GetComponent<Image>().color = new Color(1f , 1f , 1f , 0.7f);
+
+        DataArea.GetComponent<RectTransform>().sizeDelta =
+            new Vector2(LeftArea.GetComponent<RectTransform>().sizeDelta.x / 2f , LeftArea.GetComponent<RectTransform>().sizeDelta.y);
+        DataArea.GetComponent<RectTransform>().anchoredPosition *= prov;
+
+        foreach(var x in SkillInterval) x.SetActive(false);
+
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
+        intervalTimes = new float[3] { 20 , 0 , 0 };
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Backspace)) Quit();
+
+        if(Input.GetKeyDown(KeyCode.B)) IntervalSpawn(5 , 0 , 15f);
+
+        if(boolen[0])
+        {
+            float prov = Screen.height / 450f;
+            var obj = SkillInterval[0].transform.GetChild(1).GetComponent<Text>();
+            intervalTimes[0] -= Time.deltaTime;
+            if(intervalTimes[0] < 10f && intervalTimes[0] >= 0) obj.text = "0:0" + (int)intervalTimes[0];
+            else if(intervalTimes[0] >= 0) obj.text = "0:" + (int)intervalTimes[0];
+            else
+            {
+                _panelController.canskill[0] = true;
+                SkillInterval[0].SetActive(false);
+                boolen[0] = false;
+            }
+        }
+        if(boolen[1])
+        {
+            var obj = SkillInterval[1].transform.GetChild(1).GetComponent<Text>();
+            intervalTimes[1] -= Time.deltaTime;
+            if(intervalTimes[1] < 10f && intervalTimes[1] >= 0) obj.text = "0:0" + (int)intervalTimes[1];
+            else if(intervalTimes[1] >= 0) obj.text = "0:" + (int)intervalTimes[1];
+            else
+            {
+                _panelController.canskill[1] = true;
+                SkillInterval[1].SetActive(false);
+                boolen[1] = false;
+            }
+        }
+        if(boolen[2])
+        {
+            var obj = SkillInterval[2].transform.GetChild(1).GetComponent<Text>();
+            intervalTimes[2] -= Time.deltaTime;
+            if(intervalTimes[2] < 10f && intervalTimes[2] >= 0) obj.text = "0:0" + (int)intervalTimes[2];
+            else if(intervalTimes[2] >= 0) obj.text = "0:" + (int)intervalTimes[2];
+            else
+            {
+                _panelController.canskill[2] = true;
+                SkillInterval[2].SetActive(false);
+                boolen[2] = false;
+            }
+        }
 
         scoreText.text = "Score:" + _score.ToString();
     }
@@ -73,6 +137,31 @@ public class GameController : MonoBehaviour
         else
         {
             ResultController.isClear = false;
+        }
+    }
+    public void IntervalSpawn(int imageNum,int Num,float time)
+    {
+        if(!boolen[Num])
+        {
+            intervalTimes[Num] = time;
+
+            float prov = Screen.height / 450f;
+            SkillInterval[Num].SetActive(true);
+            SkillInterval[Num].GetComponent<RectTransform>().anchoredPosition *= prov;
+            SkillInterval[Num].GetComponent<RectTransform>().sizeDelta *= prov;
+
+            var img = SkillInterval[Num].transform.GetChild(0).GetComponent<Image>();
+            img.sprite = Resources.Load<Sprite>(@"Image/Skills/skill" + imageNum.ToString());
+            img.rectTransform.anchoredPosition *= prov;
+            img.rectTransform.sizeDelta *= prov;
+
+            var Text = SkillInterval[Num].transform.GetChild(1).GetComponent<Text>();
+            Text.rectTransform.anchoredPosition *= prov;
+            Text.rectTransform.sizeDelta *= prov;
+            Text.fontSize = (int)(Text.fontSize * prov);
+            Text.text = "0:" + intervalTimes[0];
+
+            boolen[Num] = true;
         }
     }
 }

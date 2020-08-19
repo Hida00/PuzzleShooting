@@ -108,20 +108,3 @@ MonoBehaviour:
   image: {fileID: 8060002617541915621, guid: b143ae9ffcd4e81418d27f5f1b2b2bc2, type: 3}
   particle: {fileID: 5566179456618252004, guid: 19ef41b734b7fee4e89c698b0d341c37,
     type: 3}
-  MoveAngles: []
-  ViranHealth: 100
-  maxHealth: 0
-  defensePoint: 2
-  displaceTime: 0
-  changeTime: 0
-  startTime: 0
-  speed: 4
-  BulletAngle: 0
-  AngleAbs: 0
-  difTime: 0
-  MoveAngle: 0
-  damage: 0
-  interval: 15
-  Type: 0
-  score: 0
-  isFinal: 0

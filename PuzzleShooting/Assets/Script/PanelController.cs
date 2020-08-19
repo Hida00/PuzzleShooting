@@ -16,15 +16,19 @@ public class PanelController : MonoBehaviour
     public GameObject[] Skills;
 
     public float difTime;
+    public float[] Skillintervals;
 
     //スキル識別用の値
     int Skill1_num = 3;
     int Skill2_num = 4;
     int Skill3_num = 2;
     public int skillSpeed = 1;
+    public int skillnum;
 
     [NonSerialized]
     public bool isSkill = false;
+    [NonSerialized]
+    public bool[] canskill;
 
     void Start()
     {
@@ -44,30 +48,35 @@ public class PanelController : MonoBehaviour
 
         Skill_Keys = buf_keys;
         skillSpeed = 1;
+        canskill = new bool[3] { true , true , true };
+        Skillintervals = new float[3];
     }
 
     void Update()
     {
         //スキルキー入力を取得、Panelの有効化
-        if (Input.GetKeyDown(Skill_Keys[0]) && !isSkill)
+        if (Input.GetKeyDown(Skill_Keys[0]) && !isSkill && canskill[0])
         {
             Panel.SetActive(true);
+            skillnum = 0;
 
             EnemyTimeSet();
             Instantiate(Skills[Skill1_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル1の処理はここに書く
         }
-        else if (Input.GetKeyDown(Skill_Keys[1]) && !isSkill)
+        else if (Input.GetKeyDown(Skill_Keys[1]) && !isSkill && canskill[1])
         {
             Panel.SetActive(true);
+            skillnum = 1;
 
             EnemyTimeSet();
             Instantiate(Skills[Skill2_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
             //スキル2の処理はここに書く
         }
-        else if (Input.GetKeyDown(Skill_Keys[2]) && !isSkill)
+        else if (Input.GetKeyDown(Skill_Keys[2]) && !isSkill && canskill[2])
         {
             Panel.SetActive(true);
+            skillnum = 2;
 
             EnemyTimeSet();
             Instantiate(Skills[Skill3_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
