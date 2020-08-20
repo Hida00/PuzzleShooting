@@ -12,9 +12,10 @@ public class Boss : MonoBehaviour
     public GameObject Placer;
     public ParticleSystem particle;
     Slider bossHP;
-    GameObject _player;
     GameObject canvas;
+    GameObject _player;
     GameObject[] placer;
+    AudioSource _BGM;
 
     PanelController _panelController;
 
@@ -31,6 +32,7 @@ public class Boss : MonoBehaviour
     public float StartTime;
     public float difTime;
     public float damage;
+    public float scale;
     float maxHealth;
     float Angle;
     float Y;
@@ -50,10 +52,12 @@ public class Boss : MonoBehaviour
     {
         Y = 19.2f * ((float)Screen.height / (float)Screen.width);
 
-        img = Instantiate(image , GameObject.Find("Canvas").transform);
+        canvas = GameObject.Find("Canvas");
+        img = Instantiate(image , canvas.transform);
         img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
         img.rectTransform.position =
             RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
+        img.rectTransform.sizeDelta *= scale;
 
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _player = GameObject.Find("Player");
@@ -65,6 +69,11 @@ public class Boss : MonoBehaviour
         startPos = this.transform.position;
         Angle = MoveAngle;
         placer = new GameObject[6];
+
+        _BGM = GameObject.Find("BGM").GetComponent<AudioSource>();
+        _BGM.volume = SelectController.volume;
+        _BGM.clip = Resources.Load<AudioClip>(@"Music/" + imageName);
+        _BGM.Play();
     }
 
     void Update()

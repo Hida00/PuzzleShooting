@@ -28,6 +28,8 @@ public class SettingController : MonoBehaviour
 
     public Text[] Skill;
 
+    public AudioSource BGM;
+
     int num;
 
     bool isFunc = false;
@@ -41,6 +43,10 @@ public class SettingController : MonoBehaviour
         volumeSlider.value = (int)(SelectController.volume * 10f + 0.5f);
         valueText.text = volumeSlider.value.ToString();
         buf = skill;
+
+        BGM.volume = SelectController.volume;
+        BGM.loop = true;
+        BGM.Play();
     }
 
 
@@ -100,9 +106,11 @@ public class SettingController : MonoBehaviour
     {
         skill = buf;
         PanelController.buf_keys = skill;
-        SceneManager.LoadScene("Select");
         SelectController.volume = volumeSlider.value / 10f;
         if(Mute) SelectController.volume = 0f;
+        
+        BGM.Stop();
+        SceneManager.LoadScene("Select");
     }
     public void ClickMute()
     {

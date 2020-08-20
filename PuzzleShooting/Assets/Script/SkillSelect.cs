@@ -14,6 +14,7 @@ public class SkillSelect : MonoBehaviour
     public Image SkillImage;
     public Text SkillName;
     public TextMeshProUGUI Exit;
+    public AudioSource BGM;
 
     public GameObject ScrollView;
     public GameObject Content;
@@ -42,6 +43,9 @@ public class SkillSelect : MonoBehaviour
         Exit.rectTransform.anchoredPosition *= new Vector2(prov , prov);
         
         Create_Image();
+
+        BGM.volume = SelectController.volume;
+        BGM.Play();
     }
     void Update()
     {
@@ -104,6 +108,7 @@ public class SkillSelect : MonoBehaviour
     public void ExitAndSave()
     {
         SelectController.SetSkills = Numbers;
+        BGM.Stop();
         SceneManager.LoadScene("Select");
     }
     public void ShowExplanation(string name)

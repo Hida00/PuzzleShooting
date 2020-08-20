@@ -14,6 +14,7 @@ public class Generator : MonoBehaviour
     public GameObject boss;
     public GameObject midBoss;
 
+    GameController _gameController;
     public TextMeshProUGUI BossAlert;
 
     public Slider bossHP;
@@ -38,6 +39,7 @@ public class Generator : MonoBehaviour
         fileName = SelectController.SelectName;
         wait = true;
 
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         TextAsset csv = Resources.Load(@"CSV/StageData/" + fileName) as TextAsset;
         data = new StringReader(csv.text);
         Data = new string[20];
@@ -142,12 +144,14 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Boss>().score = int.Parse(Data[12]);
             obj.GetComponent<Boss>().damage = float.Parse(Data[14]);
             obj.GetComponent<Boss>().imageName = Data[15];
+            obj.GetComponent<Boss>().scale = float.Parse(Data[16]);
 
             for(int i = 0; i < int.Parse(Data[11]); i++)
             {
                 float[] array = data.ReadLine().Split(',').Select(float.Parse).ToArray();
                 obj.GetComponent<Boss>().skillData.Add(array);
             }
+            _gameController.BGM.Stop();
 
             wait = false;
             isReader = true;
