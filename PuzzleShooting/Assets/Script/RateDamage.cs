@@ -25,6 +25,8 @@ public class RateDamage : MonoBehaviour
     int shape;
     int num;
 
+    bool isSuccess = false;
+
     public TextMeshProUGUI ClearText;
 
     void Start()
@@ -47,6 +49,7 @@ public class RateDamage : MonoBehaviour
             obj.rectTransform.anchoredPosition = new Vector2(0f , 0f);
 
             Invoke("Succese" , 0.8f);
+            isSuccess = true;
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -107,6 +110,11 @@ public class RateDamage : MonoBehaviour
     }
     void Finish()
     {
+        if(isSuccess) GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(2 , _panelController.skillnum , 15f);
+        else GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(2 , _panelController.skillnum , 25f);
+
+        _panelController.canskill[_panelController.skillnum] = false;
+
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;

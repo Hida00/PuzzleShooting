@@ -61,14 +61,10 @@ public class Viran : MonoBehaviour
 
     void Start()
     {
-        Y = 19.2f * ((float)Screen.height / (float)Screen.width);
-
-        canvas = GameObject.Find("Canvas");
-        img = Instantiate(image , canvas.transform);
-        img.rectTransform.anchoredPosition =
-            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img = Instantiate(image , GameObject.Find("Canvas").transform);
         img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
-        img.rectTransform.sizeDelta *= this.transform.localScale.z;
+        img.rectTransform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
@@ -81,8 +77,8 @@ public class Viran : MonoBehaviour
     
     void Update()
     {
-        img.rectTransform.anchoredPosition =
-            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img.rectTransform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         if(!_panelController.isSkill) frameCount++;
         if(ViranHealth <= 0f)
@@ -159,5 +155,15 @@ public class Viran : MonoBehaviour
         }
         float skill = _panelController.skillSpeed;
         this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * skill;
+    }
+    Vector3 GetworldPos(RectTransform rect)
+    {
+        Vector2 screenpos = RectTransformUtility.WorldToScreenPoint(GameObject.Find("Main Camera").GetComponent<Camera>() , rect.position);
+
+        Vector3 result = Vector3.zero;
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(rect , screenpos , GameObject.Find("Main Camera").GetComponent<Camera>() , out result);
+
+        return result;
     }
 }

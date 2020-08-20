@@ -50,11 +50,10 @@ public class Boss : MonoBehaviour
     {
         Y = 19.2f * ((float)Screen.height / (float)Screen.width);
 
-        canvas = GameObject.Find("canvas");
-        img = Instantiate(image , canvas.transform);
+        img = Instantiate(image , GameObject.Find("Canvas").transform);
         img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
-        img.rectTransform.anchoredPosition =
-            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img.rectTransform.position =
+            RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         _player = GameObject.Find("Player");
@@ -70,8 +69,8 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        img.rectTransform.anchoredPosition =
-            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img.rectTransform.position =
+            RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         if(!_panelController.isSkill)frameCount++;
         if(bossHealth <= 0f && !_panelController.isSkill)

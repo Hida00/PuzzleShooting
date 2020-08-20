@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 
 public class SelectController : MonoBehaviour
@@ -11,7 +10,8 @@ public class SelectController : MonoBehaviour
     public static float volume = 0.7f;
 
     public static string SelectName = "Normal1";
-    public static int[] SetSkills = { 4 , 1 , 2 };
+    public static string StageImage = "image2";
+    public static int[] SetSkills = { 0 , 1 , 2 };
 
     void Start()
     {
@@ -26,6 +26,7 @@ public class SelectController : MonoBehaviour
     public void Click_One()
     {
         SelectName = "Normal1";
+        StageImage = "image1";
         BGM.Stop();
         SceneManager.LoadScene("PlayScene");
     }
