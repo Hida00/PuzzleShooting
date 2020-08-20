@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8597461197145111008}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!33 &6121156907583410839
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 10c58198e9d69fe4995fa7fb6f9c9f80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,21 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 7414274325956033526, guid: 7f89db974b7098149a36e51e0ad03b97, type: 3}
+  image: {fileID: 8060002617541915621, guid: b143ae9ffcd4e81418d27f5f1b2b2bc2, type: 3}
   particle: {fileID: 5566179456618252004, guid: 19ef41b734b7fee4e89c698b0d341c37,
     type: 3}
-  ViranHealth: 200
-  maxHealth: 0
-  defensePoint: 2
-  displaceTime: 0
-  changeTime: 0
-  startTime: 0
-  speed: 4
-  BulletAngle: 0
-  MoveAngleZ1: 0
-  MoveAngleZ2: 0
-  AngleAbs: 0
-  difTime: 0
-  interval: 15
-  Type: 0
-  score: 0
-  isFinal: 0

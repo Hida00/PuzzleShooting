@@ -45,13 +45,13 @@ public class Strength : MonoBehaviour
 
         Create_Image();
 
-        Invoke("Finish" , 15f);
+        Invoke("Finish" , 150f);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) Finish();
-        if (isSuccess)
+        if(Input.GetKeyDown(KeyCode.Escape)) Finish();
+        if(isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
             obj.transform.SetParent(panel.transform , false);
@@ -81,6 +81,7 @@ public class Strength : MonoBehaviour
             obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
 
             obj.GetComponent<StrengthImage>().Num = i;
+            obj.name = i.ToString();
             i++;
         }
         var delete = Instantiate(Delete , panel.transform);
@@ -157,12 +158,6 @@ public class Strength : MonoBehaviour
         start = end;
         lineCount++;
         isConnect[num] = lineCount;
-    }
-    public void PointLight(RectTransform rectTransform)
-    {
-        var obj = Instantiate(panels[4] , panel.transform);
-        obj.rectTransform.anchoredPosition = rectTransform.anchoredPosition;
-        obj.rectTransform.sizeDelta = rectTransform.sizeDelta * 1.01f;
     }
     void Succese()
     {

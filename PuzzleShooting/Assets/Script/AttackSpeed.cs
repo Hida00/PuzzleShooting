@@ -14,6 +14,7 @@ public class AttackSpeed : MonoBehaviour
 
     public Image peace;
     public Image frame;
+    public Image image;
 
     public TextMeshProUGUI ClearText;
 
@@ -30,6 +31,8 @@ public class AttackSpeed : MonoBehaviour
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
 
         Create_Image();
+
+        Invoke("Finish" , 28f);
     }
 
     void Update()
@@ -52,7 +55,7 @@ public class AttackSpeed : MonoBehaviour
         StringReader st = new StringReader(csv.text);
         string[] info = st.ReadLine().Split(',');
 
-        float prov = (float)Screen.height / 450f;
+        float prov = Screen.height / 450f;
         System.Random r = new System.Random();
         int minX = int.Parse(info[2]);
         int maxX = int.Parse(info[3]) + 1;
@@ -65,6 +68,11 @@ public class AttackSpeed : MonoBehaviour
         List<Image> frames = new List<Image>();
         List<Image> peaces = new List<Image>();
 
+        string num = r.Next(1 , 3).ToString();
+        var img = Instantiate(image , panel.transform);
+        img.rectTransform.anchoredPosition = new Vector2(float.Parse(info[6]) , float.Parse(info[7]));
+        img.sprite = Resources.Load<Sprite>(@"Image/AttackSpeed/image" + num);
+
         while(st.Peek() > -1)
         {
             string[] values =  st.ReadLine().Split(',');
@@ -74,7 +82,8 @@ public class AttackSpeed : MonoBehaviour
             obj.rectTransform.sizeDelta *= new Vector2(prov , prov);
             obj.rectTransform.anchoredPosition = new Vector2(r.Next(minX , maxX) , r.Next(minY , maxY));
             obj.GetComponent<AttackSpeedImage>().Num = i + 1;
-            Sprite sprite = Resources.Load<Sprite>(@"Image/AttackSpeed/image" + r.Next(1,1).ToString() + "[" + (i + 1).ToString() + "]");
+            obj.GetComponent<AttackSpeedImage>().frameNum = 0;
+            Sprite sprite = Resources.Load<Sprite>(@"Image/AttackSpeed/image" + num + "-" + (i + 1).ToString());
             obj.sprite = sprite;
 
             var obj2 = Instantiate(frame);
@@ -116,7 +125,7 @@ public class AttackSpeed : MonoBehaviour
         int count = 0;
         for(int i = 0;i < size;i++)
         {
-            if(target[i] == imageNum[i]) count++;
+            if(imageNum[i] == i + 1) count++;
         }
         if(count == size) isSuccess = true;
     }

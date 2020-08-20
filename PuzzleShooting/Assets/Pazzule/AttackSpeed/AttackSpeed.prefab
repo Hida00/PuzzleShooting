@@ -45,8 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   peace: {fileID: 4220837831108455767, guid: efda0fe12f355374382ce46d281b30d7, type: 3}
   frame: {fileID: 4347708529305096147, guid: a9f87b280c0109442bff564837f2da13, type: 3}
-  TestText: {fileID: 1894691750998331941, guid: 81e228db01ebda841b070338f7f77fd0,
-    type: 3}
+  image: {fileID: 7938280641727152050, guid: 741a76481289290489ee124b6967cde2, type: 3}
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
     type: 3}
   imageNum: 

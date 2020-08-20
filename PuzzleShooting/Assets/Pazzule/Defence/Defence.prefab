@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7464916947351626005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7464916947351626011}
+  - component: {fileID: 7464916947351626010}
+  m_Layer: 0
+  m_Name: Defence
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7464916947351626011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464916947351626005}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -185.92892, y: 174.71082, z: -10.305436}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7464916947351626010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464916947351626005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3fba292cbb55e4dabfcbe04f533178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  peaces:
+  - {fileID: 7388307491060969947, guid: ad155a212e3a7744b9a83c4e8a119248, type: 3}
+  - {fileID: 3227910019091637580, guid: bd69c025dd3c4464ea0b4226443d879f, type: 3}
+  - {fileID: 7485219433866167125, guid: 2bc8f0305cdf8fb4e8b14d27dc813d4f, type: 3}
+  - {fileID: 5566827696079574872, guid: 938ec205bf417514b9504514ece5cf41, type: 3}
+  - {fileID: 392939100413465621, guid: ec70d5347bbd10747b3be4709c8712fa, type: 3}
+  - {fileID: 3867971070952040379, guid: a65ff0f59f5159043b9557dc46821a1d, type: 3}
+  - {fileID: 5570024222282081789, guid: 8ff06e5d2a68cf74b9799a251fa9e8ec, type: 3}
+  - {fileID: 8931715542733336324, guid: c00f77226102e2040a4ef230df5189f7, type: 3}
+  - {fileID: 4861300797807242697, guid: 5409acd85daef8442be3345579da2810, type: 3}
+  frame: {fileID: 7109034950672402776, guid: ae23b7b3f011af94da3df438b0a11021, type: 3}
+  ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
+    type: 3}
+  Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
+    type: 3}
+  width: 0
+  isSuccess: 0

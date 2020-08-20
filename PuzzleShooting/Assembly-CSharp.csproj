@@ -69,6 +69,8 @@
     <Compile Include="Assets\Script\BulletController.cs" />
     <Compile Include="Assets\Script\BulletPlacer.cs" />
     <Compile Include="Assets\Script\Defeat.cs" />
+    <Compile Include="Assets\Script\Defence.cs" />
+    <Compile Include="Assets\Script\DefenceImage.cs" />
     <Compile Include="Assets\Script\GameController.cs" />
     <Compile Include="Assets\Script\Generator.cs" />
     <Compile Include="Assets\Script\HPbarctrl.cs" />
