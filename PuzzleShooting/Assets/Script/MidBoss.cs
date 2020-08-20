@@ -35,8 +35,8 @@ public class MidBoss : MonoBehaviour
     {
         Y = 19.2f * ((float)Screen.height / (float)Screen.width);
 
-        canvas = GameObject.Find("canvas");
-        var img = Instantiate(image , canvas.transform);
+        canvas = GameObject.Find("Canvas");
+        img = Instantiate(image , canvas.transform);
         img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
         img.rectTransform.position =
             new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
@@ -47,8 +47,7 @@ public class MidBoss : MonoBehaviour
 
     void Update()
     {
-        img.rectTransform.position =
-            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img.rectTransform.position = new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
 
         if(!_panelController.isSkill) frameCount++;
         if(Time.time - startTime >= TimeSpan)

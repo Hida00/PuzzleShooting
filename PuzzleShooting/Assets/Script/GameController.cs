@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject DataArea;
     public GameObject[] SkillInterval;
     Slider bossHP;
+    public AudioSource BGM;
 
     PanelController _panelController;
 
@@ -55,10 +56,30 @@ public class GameController : MonoBehaviour
             new Vector2(LeftArea.GetComponent<RectTransform>().sizeDelta.x / 2f , LeftArea.GetComponent<RectTransform>().sizeDelta.y);
         DataArea.GetComponent<RectTransform>().anchoredPosition *= prov;
 
-        foreach(var x in SkillInterval) x.SetActive(false);
+        foreach(var x in SkillInterval)
+        {
+            x.SetActive(false);
+
+            x.GetComponent<RectTransform>().anchoredPosition *= prov;
+            x.GetComponent<RectTransform>().sizeDelta *= prov;
+
+            var img = x.transform.GetChild(0).GetComponent<Image>();
+            img.rectTransform.anchoredPosition *= prov;
+            img.rectTransform.sizeDelta *= prov;
+
+            var Text = x.transform.GetChild(1).GetComponent<Text>();
+            Text.rectTransform.anchoredPosition *= prov;
+            Text.rectTransform.sizeDelta *= prov;
+            Text.fontSize = (int)(Text.fontSize * prov);
+        }
 
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         intervalTimes = new float[3] { 20 , 0 , 0 };
+
+        BGM.clip = Resources.Load<AudioClip>(@"Music/" + SelectController.MusicName);
+        BGM.volume = SelectController.volume;
+        BGM.loop = true;
+        BGM.Play();
     }
 
     void Update()
@@ -145,20 +166,12 @@ public class GameController : MonoBehaviour
         {
             intervalTimes[Num] = time;
 
-            float prov = Screen.height / 450f;
             SkillInterval[Num].SetActive(true);
-            SkillInterval[Num].GetComponent<RectTransform>().anchoredPosition *= prov;
-            SkillInterval[Num].GetComponent<RectTransform>().sizeDelta *= prov;
 
             var img = SkillInterval[Num].transform.GetChild(0).GetComponent<Image>();
             img.sprite = Resources.Load<Sprite>(@"Image/Skills/skill" + imageNum.ToString());
-            img.rectTransform.anchoredPosition *= prov;
-            img.rectTransform.sizeDelta *= prov;
 
             var Text = SkillInterval[Num].transform.GetChild(1).GetComponent<Text>();
-            Text.rectTransform.anchoredPosition *= prov;
-            Text.rectTransform.sizeDelta *= prov;
-            Text.fontSize = (int)(Text.fontSize * prov);
             Text.text = "0:" + intervalTimes[0];
 
             boolen[Num] = true;

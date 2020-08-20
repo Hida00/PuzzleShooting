@@ -11,11 +11,13 @@ public class SelectController : MonoBehaviour
 
     public static string SelectName = "Normal1";
     public static string StageImage = "image2";
+    public static string MusicName = "Stage1";
     public static int[] SetSkills = { 0 , 1 , 2 };
 
     void Start()
     {
         BGM.volume = volume;
+        BGM.loop = true;
         BGM.Play();
     }
 
@@ -27,6 +29,7 @@ public class SelectController : MonoBehaviour
     {
         SelectName = "Normal1";
         StageImage = "image1";
+        MusicName = "Stage1";
         BGM.Stop();
         SceneManager.LoadScene("PlayScene");
     }
