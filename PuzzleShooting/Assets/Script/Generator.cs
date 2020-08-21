@@ -44,7 +44,6 @@ public class Generator : MonoBehaviour
         data = new StringReader(csv.text);
         Data = new string[20];
         data.ReadLine();
-        data.ReadLine();
     }
 
     void Update()
@@ -77,6 +76,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().isFinal = int.Parse(Data[14]);
             obj.GetComponent<Viran>().damage = float.Parse(Data[15]);
             obj.GetComponent<Viran>().MoveAngles = new float[int.Parse(Data[16])];
+
             int add = int.Parse(Data[16]);
             for(int i = 0; i < add; i++)
             {
@@ -111,6 +111,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Viran>().isFinal = int.Parse(Data[14]);
             obj.GetComponent<Viran>().damage = float.Parse(Data[15]);
             obj.GetComponent<Viran>().MoveAngles = new float[int.Parse(Data[16])];
+
             int add = int.Parse(Data[16]);
             for(int i = 0;i < int.Parse(Data[16]);i++)
             {

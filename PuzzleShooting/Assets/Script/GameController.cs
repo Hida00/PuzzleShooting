@@ -86,8 +86,6 @@ public class GameController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Backspace)) Quit();
 
-        if(Input.GetKeyDown(KeyCode.B)) IntervalSpawn(5 , 0 , 15f);
-
         if(boolen[0])
         {
             float prov = Screen.height / 450f;
