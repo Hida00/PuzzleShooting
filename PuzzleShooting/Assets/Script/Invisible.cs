@@ -10,7 +10,10 @@ using UnityEngine.UI;
 public class Invisible : MonoBehaviour
 {
     public Image image;
+    public Image time;
+    public Text Explanation;
     public TextMeshProUGUI number;
+    Image TimeImage;
 
     TextMeshProUGUI[] texts;
 
@@ -18,6 +21,8 @@ public class Invisible : MonoBehaviour
     PlayerController _playerController;
 
     PanelController _panelController;
+
+    float startTime;
 
     [NonSerialized]
     public int size;
@@ -40,6 +45,7 @@ public class Invisible : MonoBehaviour
         CreateAnswer(size);
 
         Invoke("Finish" , 40f);
+        startTime = Time.time;
     }
 
     void Update()
@@ -52,21 +58,36 @@ public class Invisible : MonoBehaviour
 
             Invoke("Succese" , 0.8f);
         }
+        {
+            float t = -360 * (Time.time - startTime) / 40f;
+            TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
+        }
         if (Input.GetKeyDown(KeyCode.Escape)) Finish();
         CheckAnswer();
     }
     void Create_Image()
     {
+        float prov = (float)Screen.height / 450;
         System.Random r = new System.Random();
         int FileNum = r.Next(1 , Filesize);
         int i = 0;
+
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TimeImage = Instantiate(time , panel.transform);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.sizeDelta *= prov;
+
         TextAsset csv = Resources.Load(@"CSV/Invisible/Invisible" + FileNum.ToString()) as TextAsset;
         StringReader st = new StringReader(csv.text);
         string[] info = st.ReadLine().Split(',');
+
         size = int.Parse(info[1]);
         Numbers = new int[size];
         texts = new TextMeshProUGUI[size];
-        float prov = (float)Screen.height / 450;
+
         while(st.Peek() > -1)
         {
             string[] values = st.ReadLine().Split(',');

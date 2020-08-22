@@ -142,6 +142,7 @@ public class Boss : MonoBehaviour
         placer[0].GetComponent<BulletPlacer>().speed = 2f;
         placer[0].GetComponent<BulletPlacer>().interval = 10;
         placer[0].GetComponent<BulletPlacer>().dif = 0f;
+        placer[0].GetComponent<BulletPlacer>().damage = damage;
 
         placer[1] = Instantiate(Placer);
         placer[1].GetComponent<BulletPlacer>().skillData = skillData[skillCount - 1];
@@ -149,6 +150,19 @@ public class Boss : MonoBehaviour
         placer[1].GetComponent<BulletPlacer>().speed = 2f;
         placer[1].GetComponent<BulletPlacer>().interval = 10;
         placer[1].GetComponent<BulletPlacer>().dif = -2f;
+        placer[1].GetComponent<BulletPlacer>().damage = damage;
+
+        placer[2] = Instantiate(Placer , new Vector3(8 , 2 , 0) , Quaternion.identity);
+        placer[2].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[2].GetComponent<BulletPlacer>().interval = 40;
+        placer[2].GetComponent<BulletPlacer>().speed = 30f;
+        placer[2].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        placer[3] = Instantiate(Placer , new Vector3(-8 , 2 , 0) , Quaternion.identity);
+        placer[3].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[3].GetComponent<BulletPlacer>().interval = 40;
+        placer[3].GetComponent<BulletPlacer>().speed = 30;
+        placer[3].GetComponent<BulletPlacer>().damage = damage / 2;
 
         isPlaceFinish = true;
         skillCount--;
@@ -160,6 +174,19 @@ public class Boss : MonoBehaviour
         placer[0].GetComponent<BulletPlacer>()._boss = this.gameObject;
         placer[0].GetComponent<BulletPlacer>().speed = 8f;
         placer[0].GetComponent<BulletPlacer>().interval = 7;
+        placer[0].GetComponent<BulletPlacer>().damage = damage;
+
+        placer[2] = Instantiate(Placer , new Vector3(8 , -2 , 0) , Quaternion.identity);
+        placer[2].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[2].GetComponent<BulletPlacer>().interval = 40;
+        placer[2].GetComponent<BulletPlacer>().speed = 30f;
+        placer[2].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        placer[3] = Instantiate(Placer , new Vector3(-8 , -2 , 0) , Quaternion.identity);
+        placer[3].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[3].GetComponent<BulletPlacer>().interval = 40;
+        placer[3].GetComponent<BulletPlacer>().speed = 30;
+        placer[3].GetComponent<BulletPlacer>().damage = damage / 2;
 
         isPlaceFinish = true;
         skillCount--;
@@ -172,6 +199,19 @@ public class Boss : MonoBehaviour
         placer[0].GetComponent<BulletPlacer>().speed = 4f;
         placer[0].GetComponent<BulletPlacer>().interval = 10;
         placer[0].GetComponent<BulletPlacer>().dif = 0f;
+        placer[0].GetComponent<BulletPlacer>().damage = damage;
+
+        placer[2] = Instantiate(Placer , new Vector3(8 , -4 , 0) , Quaternion.identity);
+        placer[2].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[2].GetComponent<BulletPlacer>().interval = 40;
+        placer[2].GetComponent<BulletPlacer>().speed = 30f;
+        placer[2].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        placer[3] = Instantiate(Placer , new Vector3(-8 , -4 , 0) , Quaternion.identity);
+        placer[3].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[3].GetComponent<BulletPlacer>().interval = 40;
+        placer[3].GetComponent<BulletPlacer>().speed = 30;
+        placer[3].GetComponent<BulletPlacer>().damage = damage / 2;
 
         isPlaceFinish = true;
         skillCount--;

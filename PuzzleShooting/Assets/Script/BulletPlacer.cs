@@ -24,32 +24,68 @@ public class BulletPlacer : MonoBehaviour
 
     bool move = true;
     bool[] boolen;
+    public bool isLockOn = false;
 
     void Start()
     {
-        Count = 0;
-        skillData[1] += dif;
-        move = true;
         _player = GameObject.Find("Player");
         data = new float[10];
         boolen = new bool[10];
+        Count = 0;
+        if(!isLockOn)
+        {
+            skillData[1] += dif;
+            move = true;
+        }
+        else
+        {
+            data[1] = this.transform.position.x / Mathf.Abs(this.transform.position.x);
+        }
         boolen = boolen.Select(x => true).ToArray();
     }
 
     void Update()
     {
-        if(skillData[0] == 1 && move) Circle(skillData[1] + dif);
-        if(skillData[0] == 2 && move) Star(skillData[1] + dif);
-        if(skillData[0] == 3 && move) BigCircle(skillData[1] + dif);
-
         frameCount++;
-        if(frameCount >= interval)
+        if(isLockOn && move) LockOn();
+        else
+        {
+            if(skillData[0] == 1 && move) Circle(skillData[1] + dif);
+            if(skillData[0] == 2 && move) Star(skillData[1] + dif);
+            if(skillData[0] == 3 && move) BigCircle(skillData[1] + dif);
+        }
+
+        if(frameCount >= interval && !isLockOn)
         {
             float angle = (float)Math.Atan2(this.transform.position.y - _player.transform.position.y , this.transform.position.x - _player.transform.position.x) * 180f / (float)Math.PI;
             var obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , 90f + angle));
             obj.GetComponent<BulletController>().isBoss = true;
             obj.GetComponent<BulletController>().speed = skillData[4];
             frameCount = 0;
+        }
+    }
+    void LockOn()
+    {
+        if(frameCount >= interval)
+        {
+            var obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , 0f + Count));
+            obj.GetComponent<BulletController>().speed = speed;
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , 25f + Count));
+            obj.GetComponent<BulletController>().speed = speed;
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , -25f + Count));
+            obj.GetComponent<BulletController>().speed = speed;
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , 50f + Count));
+            obj.GetComponent<BulletController>().speed = speed;
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , -50f + Count));
+            obj.GetComponent<BulletController>().speed = speed;
+            obj.GetComponent<BulletController>().damagePoint = damage;
+            frameCount = 0;
+            Count += 20 * (int)data[1];
+            if(Mathf.Abs(Count) > 180) Count = 0;
         }
     }
     void Circle(float radius)

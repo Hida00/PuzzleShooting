@@ -14,6 +14,8 @@ public class Recovery : MonoBehaviour
     //Imageオブジェクト
     public Image[] panels;
     public Text Explanation;
+    public Image time;
+    Image TimeImage;
 
     RecoveryImage[] _imageObjects;
 
@@ -31,6 +33,8 @@ public class Recovery : MonoBehaviour
 
     public TextMeshProUGUI ClearText;
 
+    float startTime;
+
     public int Filesize;
 
     public bool isSuccess = false;
@@ -46,6 +50,8 @@ public class Recovery : MonoBehaviour
         Create_Image();
 
         Invoke("Finish" , 15f);
+
+        startTime = Time.time;
     }
 
     void Update()
@@ -58,6 +64,10 @@ public class Recovery : MonoBehaviour
             obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
 
             Invoke("Succese" , 0.8f);
+        }
+        {
+            float t = -360 * (Time.time - startTime) / 15f;
+            TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 ,t);
         }
         CheckLight();
     }
@@ -98,6 +108,10 @@ public class Recovery : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TimeImage = Instantiate(time , panel.transform);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Recovery/Explanation") as TextAsset;
         StringReader st = new StringReader(explanation.text);

@@ -10,6 +10,8 @@ public class Strength : MonoBehaviour
 {
     public Image[] panels;
     public Text Explanation;
+    public Image time;
+    Image TimeImage;
 
     GameObject panel;
 
@@ -19,6 +21,8 @@ public class Strength : MonoBehaviour
 
     [NonSerialized]
     public Vector3 start;
+
+    float startTime;
 
     [NonSerialized]
     public int[] isConnect;
@@ -46,13 +50,20 @@ public class Strength : MonoBehaviour
 
         Create_Image();
 
-        Invoke("Finish" , 150f);
+        Invoke("Finish" , 15f);
 
         b = true;
+        startTime = Time.time;
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            string s = "";
+            foreach(var x in isConnect) s += x.ToString();
+            Debug.Log(s);
+        }
         if(Input.GetKeyDown(KeyCode.Escape) && b) Finish();
         if(isSuccess)
         {
@@ -61,6 +72,10 @@ public class Strength : MonoBehaviour
             obj.rectTransform.anchoredPosition = new Vector2(0f , -70f);
 
             Invoke("Succese" , 0.8f);
+        }
+        {
+            float t = -360 * (Time.time - startTime) / 15f;
+            TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
         }
         Check_Connect();
     }
@@ -117,6 +132,10 @@ public class Strength : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TimeImage = Instantiate(time , panel.transform);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Strength/Explanation") as TextAsset;
         StringReader sr = new StringReader(explanation.text);
@@ -199,12 +218,17 @@ public class Strength : MonoBehaviour
         var skill = GameObject.Find("Strength(Clone)").GetComponent<Strength>();
         skill.isConnect = new int[skill.size];
         skill.isClick = false;
+        skill.lineCount = 1;
 
         var lines = GameObject.FindGameObjectsWithTag("LINE");
         foreach(var obj in lines)
         {
             Destroy(obj.gameObject);
         }
-        Debug.Log("Delete");
+        var points = GameObject.FindGameObjectsWithTag("POINT");
+        foreach(var obj in points)
+        {
+            obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/Strength/point");
+        }
     }
 }

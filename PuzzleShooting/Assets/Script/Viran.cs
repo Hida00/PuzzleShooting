@@ -147,7 +147,7 @@ public class Viran : MonoBehaviour
             obj.GetComponent<BulletController>().damagePoint = damage;
             frameCount = 0;
         }
-        if(this.transform.position.x >= 13f || this.transform.position.x <= -13f || this.transform.position.y >= 15f || this.transform.position.y <= -15f || count >= maxCount)
+        if(this.transform.position.x >= 13.5f || this.transform.position.x <= -13.5f || this.transform.position.y >= 15f || this.transform.position.y <= -15f || count >= maxCount)
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             Destroy(img);

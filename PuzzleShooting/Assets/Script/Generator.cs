@@ -60,7 +60,6 @@ public class Generator : MonoBehaviour
         if(float.Parse(Data[0]) == 1f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill)
         {
             var obj = Instantiate(viran1);
-            
 
             obj.transform.position = new Vector3(float.Parse(Data[1]) , float.Parse(Data[2]) , float.Parse(Data[3]));
             obj.GetComponent<Viran>().MoveAngle = float.Parse(Data[4]);
@@ -171,7 +170,8 @@ public class Generator : MonoBehaviour
             obj.GetComponent<MidBoss>().TimeSpan = float.Parse(Data[9]);
             obj.GetComponent<MidBoss>().scale = new Vector3(float.Parse(Data[10]) , float.Parse(Data[10]) , float.Parse(Data[10]));
             obj.GetComponent<MidBoss>().damage = float.Parse(Data[11]);
-            obj.GetComponent<MidBoss>().imageName = Data[11];
+            obj.GetComponent<MidBoss>().imageName = Data[12];
+            obj.GetComponent<MidBoss>().imgscale = float.Parse(Data[13]);
 
             isReader = true;
             viranCount++;

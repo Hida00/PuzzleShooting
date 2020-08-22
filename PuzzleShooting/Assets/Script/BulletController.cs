@@ -7,7 +7,7 @@ public class BulletController : MonoBehaviour
 {
     PlayerController _playerController;
 
-    public float speed = 0.1f;
+    public float speed;// = 0.1f;
     public float damagePoint = 1.0f;
     float moveOverY;
 

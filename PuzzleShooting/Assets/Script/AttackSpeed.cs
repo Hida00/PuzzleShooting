@@ -12,11 +12,16 @@ public class AttackSpeed : MonoBehaviour
     PanelController _panelController;
     PlayerController _playerController;
 
+    public Text Explanation;
     public Image peace;
     public Image frame;
     public Image image;
+    public Image time;
+    Image TimeImage;
 
     public TextMeshProUGUI ClearText;
+
+    float startTime;
 
     int size;
     int[] target;
@@ -33,6 +38,8 @@ public class AttackSpeed : MonoBehaviour
         Create_Image();
 
         Invoke("Finish" , 28f);
+
+        startTime = Time.time;
     }
 
     void Update()
@@ -46,6 +53,10 @@ public class AttackSpeed : MonoBehaviour
 
             Invoke("Succese" , 0.8f);
         }
+        {
+            float t = -360 * (Time.time - startTime) / 28f;
+            TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
+        }
         Check_Array();
     }
     void Create_Image()
@@ -54,8 +65,16 @@ public class AttackSpeed : MonoBehaviour
         TextAsset csv = Resources.Load(@"CSV/AttackSpeed/AttackSpeed") as TextAsset;
         StringReader st = new StringReader(csv.text);
         string[] info = st.ReadLine().Split(',');
-
         float prov = Screen.height / 450f;
+
+        var explanation = Instantiate(Explanation , panel.transform);
+        explanation.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        explanation.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TimeImage = Instantiate(time , panel.transform);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.sizeDelta *= prov;
+
         System.Random r = new System.Random();
         int minX = int.Parse(info[2]);
         int maxX = int.Parse(info[3]) + 1;

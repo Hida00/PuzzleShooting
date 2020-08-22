@@ -10,6 +10,8 @@ public class RateDamage : MonoBehaviour
 {
     public Image[] panels;
     public Text Explanation;
+    public Image time;
+    Image TimeImage;
 
     RateDamageImage[] images;
 
@@ -19,6 +21,8 @@ public class RateDamage : MonoBehaviour
     PlayerController _playerController;
 
     public string[] Names;
+
+    float startTime;
 
     public int count;
     int size;
@@ -36,7 +40,8 @@ public class RateDamage : MonoBehaviour
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
         Create_Image();
-        Invoke("Finish" , 200f);
+        Invoke("Finish" , 20f);
+        startTime = Time.time;
     }
 
 
@@ -50,6 +55,10 @@ public class RateDamage : MonoBehaviour
 
             Invoke("Succese" , 0.8f);
             isSuccess = true;
+        }
+        {
+            float t = -360 * (Time.time - startTime) / 20;
+            TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
         }
         if(Input.GetKeyDown(KeyCode.Escape))
         {
@@ -95,6 +104,10 @@ public class RateDamage : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TimeImage = Instantiate(time , panel.transform);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/RateDamage/Explanation") as TextAsset;
         StringReader sr = new StringReader(explanation.text);

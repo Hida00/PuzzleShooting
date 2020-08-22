@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 8620894711761230291, guid: 9fdd638d68e3f9f4fa5d76d112d9069a, type: 3}
+  time: {fileID: 5642601476388718921, guid: dcc61dc0227dbc74cabc0aff97038eec, type: 3}
+  Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
+    type: 3}
   number: {fileID: 4088428645594718443, guid: 8138416302145e446aa4c1c282bb0211, type: 3}
   Filesize: 3
   Answer: 

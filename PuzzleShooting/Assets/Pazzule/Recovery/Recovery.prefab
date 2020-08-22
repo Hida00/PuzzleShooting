@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 1293647426891079270, guid: 97332d1b85abfef4db8a2a726e4832e3, type: 3}
   Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
     type: 3}
+  time: {fileID: 5642601476388718921, guid: dcc61dc0227dbc74cabc0aff97038eec, type: 3}
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
     type: 3}
   Filesize: 4

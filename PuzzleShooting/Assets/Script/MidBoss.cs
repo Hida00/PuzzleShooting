@@ -20,6 +20,7 @@ public class MidBoss : MonoBehaviour
     public float HealthPoint;
     public float defencePoint = -3.5f;
     public float damage;
+    public float imgscale;
     float angle = -12.5f;
     float startTime;
     float Y;
@@ -33,13 +34,14 @@ public class MidBoss : MonoBehaviour
 
     void Start()
     {
-        Y = 19.2f * ((float)Screen.height / (float)Screen.width);
+        Y = 19.2f * (Screen.height / Screen.width);
 
         canvas = GameObject.Find("Canvas");
         img = Instantiate(image , canvas.transform);
         img.sprite = Resources.Load<Sprite>(@"Image/Enemy/" + imageName);
-        img.rectTransform.position =
-            new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img.rectTransform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
+        img.rectTransform.sizeDelta *= imgscale;
 
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         startTime = Time.time;
@@ -47,7 +49,8 @@ public class MidBoss : MonoBehaviour
 
     void Update()
     {
-        img.rectTransform.position = new Vector2(this.transform.position.x / 20f * 471f , this.transform.position.y / Y * 231.5f);
+        img.rectTransform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         if(!_panelController.isSkill) frameCount++;
         if(Time.time - startTime >= TimeSpan)
