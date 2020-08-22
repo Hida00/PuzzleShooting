@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    {
+    { 
         framecount++;
 
         if(framecount >= attackSpeed && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
                 obj = Instantiate(PlayerBullet , five , Quaternion.identity);
                 obj.GetComponent<BulletController>().damagePoint = strength * damage;
             }
+
             framecount = 0;
         }
         float skill = GameObject.Find("PanelController").GetComponent<PanelController>().skillSpeed;

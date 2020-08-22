@@ -121,4 +121,8 @@ public class SettingController : MonoBehaviour
     {
         SceneManager.LoadScene("SkillSelect");
     }
+    public void Credit()
+    {
+        SceneManager.LoadScene("Credit");
+    }
 }
