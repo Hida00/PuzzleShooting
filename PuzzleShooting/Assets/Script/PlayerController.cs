@@ -82,16 +82,19 @@ public class PlayerController : MonoBehaviour
 
             framecount = 0;
         }
-        float skill = GameObject.Find("PanelController").GetComponent<PanelController>().skillSpeed;
-        //移動キーの取得
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup * skill;
-        if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown * skill;
-        if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft * skill;
-        if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright * skill;
+        if(!GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
+        {
+            float skill = GameObject.Find("PanelController").GetComponent<PanelController>().skillSpeed;
+            //移動キーの取得
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                this.transform.position += Vector3.down * -1f * speed * speedMag * moveup * skill;
+            if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                this.transform.position += Vector3.down * +1f * speed * speedMag * movedown * skill;
+            if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft * skill;
+            if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                this.transform.position += Vector3.right * 1f * speed * speedMag * moveright * skill;
+        }
 
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {

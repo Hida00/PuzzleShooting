@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public GameObject RightArea;
     public GameObject DataArea;
     public GameObject[] SkillInterval;
+    public Image Pause;
+    public GameObject PausePanel;
     Slider bossHP;
     public AudioSource BGM;
 
@@ -27,6 +29,8 @@ public class GameController : MonoBehaviour
     public int _score = 0;
 
     bool[] boolen = new bool[3];
+    bool isPause = false;
+    bool isSkill = false;
 
     void Start()
     {
@@ -73,6 +77,31 @@ public class GameController : MonoBehaviour
             Text.fontSize = (int)(Text.fontSize * prov);
         }
 
+        Pause.rectTransform.anchoredPosition *= prov;
+        Pause.rectTransform.sizeDelta *= prov;
+        PausePanel.GetComponent<Image>().color = new Color(0.375f , 0.375f , 0.375f , 0.5f);
+        PausePanel.SetActive(false);
+        
+        var child = PausePanel.transform.GetChild(0).GetComponent<RectTransform>();
+        child.anchoredPosition = Vector2.zero * prov;
+        child.sizeDelta *= prov;
+        child.GetComponent<Image>().color = new Color(0.75f , 0.75f , 0.75f , 0.75f);
+
+        var Child = child.transform.GetChild(0).GetComponent<RectTransform>();
+        Child.anchoredPosition *= prov;
+        Child.sizeDelta *= prov;
+        Child.GetComponent<Text>().fontSize = (int)(Child.GetComponent<Text>().fontSize * (1 + (prov - 1) / 2));
+
+        Child = child.transform.GetChild(1).GetComponent<RectTransform>();
+        Child.anchoredPosition *= prov;
+        Child.sizeDelta *= prov;
+        Child.transform.GetChild(0).GetComponent<Text>().fontSize = (int)(Child.transform.GetChild(0).GetComponent<Text>().fontSize * prov);
+
+        Child = child.transform.GetChild(2).GetComponent<RectTransform>();
+        Child.anchoredPosition *= prov;
+        Child.sizeDelta *= prov;
+        Child.transform.GetChild(0).GetComponent<Text>().fontSize = (int)(Child.transform.GetChild(0).GetComponent<Text>().fontSize * prov);
+
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         intervalTimes = new float[3] { 20 , 0 , 0 };
 
@@ -84,8 +113,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Backspace)) Quit();
-
         if(boolen[0])
         {
             float prov = Screen.height / 450f;
@@ -129,7 +156,7 @@ public class GameController : MonoBehaviour
 
         scoreText.text = "Score:" + _score.ToString();
     }
-    void Quit()
+    public void Quit()
     {
         SceneManager.LoadScene("Select");
     }
@@ -174,5 +201,27 @@ public class GameController : MonoBehaviour
 
             boolen[Num] = true;
         }
+    }
+    public void PauseClick()
+    {
+        if(isPause)
+        {
+            if(!isSkill) _panelController.isSkill = false;
+            Time.timeScale = 1;
+            isPause = false;
+            PausePanel.SetActive(false);
+        }
+        else
+        {
+            if(_panelController.isSkill) isSkill = true;
+            Time.timeScale = 0;
+            _panelController.isSkill = true;
+            isPause = true;
+            PausePanel.SetActive(true);
+        }
+    }
+    public void Title()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
