@@ -160,6 +160,10 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene("Select");
     }
+    public void Title()
+    {
+        SceneManager.LoadScene("Title");
+    }
     public void Clear()
     {
         SceneManager.LoadScene("Result");
@@ -219,9 +223,5 @@ public class GameController : MonoBehaviour
             isPause = true;
             PausePanel.SetActive(true);
         }
-    }
-    public void Title()
-    {
-        SceneManager.LoadScene("Title");
     }
 }
