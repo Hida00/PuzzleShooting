@@ -105,6 +105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebfbcb6db2b4267489ffe1737b73d128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletImage: {fileID: 8892717205501406785, guid: 7c2c6a1748de03647b322ddbe99eb9be,
+    type: 3}
+  scale: {x: 0.2, y: 0.8}
+  imageName: bullet
   speed: 10
   damagePoint: 1
   isBoss: 0

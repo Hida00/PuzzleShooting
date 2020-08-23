@@ -62,6 +62,8 @@ public class MidBoss : MonoBehaviour
             obj.transform.localScale = scale;
             obj.GetComponent<BulletController>().speed *= 1.5f;
             obj.GetComponent<BulletController>().damagePoint = damage * 2.3f;
+            obj.GetComponent<BulletController>().imageName = "bullet2";
+            obj.GetComponent<BulletController>().scale = Vector2.one;
             startTime = Time.time;
         }
         if(frameCount == interval && !_panelController.isSkill)

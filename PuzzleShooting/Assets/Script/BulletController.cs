@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletController : MonoBehaviour
 {
     PlayerController _playerController;
+
+    public Image bulletImage;
+    Image img;
+    GameObject canvas;
+
+    public Vector2 scale = new Vector2(0.2f , 0.8f);
+
+    public string imageName = "bullet";
 
     public float speed;// = 0.1f;
     public float damagePoint = 1.0f;
@@ -17,12 +27,24 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
+        canvas = GameObject.Find("Canvas");
+        img = Instantiate(bulletImage , canvas.transform);
+        img.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + imageName);
+        img.rectTransform.localScale = scale;
+        img.rectTransform.rotation = this.transform.rotation;
+        img.transform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
+
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         moveOverY = (19.2f * ((float)Screen.height / (float)Screen.width)) + 1f;
     }
 
     void Update()
     {
+        img.transform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
+        img.rectTransform.rotation = this.transform.rotation;
+
         if(isTracking)
         {
             if(isPlayer)
@@ -55,8 +77,9 @@ public class BulletController : MonoBehaviour
         }
 
         if (this.transform.position.y >= moveOverY || this.transform.position.y <= -moveOverY || this.transform.position.x <= -13f || this.transform.position.x >= 13f)
-        { 
+        {
             Destroy(this.gameObject);
+            Destroy(img);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -67,6 +90,7 @@ public class BulletController : MonoBehaviour
             //Debug.Log("Hit!");
             _playerController.health_Point -= damagePoint - _playerController.defence;
             Destroy(this.gameObject);
+            Destroy(img);
         }
         if(other.gameObject.tag == "ENEMY" && isPlayer)
         {
@@ -74,18 +98,21 @@ public class BulletController : MonoBehaviour
             float defense = other.gameObject.GetComponent<Viran>().defensePoint;
             other.gameObject.GetComponent<Viran>().ViranHealth -= (damagePoint - defense);
             Destroy(this.gameObject);
+            Destroy(img);
         }
         if(other.gameObject.tag == "BOSS" && isPlayer)
         {
             float defence = other.gameObject.GetComponent<Boss>().defensePoint;
             other.gameObject.GetComponent<Boss>().bossHealth -= (damagePoint - defence);
             Destroy(this.gameObject);
+            Destroy(img);
         }
         if(other.gameObject.tag == "MIDBOSS" && isPlayer)
         {
             float defence = other.gameObject.GetComponent<MidBoss>().defencePoint;
             other.gameObject.GetComponent<MidBoss>().HealthPoint -= (damagePoint - defence);
             Destroy(this.gameObject);
+            Destroy(img);
         }
     }
 }

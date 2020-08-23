@@ -113,6 +113,7 @@ MonoBehaviour:
   HealthPoint: 0
   defencePoint: -3.5
   damage: 0
+  imgscale: 0
   interval: 0
   score: 0
   isFinal: 0
