@@ -105,6 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 7414274325956033526, guid: 7f89db974b7098149a36e51e0ad03b97, type: 3}
+  Blue: {fileID: 4659996882603593358, guid: 71b3e06ab946d1e45ab7159b808264d5, type: 3}
   _boss: {fileID: 0}
   skillData: []
   dif: 0

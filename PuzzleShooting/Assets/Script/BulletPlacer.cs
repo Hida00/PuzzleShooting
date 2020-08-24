@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletPlacer : MonoBehaviour
 {
     public GameObject Bullet;
+    public Image Blue;
     GameObject _player;
+    PanelController _panelController;
 
     public GameObject _boss;
 
@@ -29,6 +32,8 @@ public class BulletPlacer : MonoBehaviour
     void Start()
     {
         _player = GameObject.Find("Player");
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
+
         data = new float[10];
         boolen = new bool[10];
         Count = 0;
@@ -47,20 +52,21 @@ public class BulletPlacer : MonoBehaviour
     void Update()
     {
         frameCount++;
-        if(isLockOn && move) LockOn();
-        else
+        if(isLockOn && move && !_panelController.isSkill) LockOn();
+        else if(!_panelController.isSkill)
         {
             if(skillData[0] == 1 && move) Circle(skillData[1] + dif);
             if(skillData[0] == 2 && move) Star(skillData[1] + dif);
             if(skillData[0] == 3 && move) BigCircle(skillData[1] + dif);
         }
 
-        if(frameCount >= interval && !isLockOn)
+        if(frameCount >= interval && !isLockOn && !_panelController.isSkill)
         {
             float angle = (float)Math.Atan2(this.transform.position.y - _player.transform.position.y , this.transform.position.x - _player.transform.position.x) * 180f / (float)Math.PI;
             var obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , 90f + angle));
             obj.GetComponent<BulletController>().isBoss = true;
             obj.GetComponent<BulletController>().speed = skillData[4];
+            obj.GetComponent<BulletController>().bulletImage = Blue;
             frameCount = 0;
         }
     }

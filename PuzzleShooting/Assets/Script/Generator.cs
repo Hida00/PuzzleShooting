@@ -145,6 +145,7 @@ public class Generator : MonoBehaviour
             obj.GetComponent<Boss>().damage = float.Parse(Data[14]);
             obj.GetComponent<Boss>().imageName = Data[15];
             obj.GetComponent<Boss>().scale = float.Parse(Data[16]);
+            obj.GetComponent<Boss>().backImage = Data[17];
 
             for(int i = 0; i < int.Parse(Data[11]); i++)
             {

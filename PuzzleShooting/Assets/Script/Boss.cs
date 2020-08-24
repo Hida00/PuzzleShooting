@@ -22,6 +22,8 @@ public class Boss : MonoBehaviour
 
     Vector3 startPos;
 
+    public string backImage;
+
     public float MoveAngle;
     public float BulletAngle;
     public float rotationCount;
@@ -71,6 +73,8 @@ public class Boss : MonoBehaviour
         Angle = MoveAngle;
         placer = new GameObject[6];
         placer_hard = new GameObject[2];
+
+        GameObject.Find("background").GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + backImage);
 
         _BGM = GameObject.Find("BGM").GetComponent<AudioSource>();
         _BGM.volume = SelectController.volume;
