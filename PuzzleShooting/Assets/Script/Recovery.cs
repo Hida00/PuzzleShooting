@@ -108,6 +108,7 @@ public class Recovery : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        text.fontSize = (int)(text.fontSize * prov);
 
         TimeImage = Instantiate(time , panel.transform);
         TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);

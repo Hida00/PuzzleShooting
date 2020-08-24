@@ -27,7 +27,7 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("BulletPanel");
         img = Instantiate(bulletImage , canvas.transform);
         img.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + imageName);
         img.rectTransform.localScale = scale;

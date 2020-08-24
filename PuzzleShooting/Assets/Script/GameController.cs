@@ -102,6 +102,11 @@ public class GameController : MonoBehaviour
         Child.sizeDelta *= prov;
         Child.transform.GetChild(0).GetComponent<Text>().fontSize = (int)(Child.transform.GetChild(0).GetComponent<Text>().fontSize * prov);
 
+        Child = child.transform.GetChild(3).GetComponent<RectTransform>();
+        Child.anchoredPosition *= prov;
+        Child.sizeDelta *= prov;
+        Child.transform.GetChild(0).GetComponent<Text>().fontSize = (int)(Child.transform.GetChild(0).GetComponent<Text>().fontSize * prov);
+
         _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         intervalTimes = new float[3] { 20 , 0 , 0 };
 
@@ -158,11 +163,17 @@ public class GameController : MonoBehaviour
     }
     public void Quit()
     {
+        PauseClick();
         SceneManager.LoadScene("Select");
     }
     public void Title()
     {
+        PauseClick();
         SceneManager.LoadScene("Title");
+    }
+    public void BackGame()
+    {
+        PauseClick();
     }
     public void Clear()
     {
@@ -210,7 +221,11 @@ public class GameController : MonoBehaviour
     {
         if(isPause)
         {
-            if(!isSkill) _panelController.isSkill = false;
+            if(!isSkill)
+            {
+                _panelController.isSkill = false;
+                _panelController.skillSpeed = 1;
+            }
             Time.timeScale = 1;
             isPause = false;
             PausePanel.SetActive(false);
@@ -220,6 +235,7 @@ public class GameController : MonoBehaviour
             if(_panelController.isSkill) isSkill = true;
             Time.timeScale = 0;
             _panelController.isSkill = true;
+            _panelController.skillSpeed = 0;
             isPause = true;
             PausePanel.SetActive(true);
         }
