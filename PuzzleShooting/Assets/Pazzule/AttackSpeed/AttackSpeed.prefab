@@ -43,9 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aead35fea26f04e4b86a2f29ccb081e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
+    type: 3}
   peace: {fileID: 4220837831108455767, guid: efda0fe12f355374382ce46d281b30d7, type: 3}
   frame: {fileID: 4347708529305096147, guid: a9f87b280c0109442bff564837f2da13, type: 3}
   image: {fileID: 7938280641727152050, guid: 741a76481289290489ee124b6967cde2, type: 3}
+  time: {fileID: 5642601476388718921, guid: dcc61dc0227dbc74cabc0aff97038eec, type: 3}
   ClearText: {fileID: 4259088191953386208, guid: 23d98649a17f4754ab3254b74f28a308,
     type: 3}
   imageNum: 

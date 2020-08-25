@@ -58,5 +58,8 @@ MonoBehaviour:
     type: 3}
   Explanation: {fileID: 2203507019230465068, guid: fa9d3584d5b30504494bc156c1483809,
     type: 3}
+  time: {fileID: 5642601476388718921, guid: dcc61dc0227dbc74cabc0aff97038eec, type: 3}
+  select: {fileID: 0}
+  size: 0
   width: 0
   isSuccess: 0

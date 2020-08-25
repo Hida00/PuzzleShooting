@@ -15,11 +15,14 @@ public class Boss : MonoBehaviour
     GameObject canvas;
     GameObject _player;
     GameObject[] placer;
+    GameObject[] placer_hard;
     AudioSource _BGM;
 
     PanelController _panelController;
 
     Vector3 startPos;
+
+    public string backImage;
 
     public float MoveAngle;
     public float BulletAngle;
@@ -69,11 +72,39 @@ public class Boss : MonoBehaviour
         startPos = this.transform.position;
         Angle = MoveAngle;
         placer = new GameObject[6];
+        placer_hard = new GameObject[2];
+
+        GameObject.Find("background").GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + backImage);
 
         _BGM = GameObject.Find("BGM").GetComponent<AudioSource>();
         _BGM.volume = SelectController.volume;
         _BGM.clip = Resources.Load<AudioClip>(@"Music/" + imageName);
         _BGM.Play();
+
+        if(SelectController.SelectName == "Hard1")
+        {
+            placer_hard[0] = Instantiate(Placer , new Vector3(8 , 7 , 0) , Quaternion.identity);
+            placer_hard[0].GetComponent<BulletPlacer>().isLockOn = true;
+            placer_hard[0].GetComponent<BulletPlacer>().interval = 30;
+            placer_hard[0].GetComponent<BulletPlacer>().speed = 26f;
+            placer_hard[0].GetComponent<BulletPlacer>().damage = damage / 2;
+            var obj = Instantiate(image , canvas.transform);
+            obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+            obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+            obj.rectTransform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , placer_hard[0].transform.position);
+
+            placer_hard[1] = Instantiate(Placer , new Vector3(-8 , 7 , 0) , Quaternion.identity);
+            placer_hard[1].GetComponent<BulletPlacer>().isLockOn = true;
+            placer_hard[1].GetComponent<BulletPlacer>().interval = 30;
+            placer_hard[1].GetComponent<BulletPlacer>().speed = 26f;
+            placer_hard[1].GetComponent<BulletPlacer>().damage = damage / 2;
+            obj = Instantiate(image , canvas.transform);
+            obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+            obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+            obj.rectTransform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , placer_hard[1].transform.position);
+        }
     }
 
     void Update()
@@ -116,13 +147,13 @@ public class Boss : MonoBehaviour
         {
             BulletAngle = (float)Math.Atan2(this.transform.position.y - _player.transform.position.y , this.transform.position.x - _player.transform.position.x) * 180f / (float)Math.PI;
             var obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 90f));
-            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 97f));
+            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 105f));
             obj.GetComponent<BulletController>().damagePoint = damage;
-            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 83f));
+            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 75f));
             obj.GetComponent<BulletController>().damagePoint = damage;
-            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 104f));
+            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 120f));
             obj.GetComponent<BulletController>().damagePoint = damage;
-            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 76f));
+            Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 60f));
             obj.GetComponent<BulletController>().damagePoint = damage;
             frameCount = 0;
         }
@@ -142,6 +173,7 @@ public class Boss : MonoBehaviour
         placer[0].GetComponent<BulletPlacer>().speed = 2f;
         placer[0].GetComponent<BulletPlacer>().interval = 10;
         placer[0].GetComponent<BulletPlacer>().dif = 0f;
+        placer[0].GetComponent<BulletPlacer>().damage = damage;
 
         placer[1] = Instantiate(Placer);
         placer[1].GetComponent<BulletPlacer>().skillData = skillData[skillCount - 1];
@@ -149,6 +181,31 @@ public class Boss : MonoBehaviour
         placer[1].GetComponent<BulletPlacer>().speed = 2f;
         placer[1].GetComponent<BulletPlacer>().interval = 10;
         placer[1].GetComponent<BulletPlacer>().dif = -2f;
+        placer[1].GetComponent<BulletPlacer>().damage = damage;
+
+        placer[2] = Instantiate(Placer , new Vector3(8 , 2 , 0) , Quaternion.identity);
+        placer[2].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[2].GetComponent<BulletPlacer>().interval = 40;
+        placer[2].GetComponent<BulletPlacer>().speed = 30f;
+        placer[2].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        var obj = Instantiate(image , canvas.transform);
+        obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+        obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+        obj.transform.position
+        = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[2].transform.position);
+
+        placer[3] = Instantiate(Placer , new Vector3(-8 , 2 , 0) , Quaternion.identity);
+        placer[3].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[3].GetComponent<BulletPlacer>().interval = 40;
+        placer[3].GetComponent<BulletPlacer>().speed = 30;
+        placer[3].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        obj = Instantiate(image , canvas.transform);
+        obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+        obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+        obj.transform.position
+        = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[3].transform.position);
 
         isPlaceFinish = true;
         skillCount--;
@@ -160,6 +217,31 @@ public class Boss : MonoBehaviour
         placer[0].GetComponent<BulletPlacer>()._boss = this.gameObject;
         placer[0].GetComponent<BulletPlacer>().speed = 8f;
         placer[0].GetComponent<BulletPlacer>().interval = 7;
+        placer[0].GetComponent<BulletPlacer>().damage = damage;
+
+        placer[2] = Instantiate(Placer , new Vector3(8 , -2 , 0) , Quaternion.identity);
+        placer[2].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[2].GetComponent<BulletPlacer>().interval = 40;
+        placer[2].GetComponent<BulletPlacer>().speed = 30f;
+        placer[2].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        var obj = Instantiate(image , canvas.transform);
+        obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+        obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+        obj.transform.position
+        = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[2].transform.position);
+
+        placer[3] = Instantiate(Placer , new Vector3(-8 , -2 , 0) , Quaternion.identity);
+        placer[3].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[3].GetComponent<BulletPlacer>().interval = 40;
+        placer[3].GetComponent<BulletPlacer>().speed = 30;
+        placer[3].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        obj = Instantiate(image , canvas.transform);
+        obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+        obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+        obj.transform.position
+        = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[3].transform.position);
 
         isPlaceFinish = true;
         skillCount--;
@@ -172,6 +254,31 @@ public class Boss : MonoBehaviour
         placer[0].GetComponent<BulletPlacer>().speed = 4f;
         placer[0].GetComponent<BulletPlacer>().interval = 10;
         placer[0].GetComponent<BulletPlacer>().dif = 0f;
+        placer[0].GetComponent<BulletPlacer>().damage = damage;
+
+        placer[2] = Instantiate(Placer , new Vector3(8 , -4 , 0) , Quaternion.identity);
+        placer[2].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[2].GetComponent<BulletPlacer>().interval = 40;
+        placer[2].GetComponent<BulletPlacer>().speed = 30f;
+        placer[2].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        var obj = Instantiate(image , canvas.transform);
+        obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+        obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+        obj.transform.position
+        = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[2].transform.position);
+
+        placer[3] = Instantiate(Placer , new Vector3(-8 , -4 , 0) , Quaternion.identity);
+        placer[3].GetComponent<BulletPlacer>().isLockOn = true;
+        placer[3].GetComponent<BulletPlacer>().interval = 40;
+        placer[3].GetComponent<BulletPlacer>().speed = 30;
+        placer[3].GetComponent<BulletPlacer>().damage = damage / 2;
+
+        obj = Instantiate(image , canvas.transform);
+        obj.rectTransform.sizeDelta = new Vector2(30 , 60);
+        obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
+        obj.transform.position
+        = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[3].transform.position);
 
         isPlaceFinish = true;
         skillCount--;

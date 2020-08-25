@@ -12,6 +12,8 @@ public class Defence : MonoBehaviour
     public Image frame;
     public TextMeshProUGUI ClearText;
     public Text Explanation;
+    public Image time;
+    Image TimeImage;
 
     PanelController _panelController;
 
@@ -19,6 +21,7 @@ public class Defence : MonoBehaviour
     public Image select;
 
     float[] onPeace;
+    float startTime;
 
     public int size;
     public int width;
@@ -33,6 +36,8 @@ public class Defence : MonoBehaviour
         Create_peace();
 
         Invoke("Finish" , 22f);
+
+        startTime = Time.time;
     }
 
     void Update()
@@ -47,6 +52,10 @@ public class Defence : MonoBehaviour
 
             Invoke("Succese" , 0.8f);
         }
+        {
+            float t = -360 * (Time.time - startTime) / 22f;
+            TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
+        }
         CheckPease();
     }
 
@@ -57,6 +66,10 @@ public class Defence : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+
+        TimeImage = Instantiate(time , panel.transform);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Defence/Explanation") as TextAsset;
         StringReader sr = new StringReader(explanation.text);
@@ -70,7 +83,7 @@ public class Defence : MonoBehaviour
         System.Random r = new System.Random();
 
         isSuccess = false;
-        TextAsset csv = Resources.Load(@"CSV/Defence/Defence" + r.Next(1,3).ToString()) as TextAsset;
+        TextAsset csv = Resources.Load(@"CSV/Defence/Defence" + r.Next(1 , 3).ToString()) as TextAsset;
         StringReader st = new StringReader(csv.text);
 
         string[] info = st.ReadLine().Split(',');

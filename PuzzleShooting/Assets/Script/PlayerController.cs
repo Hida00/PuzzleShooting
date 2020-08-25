@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     //プレイヤーの弾丸
     public GameObject PlayerBullet;
     public GameObject TrackingBullet;
+    public Image playerImage;
 
     //Shift押下中速度を落とすための補正倍率
     public float speedMag = 1.0f;
@@ -45,8 +46,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void Update()
-    { 
+    {
         framecount++;
+
+        playerImage.transform.position
+            = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position) + Vector2.up * 2;
 
         if(framecount >= attackSpeed && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
         {
