@@ -106,6 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 7414274325956033526, guid: 7f89db974b7098149a36e51e0ad03b97, type: 3}
   image: {fileID: 8060002617541915621, guid: b143ae9ffcd4e81418d27f5f1b2b2bc2, type: 3}
+  Yellow: {fileID: 5096869673785309770, guid: dbaab1aac92c49f488bc1cf7fdd24897, type: 3}
   particle: {fileID: 5566179456618252004, guid: 19ef41b734b7fee4e89c698b0d341c37,
     type: 3}
   scale: {x: 0, y: 0, z: 0}

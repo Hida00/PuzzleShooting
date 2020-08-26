@@ -8,6 +8,7 @@ public class MidBoss : MonoBehaviour
 {
     public GameObject bullet;
     public Image image;
+    public Image Yellow;
     Image img;
     public ParticleSystem particle;
 
@@ -53,7 +54,7 @@ public class MidBoss : MonoBehaviour
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         if(!_panelController.isSkill) frameCount++;
-        if(Time.time - startTime >= TimeSpan)
+        if(Time.time - startTime >= TimeSpan && !_panelController.isSkill)
         {
             Vector3 pos = GameObject.Find("Player").transform.position;
             float angle = (float)(Math.Atan2(this.transform.position.y - pos.y , this.transform.position.x - pos.x) * 180f / Math.PI);
@@ -64,6 +65,7 @@ public class MidBoss : MonoBehaviour
             obj.GetComponent<BulletController>().damagePoint = damage * 2.3f;
             obj.GetComponent<BulletController>().imageName = "bullet2";
             obj.GetComponent<BulletController>().scale = Vector2.one;
+            obj.GetComponent<BulletController>().bulletImage = Yellow;
             startTime = Time.time;
         }
         if(frameCount == interval && !_panelController.isSkill)

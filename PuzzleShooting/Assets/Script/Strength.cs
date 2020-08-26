@@ -126,7 +126,7 @@ public class Strength : MonoBehaviour
         text.fontSize = (int)(text.fontSize * prov);
 
         TimeImage = Instantiate(time , panel.transform);
-        TimeImage.rectTransform.anchoredPosition = new Vector2(40 * prov , -180 * prov);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(40 * prov , -195 * prov);
         TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Strength/Explanation") as TextAsset;
