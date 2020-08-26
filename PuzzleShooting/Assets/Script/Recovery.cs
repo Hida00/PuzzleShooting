@@ -56,7 +56,6 @@ public class Recovery : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))Finish();
         if(isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
@@ -111,15 +110,17 @@ public class Recovery : MonoBehaviour
         text.fontSize = (int)(text.fontSize * prov);
 
         TimeImage = Instantiate(time , panel.transform);
-        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(40 * prov , -180 * prov);
         TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Recovery/Explanation") as TextAsset;
         StringReader st = new StringReader(explanation.text);
+        text.text = "";
         while(st.Peek() > -1)
         {
             string s = st.ReadLine();
-            text.text = s;
+            text.text += s;
+            text.text += "\n";
         }
     }
 
@@ -174,11 +175,13 @@ public class Recovery : MonoBehaviour
     }
     public void Succese()
     {
-        _playerController.health_Point += 30f;
+        float value = _playerController.maxHealth * 0.15f;
+        _playerController.health_Point += value;
         Finish();
     }
     void Finish()
     {
+        Debug.Log("Finish");
         if(isSuccess)
         {
             GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(0 , _panelController.skillnum , 15f);

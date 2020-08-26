@@ -13,6 +13,7 @@ public class Generator : MonoBehaviour
     public GameObject viran2;
     public GameObject boss;
     public GameObject midBoss;
+    public GameObject last_boss;
 
     GameController _gameController;
     public TextMeshProUGUI BossAlert;
@@ -43,7 +44,9 @@ public class Generator : MonoBehaviour
         TextAsset csv = Resources.Load(@"CSV/StageData/" + fileName) as TextAsset;
         data = new StringReader(csv.text);
         Data = new string[20];
-        data.ReadLine();
+        string[] info = data.ReadLine().Split(',');
+        GameObject.Find("Player").GetComponent<PlayerController>().health_Point = float.Parse(info[3]);
+        GameObject.Find("Player").GetComponent<PlayerController>().maxHealth = float.Parse(info[3]);
     }
 
     void Update()

@@ -15,6 +15,8 @@ public class PanelController : MonoBehaviour
     public GameObject Panel;
     public GameObject[] Skills;
 
+    public Text finish;
+
     public float difTime;
     public float[] Skillintervals;
 
@@ -22,6 +24,7 @@ public class PanelController : MonoBehaviour
     int Skill1_num = 3;
     int Skill2_num = 4;
     int Skill3_num = 2;
+    int skill;
     public int skillSpeed = 1;
     public int skillnum;
 
@@ -36,6 +39,12 @@ public class PanelController : MonoBehaviour
         Panel.GetComponent<RectTransform>().sizeDelta = new Vector2(area.sizeDelta.x * 0.5f , area.sizeDelta.y);
         Panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-Panel.GetComponent<RectTransform>().sizeDelta.x * 0.5f , 0);
         SetSkillNumber();
+
+        float prov = (float)Screen.height / 450f;
+        finish.rectTransform.anchoredPosition *= prov;
+        finish.rectTransform.sizeDelta *= prov;
+        finish.fontSize = (int)(finish.fontSize * prov);
+        finish.text = "";
 
         //Panelのゲームオブジェクトを格納
         Panel = GameObject.Find("Panel");
@@ -57,29 +66,35 @@ public class PanelController : MonoBehaviour
         //スキルキー入力を取得、Panelの有効化
         if (Input.GetKeyDown(Skill_Keys[0]) && !isSkill && canskill[0])
         {
+            finish.text = "×";
             Panel.SetActive(true);
             skillnum = 0;
+            skill = Skill1_num;
 
             EnemyTimeSet();
-            Instantiate(Skills[Skill1_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
+            Instantiate(Skills[Skill1_num] , Panel.transform);
             //スキル1の処理はここに書く
         }
         else if (Input.GetKeyDown(Skill_Keys[1]) && !isSkill && canskill[1])
         {
+            finish.text = "×";
             Panel.SetActive(true);
             skillnum = 1;
+            skill = Skill2_num;
 
             EnemyTimeSet();
-            Instantiate(Skills[Skill2_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
+            Instantiate(Skills[Skill2_num] , Panel.transform);
             //スキル2の処理はここに書く
         }
         else if (Input.GetKeyDown(Skill_Keys[2]) && !isSkill && canskill[2])
         {
+            finish.text = "×";
             Panel.SetActive(true);
             skillnum = 2;
+            skill = Skill3_num;
 
             EnemyTimeSet();
-            Instantiate(Skills[Skill3_num] , new Vector3(0 , 0 , 0) , Quaternion.identity);
+            Instantiate(Skills[Skill3_num] , Panel.transform);
             //スキル3の処理はここに書く
         }
     }
@@ -141,5 +156,21 @@ public class PanelController : MonoBehaviour
             isSkill = true;
             difTime = Time.time - GameObject.Find("Generator").GetComponent<Generator>().startTime;
         }
+    }
+    public void SkillEnd()
+    {
+        GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(skill , skillnum , 25f);
+        canskill[skillnum] = false;
+
+        skillSpeed = 1;
+        Time.timeScale = 1.0f;
+
+        FinishTimeSet();
+        foreach(Transform obj in Panel.transform)
+        {
+            Destroy(obj.gameObject);
+        }
+        Panel.SetActive(false);
+        finish.text = "";
     }
 }

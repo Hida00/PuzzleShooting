@@ -122,12 +122,16 @@ public class PlayerController : MonoBehaviour
         {
             this.gameObject.GetComponentInChildren<CapsuleCollider>().isTrigger = true;
             skill = false;
+
+            playerImage.color = new Color(1f , 1f , 1f , 1f);
         }
         else
         {
             this.gameObject.GetComponentInChildren<CapsuleCollider>().isTrigger = false;
             skill = true;
-            Invoke("Invisible" , 10f);
+            Invoke("Invisible" , 15f);
+
+            playerImage.color = new Color(1f , 1f , 1f , 0.4f);
         }
     }
     public void AttackSpeed()
@@ -143,7 +147,7 @@ public class PlayerController : MonoBehaviour
             attackSpeed = 5;
             framecount = 0;
             skill = true;
-            Invoke("AttackSpeed" , 10f);
+            Invoke("AttackSpeed" , 15f);
         }
     }
     public void RateDamage()
@@ -152,13 +156,29 @@ public class PlayerController : MonoBehaviour
 
         if(Enemys.Length != 0)
         {
-            int length = Enemys.Length;
-            System.Random r = new System.Random();
-            
-            for(int i = 0; i < 4; i++)
+            foreach(var obj in Enemys)
             {
-                int num = r.Next(0 , length);
-                Enemys[num].GetComponent<Viran>().ViranHealth -= Enemys[num].GetComponent<Viran>().ViranHealth * 0.5f;
+                obj.GetComponent<Viran>().ViranHealth -= obj.GetComponent<Viran>().ViranHealth * 0.40f;
+            }
+        }
+
+        var MidBoss = GameObject.FindGameObjectsWithTag("MIDBOSS");
+
+        if(MidBoss.Length != 0)
+        {
+            foreach(var obj in MidBoss)
+            {
+                obj.GetComponent<MidBoss>().HealthPoint -= obj.GetComponent<MidBoss>().HealthPoint * 0.40f;
+            }
+        }
+
+        var Boss = GameObject.FindGameObjectsWithTag("BOSS");
+
+        if(Boss.Length != 0)
+        {
+            foreach(var obj in Boss)
+            {
+                obj.GetComponent<Boss>().bossHealth -= obj.GetComponent<Boss>().bossHealth * 040f;
             }
         }
     }
@@ -173,7 +193,7 @@ public class PlayerController : MonoBehaviour
         {
             strength = 2.0f;
             skill = true;
-            Invoke("Strength" , 10f);
+            Invoke("Strength" , 15f);
         }
     }
     public void Defence()
@@ -187,7 +207,7 @@ public class PlayerController : MonoBehaviour
         {
             defence *= 2f;
             skill = true;
-            Invoke("Defence" , 10f);
+            Invoke("Defence" , 15f);
         }
     }
     void PositionOver(Vector3 position)

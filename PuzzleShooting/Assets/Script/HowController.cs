@@ -100,6 +100,6 @@ public class HowController : MonoBehaviour
 
     public void BackSelect()
     {
-        SceneManager.LoadScene("Selece");
+        SceneManager.LoadScene("Select");
     }
 }

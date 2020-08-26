@@ -36,7 +36,6 @@ public class Strength : MonoBehaviour
 
     public bool isClick = false;
     public bool isSuccess = false;
-    bool b = false;
 
     public TextMeshProUGUI ClearText;
     public TextMeshProUGUI Delete;
@@ -52,19 +51,11 @@ public class Strength : MonoBehaviour
 
         Invoke("Finish" , 15f);
 
-        b = true;
         startTime = Time.time;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B))
-        {
-            string s = "";
-            foreach(var x in isConnect) s += x.ToString();
-            Debug.Log(s);
-        }
-        if(Input.GetKeyDown(KeyCode.Escape) && b) Finish();
         if(isSuccess)
         {
             var obj = Instantiate(ClearText , new Vector3(0f , 0f , 0f) , Quaternion.identity);
@@ -132,9 +123,10 @@ public class Strength : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        text.fontSize = (int)(text.fontSize * prov);
 
         TimeImage = Instantiate(time , panel.transform);
-        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(40 * prov , -180 * prov);
         TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Strength/Explanation") as TextAsset;

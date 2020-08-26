@@ -118,6 +118,8 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape)) PauseClick();
+
         if(boolen[0])
         {
             float prov = Screen.height / 450f;
@@ -226,16 +228,22 @@ public class GameController : MonoBehaviour
                 _panelController.isSkill = false;
                 _panelController.skillSpeed = 1;
             }
+
+            BGM.UnPause();
             Time.timeScale = 1;
             isPause = false;
+            
             PausePanel.SetActive(false);
         }
         else
         {
             if(_panelController.isSkill) isSkill = true;
+
+            BGM.Pause();
             Time.timeScale = 0;
             _panelController.isSkill = true;
             _panelController.skillSpeed = 0;
+
             isPause = true;
             PausePanel.SetActive(true);
         }

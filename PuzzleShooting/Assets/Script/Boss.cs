@@ -9,6 +9,7 @@ public class Boss : MonoBehaviour
     public GameObject Bullet;
     public Image image;
     Image img;
+    Image[] imgs;
     public GameObject Placer;
     public ParticleSystem particle;
     Slider bossHP;
@@ -72,7 +73,8 @@ public class Boss : MonoBehaviour
         startPos = this.transform.position;
         Angle = MoveAngle;
         placer = new GameObject[6];
-        placer_hard = new GameObject[2];
+        imgs = new Image[6];
+        placer_hard = new GameObject[4];
 
         GameObject.Find("background").GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + backImage);
 
@@ -93,6 +95,7 @@ public class Boss : MonoBehaviour
             obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
             obj.rectTransform.position
             = RectTransformUtility.WorldToScreenPoint(Camera.main , placer_hard[0].transform.position);
+            placer_hard[2] = obj.gameObject;
 
             placer_hard[1] = Instantiate(Placer , new Vector3(-8 , 7 , 0) , Quaternion.identity);
             placer_hard[1].GetComponent<BulletPlacer>().isLockOn = true;
@@ -104,6 +107,7 @@ public class Boss : MonoBehaviour
             obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
             obj.rectTransform.position
             = RectTransformUtility.WorldToScreenPoint(Camera.main , placer_hard[1].transform.position);
+            placer_hard[3] = obj.gameObject;
         }
     }
 
@@ -116,6 +120,8 @@ public class Boss : MonoBehaviour
         if(bossHealth <= 0f && !_panelController.isSkill)
         {
             foreach(var placers in placer) Destroy(placers);
+            foreach(var im in imgs) Destroy(im);
+
             GameObject.Find("GameController").GetComponent<GameController>().BossBulletMoveStart();
             HPcolorChange(skillCount);
             if(skillCount == 0)
@@ -126,6 +132,7 @@ public class Boss : MonoBehaviour
                 _gameController.Clear();
                 _gameController.FinishGame(true);
                 Instantiate(particle,this.transform.position,Quaternion.Euler(90 , 0 , 0));
+                foreach(var obj in placer_hard) Destroy(obj);
                 Destroy(img);
                 Destroy(this.gameObject);
             }
@@ -194,6 +201,7 @@ public class Boss : MonoBehaviour
         obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
         obj.transform.position
         = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[2].transform.position);
+        imgs[0] = obj;
 
         placer[3] = Instantiate(Placer , new Vector3(-8 , 2 , 0) , Quaternion.identity);
         placer[3].GetComponent<BulletPlacer>().isLockOn = true;
@@ -206,6 +214,7 @@ public class Boss : MonoBehaviour
         obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
         obj.transform.position
         = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[3].transform.position);
+        imgs[1] = obj;
 
         isPlaceFinish = true;
         skillCount--;
@@ -230,6 +239,7 @@ public class Boss : MonoBehaviour
         obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
         obj.transform.position
         = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[2].transform.position);
+        imgs[0] = obj;
 
         placer[3] = Instantiate(Placer , new Vector3(-8 , -2 , 0) , Quaternion.identity);
         placer[3].GetComponent<BulletPlacer>().isLockOn = true;
@@ -242,6 +252,7 @@ public class Boss : MonoBehaviour
         obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
         obj.transform.position
         = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[3].transform.position);
+        imgs[1] = obj;
 
         isPlaceFinish = true;
         skillCount--;
@@ -267,6 +278,7 @@ public class Boss : MonoBehaviour
         obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
         obj.transform.position
         = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[2].transform.position);
+        imgs[0] = obj;
 
         placer[3] = Instantiate(Placer , new Vector3(-8 , -4 , 0) , Quaternion.identity);
         placer[3].GetComponent<BulletPlacer>().isLockOn = true;
@@ -279,6 +291,7 @@ public class Boss : MonoBehaviour
         obj.sprite = Resources.Load<Sprite>(@"Image/Enemy/Placer");
         obj.transform.position
         = RectTransformUtility.WorldToScreenPoint(Camera.main , placer[3].transform.position);
+        imgs[1] = obj;
 
         isPlaceFinish = true;
         skillCount--;
