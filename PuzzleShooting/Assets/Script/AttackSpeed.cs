@@ -37,14 +37,13 @@ public class AttackSpeed : MonoBehaviour
 
         Create_Image();
 
-        Invoke("Finish" , 28f);
+        Invoke("Finish" , 38f);
 
         startTime = Time.time;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) Finish();
         if(isSuccess)
         {
             var obj = Instantiate(ClearText);
@@ -54,7 +53,7 @@ public class AttackSpeed : MonoBehaviour
             Invoke("Succese" , 0.8f);
         }
         {
-            float t = -360 * (Time.time - startTime) / 28f;
+            float t = -360 * (Time.time - startTime) / 38f;
             TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
         }
         Check_Array();
@@ -67,9 +66,20 @@ public class AttackSpeed : MonoBehaviour
         string[] info = st.ReadLine().Split(',');
         float prov = Screen.height / 450f;
 
-        var explanation = Instantiate(Explanation , panel.transform);
-        explanation.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
-        explanation.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        var text = Instantiate(Explanation , panel.transform);
+        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        text.fontSize = (int)(text.fontSize * prov);
+        text.text = "";
+
+        TextAsset ex = Resources.Load(@"CSV/AttackSpeed/Explanation") as TextAsset;
+        StringReader Ex = new StringReader(ex.text);
+
+        while(Ex.Peek() > -1)
+        {
+            text.text += Ex.ReadLine();
+            text.text += "\n";
+        }
 
         TimeImage = Instantiate(time , panel.transform);
         TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);

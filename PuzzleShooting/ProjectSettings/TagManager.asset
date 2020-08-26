@@ -12,6 +12,7 @@ TagManager:
   - BULLET
   - LINE
   - POINT
+  - LASTBOSS
   layers:
   - Default
   - TransparentFX

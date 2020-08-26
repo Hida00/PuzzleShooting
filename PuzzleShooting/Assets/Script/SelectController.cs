@@ -9,7 +9,7 @@ public class SelectController : MonoBehaviour
 
     public static float volume = 0;//.7f;
 
-    public static string SelectName = "last";
+    public static string SelectName = "Hard";
     public static string StageImage = "image2";
     public static string MusicName = "Stage1";
     public static int[] SetSkills = { 0 , 1 , 2 };
@@ -25,7 +25,7 @@ public class SelectController : MonoBehaviour
 
     public void Click_One()
     {
-        SelectName = "Normal1";
+        SelectName = "Normal";
         StageImage = "image1";
         MusicName = "Stage1";
         BGM.Stop();
@@ -33,7 +33,9 @@ public class SelectController : MonoBehaviour
     }
     public void Click_Two()
     {
-        SelectName = "Hard1";
+        SelectName = "Hard";
+        StageImage = "image2";
+        MusicName = "Stage2";
         BGM.Stop();
         SceneManager.LoadScene("PlayScene");
     }
@@ -55,5 +57,10 @@ public class SelectController : MonoBehaviour
     {
         BGM.Stop();
         SceneManager.LoadScene("Title");
+    }
+    public void How()
+    {
+        BGM.Stop();
+        SceneManager.LoadScene("HowToPlay");
     }
 }

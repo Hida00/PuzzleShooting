@@ -62,7 +62,6 @@ public class Invisible : MonoBehaviour
             float t = -360 * (Time.time - startTime) / 40f;
             TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
         }
-        if (Input.GetKeyDown(KeyCode.Escape)) Finish();
         CheckAnswer();
     }
     void Create_Image()
@@ -75,6 +74,17 @@ public class Invisible : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        text.fontSize = (int)(text.fontSize * prov);
+        text.text = "";
+
+        TextAsset ex = Resources.Load(@"CSV/Invisible/Explanation") as TextAsset;
+        StringReader Ex = new StringReader(ex.text);
+
+        while(Ex.Peek() > -1)
+        {
+            text.text += Ex.ReadLine();
+            text.text += "\n";
+        }
 
         TimeImage = Instantiate(time , panel.transform);
         TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);

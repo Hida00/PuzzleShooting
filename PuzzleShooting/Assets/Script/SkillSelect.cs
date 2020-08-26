@@ -82,6 +82,7 @@ public class SkillSelect : MonoBehaviour
             obj2.rectTransform.anchoredPosition = new Vector2(0.0f , 0f);
             obj2.rectTransform.sizeDelta = new Vector2(ScrollView.GetComponent<RectTransform>().sizeDelta.x * 0.5f , panel.rectTransform.sizeDelta.y * 0.85f);
             obj2.text = values[1];
+            obj2.fontSize = (int)(obj2.fontSize * prov);
 
             skillPanels[i] = obj;
             i++;
@@ -119,7 +120,15 @@ public class SkillSelect : MonoBehaviour
         TextAsset csv = Resources.Load(@"CSV/SkillData/" + name) as TextAsset;
         StringReader st = new StringReader(csv.text);
 
-        obj.transform.GetComponentInChildren<Text>().text = st.ReadToEnd();
+        obj.transform.GetComponentInChildren<Text>().text = "";
+
+        while(st.Peek() > -1)
+        {
+            string s = st.ReadLine();
+            obj.transform.GetComponentInChildren<Text>().text += s;
+            obj.transform.GetComponentInChildren<Text>().text += "\n";
+        }
+
         obj.transform.GetComponentInChildren<Text>().fontSize = (int)((float)obj.transform.GetComponentInChildren<Text>().fontSize * prov);
         obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-320f * prov , 0 , 0);
         obj.GetComponent<RectTransform>().sizeDelta *= prov;

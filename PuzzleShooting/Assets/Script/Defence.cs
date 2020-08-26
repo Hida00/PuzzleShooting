@@ -35,14 +35,13 @@ public class Defence : MonoBehaviour
         panel = GameObject.Find("Panel");
         Create_peace();
 
-        Invoke("Finish" , 22f);
+        Invoke("Finish" , 30f);
 
         startTime = Time.time;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) Finish();
         if(Input.GetKeyDown(KeyCode.T) && select != null) select.GetComponent<DefenceImage>().Turn();
 
         if(isSuccess)
@@ -53,7 +52,7 @@ public class Defence : MonoBehaviour
             Invoke("Succese" , 0.8f);
         }
         {
-            float t = -360 * (Time.time - startTime) / 22f;
+            float t = -360 * (Time.time - startTime) / 30f;
             TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
         }
         CheckPease();
@@ -66,6 +65,7 @@ public class Defence : MonoBehaviour
         var text = Instantiate(Explanation , panel.transform);
         text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
         text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        text.fontSize = (int)(text.fontSize * prov);
 
         TimeImage = Instantiate(time , panel.transform);
         TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
