@@ -68,7 +68,7 @@ public class Defence : MonoBehaviour
         text.fontSize = (int)(text.fontSize * prov);
 
         TimeImage = Instantiate(time , panel.transform);
-        TimeImage.rectTransform.anchoredPosition = new Vector2(60 * prov , -180 * prov);
+        TimeImage.rectTransform.anchoredPosition = new Vector2(40 * prov , -180 * prov);
         TimeImage.rectTransform.sizeDelta *= prov;
 
         TextAsset explanation = Resources.Load(@"CSV/Defence/Explanation") as TextAsset;

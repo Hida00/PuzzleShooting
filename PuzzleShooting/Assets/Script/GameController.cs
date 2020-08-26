@@ -229,6 +229,7 @@ public class GameController : MonoBehaviour
                 _panelController.skillSpeed = 1;
             }
 
+            BGM.UnPause();
             Time.timeScale = 1;
             isPause = false;
             
@@ -238,6 +239,7 @@ public class GameController : MonoBehaviour
         {
             if(_panelController.isSkill) isSkill = true;
 
+            BGM.Pause();
             Time.timeScale = 0;
             _panelController.isSkill = true;
             _panelController.skillSpeed = 0;
