@@ -191,7 +191,6 @@ public class Strength : MonoBehaviour
 
         _panelController.canskill[_panelController.skillnum] = false;
 
-        panel.SetActive(false);
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
@@ -200,6 +199,8 @@ public class Strength : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+
+        panel.SetActive(false);
         _panelController.FinishTimeSet();
         target = new int[0];
         isSuccess = false;

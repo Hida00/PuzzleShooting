@@ -40,7 +40,7 @@ public class RateDamage : MonoBehaviour
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
         Create_Image();
-        Invoke("Finish" , 30f);
+        Invoke("Finish" , 32f);
         startTime = Time.time;
     }
 
@@ -57,7 +57,7 @@ public class RateDamage : MonoBehaviour
             isSuccess = true;
         }
         {
-            float t = -360 * (Time.time - startTime) / 30f;
+            float t = -360 * (Time.time - startTime) / 32f;
             TimeImage.rectTransform.rotation = Quaternion.Euler(0 , 0 , t);
         }
     }
