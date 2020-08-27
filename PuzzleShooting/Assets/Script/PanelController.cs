@@ -28,7 +28,6 @@ public class PanelController : MonoBehaviour
     public int skillSpeed = 1;
     public int skillnum;
 
-    [NonSerialized]
     public bool isSkill = false;
     [NonSerialized]
     public bool[] canskill;
@@ -54,6 +53,7 @@ public class PanelController : MonoBehaviour
 
         //Panelを無効化、スキルキー入力で有効
         Panel.SetActive(false);
+        finish.gameObject.SetActive(false);
 
         Skill_Keys = buf_keys;
         skillSpeed = 1;
@@ -67,6 +67,7 @@ public class PanelController : MonoBehaviour
         if (Input.GetKeyDown(Skill_Keys[0]) && !isSkill && canskill[0])
         {
             finish.text = "×";
+            finish.gameObject.SetActive(true);
             Panel.SetActive(true);
             skillnum = 0;
             skill = Skill1_num;
@@ -78,6 +79,7 @@ public class PanelController : MonoBehaviour
         else if (Input.GetKeyDown(Skill_Keys[1]) && !isSkill && canskill[1])
         {
             finish.text = "×";
+            finish.gameObject.SetActive(true);
             Panel.SetActive(true);
             skillnum = 1;
             skill = Skill2_num;
@@ -89,6 +91,7 @@ public class PanelController : MonoBehaviour
         else if (Input.GetKeyDown(Skill_Keys[2]) && !isSkill && canskill[2])
         {
             finish.text = "×";
+            finish.gameObject.SetActive(true);
             Panel.SetActive(true);
             skillnum = 2;
             skill = Skill3_num;
@@ -172,5 +175,9 @@ public class PanelController : MonoBehaviour
         }
         Panel.SetActive(false);
         finish.text = "";
+    }
+    public void Finish()
+    {
+        finish.gameObject.SetActive(false);
     }
 }

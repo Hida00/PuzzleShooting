@@ -181,7 +181,6 @@ public class Recovery : MonoBehaviour
     }
     void Finish()
     {
-        Debug.Log("Finish");
         if(isSuccess)
         {
             GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(0 , _panelController.skillnum , 15f);
@@ -201,6 +200,8 @@ public class Recovery : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+
+        _panelController.Finish();
         panel.SetActive(false);
         _panelController.FinishTimeSet();
         Destroy(this.gameObject);
