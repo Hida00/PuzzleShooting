@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/2020.8.26/PuzzleShooting.exe
+C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/2020.8.27/PuzzleShooting.exe
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/Select.unity
@@ -141,7 +141,7 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 9e491e24e6d63bc39e4f06182784ec63 Assembly-CSharp.dll:.Generator
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
-ba9ecf8e6df4e30dc1b7aa9426fb8094 Assembly-CSharp.dll:.MidBoss
+79684fd25076dc48bfa33f5e30f64992 Assembly-CSharp.dll:.MidBoss
 7c1d073302646e48bb26ac3019025abf Assembly-CSharp.dll:.SettingController
 58fc46ee8a317ef1e0c9726d604c742e Assembly-CSharp.dll:.SkillPanels
 4fd8bf02e3089425d3502e26c44ba31a Unity.TextMeshPro.dll:TMPro.TextContainer
