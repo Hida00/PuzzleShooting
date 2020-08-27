@@ -134,7 +134,6 @@ public class Defence : MonoBehaviour
 
         _panelController.canskill[_panelController.skillnum] = false;
 
-        panel.SetActive(false);
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
         Time.timeScale = 1.0f;
@@ -143,6 +142,7 @@ public class Defence : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        panel.SetActive(false);
         _panelController.FinishTimeSet();
         Destroy(this.gameObject);
     }
