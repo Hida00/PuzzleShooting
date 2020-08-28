@@ -133,6 +133,7 @@ public class Defence : MonoBehaviour
         else GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(5 , _panelController.skillnum , 25f);
 
         _panelController.canskill[_panelController.skillnum] = false;
+        _panelController.isSkill = true;
 
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
@@ -144,7 +145,6 @@ public class Defence : MonoBehaviour
         }
 
         _panelController.Finish();
-        _panelController.isSkill = true;
         panel.SetActive(false);
         _panelController.FinishTimeSet();
         Destroy(this.gameObject);
