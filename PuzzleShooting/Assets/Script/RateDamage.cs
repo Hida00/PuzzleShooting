@@ -134,6 +134,7 @@ public class RateDamage : MonoBehaviour
             Destroy(n.gameObject);
         }
 
+        _panelController.Finish();
         panel.SetActive(false);
         _panelController.FinishTimeSet();
         Destroy(this.gameObject);

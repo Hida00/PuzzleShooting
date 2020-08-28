@@ -92,9 +92,14 @@ public class SettingController : MonoBehaviour
         {
             foreach (KeyCode code in Enum.GetValues(typeof(KeyCode)))
             {
-                if (Input.GetKeyDown(code))
+                if (Input.GetKeyDown(code) && code != KeyCode.Mouse0 && code != KeyCode.Mouse1)
                 {
                     buf[num] = code;
+                    isFunc = false;
+                    break;
+                }
+                else if(code == KeyCode.Mouse0 || code == KeyCode.Mouse1)
+                {
                     isFunc = false;
                     break;
                 }

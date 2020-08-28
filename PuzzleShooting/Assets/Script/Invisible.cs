@@ -131,6 +131,7 @@ public class Invisible : MonoBehaviour
         else GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(3 , _panelController.skillnum , 25f);
 
         _panelController.canskill[_panelController.skillnum] = false;
+        _panelController.isSkill = true;
 
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
@@ -140,6 +141,7 @@ public class Invisible : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+        _panelController.Finish();
         panel.SetActive(false);
         _panelController.FinishTimeSet();
         Destroy(this.gameObject);

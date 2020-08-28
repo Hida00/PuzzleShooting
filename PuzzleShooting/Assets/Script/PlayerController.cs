@@ -138,13 +138,13 @@ public class PlayerController : MonoBehaviour
     {
         if(skill)
         {
-            attackSpeed = 10;
+            attackSpeed = 15;
             framecount = 0;
             skill = false;
         }
         else
         {
-            attackSpeed = 5;
+            attackSpeed = 7;
             framecount = 0;
             skill = true;
             Invoke("AttackSpeed" , 15f);

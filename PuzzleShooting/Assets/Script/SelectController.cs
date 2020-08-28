@@ -7,7 +7,7 @@ public class SelectController : MonoBehaviour
 {
     public AudioSource BGM;
 
-    public static float volume = 0;//.7f;
+    public static float volume = 0.7f;
 
     public static string SelectName = "Hard";
     public static string StageImage = "image2";

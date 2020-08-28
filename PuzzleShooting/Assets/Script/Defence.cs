@@ -142,6 +142,9 @@ public class Defence : MonoBehaviour
         {
             Destroy(n.gameObject);
         }
+
+        _panelController.Finish();
+        _panelController.isSkill = true;
         panel.SetActive(false);
         _panelController.FinishTimeSet();
         Destroy(this.gameObject);

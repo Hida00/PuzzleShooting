@@ -75,7 +75,7 @@ public class HowController : MonoBehaviour
     public void Go()
     {
         textCount++;
-        if(textCount > 2) textCount = 10;
+        if(textCount > 1) textCount = 1;
         Explanation.text = ExTexts[textCount];
         if(textCount == 1)
         {
