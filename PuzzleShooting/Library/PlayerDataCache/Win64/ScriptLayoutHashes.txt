@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/2020.8.28(2)/PuzzleShooting.exe
+C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/PuzzleShooting/PuzzleShooting.exe
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/Select.unity
