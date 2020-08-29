@@ -119,7 +119,7 @@ public class AttackSpeed : MonoBehaviour
             frames.Add(obj2);
             obj2.rectTransform.anchoredPosition = new Vector2(float.Parse(values[2]) , float.Parse(values[3])) * prov;
             obj2.rectTransform.sizeDelta *= new Vector2(prov , prov);
-            obj2.GetComponent<AttackSpeedImage>().frameNum = i;
+            obj2.GetComponent<AttackSpeedImage>().frameNum = i + 1;
             i++;
         }
         foreach(var obj in frames)
@@ -141,6 +141,7 @@ public class AttackSpeed : MonoBehaviour
         else GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(4 , _panelController.skillnum , 25f);
 
         _panelController.canskill[_panelController.skillnum] = false;
+        _panelController.isSkill = true;
 
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す

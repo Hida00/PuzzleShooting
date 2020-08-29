@@ -36,7 +36,7 @@ public class AttackSpeedImage : MonoBehaviour , IDragHandler , IDropHandler
         {
             if(hit.gameObject.CompareTag("Frame"))
             {
-                _attackSpeed.imageNum[hit.gameObject.GetComponent<AttackSpeedImage>().frameNum] = Num;
+                _attackSpeed.imageNum[hit.gameObject.GetComponent<AttackSpeedImage>().frameNum - 1] = Num;
                 this.GetComponent<RectTransform>().anchoredPosition = hit.gameObject.GetComponent<RectTransform>().anchoredPosition;
             }
         }

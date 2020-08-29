@@ -124,6 +124,7 @@ public class RateDamage : MonoBehaviour
         else GameObject.Find("GameController").GetComponent<GameController>().IntervalSpawn(2 , _panelController.skillnum , 25f);
 
         _panelController.canskill[_panelController.skillnum] = false;
+        _panelController.isSkill = true;
 
         _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
