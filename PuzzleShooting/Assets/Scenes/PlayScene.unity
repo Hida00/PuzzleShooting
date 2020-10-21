@@ -1018,6 +1018,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374467538}
   m_CullTransparentMesh: 0
+--- !u!1 &406449153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406449154}
+  - component: {fileID: 406449155}
+  m_Layer: 0
+  m_Name: Battery
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &406449154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406449153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.7325411, y: 1.0324643, z: 1.5214844}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &406449155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406449153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 597b69d0cb096c74eb8f458c1a149efb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,11 +2600,13 @@ MonoBehaviour:
   - {fileID: 1144751985484154454, guid: 0185fbedfbcb42b428f959144b0be7d1, type: 3}
   - {fileID: 27494764824534553, guid: 3e4961c1c0e5bff429ffd6aef4799ad1, type: 3}
   - {fileID: 7464916947351626005, guid: 062917459bd612a449bb08badfac5e00, type: 3}
+  - {fileID: 7464916947351626005, guid: 062917459bd612a449bb08badfac5e00, type: 3}
   finish: {fileID: 800401058}
   difTime: 0
   Skillintervals: []
   skillSpeed: 1
   skillnum: 0
+  isSkill: 0
 --- !u!4 &1318566210
 Transform:
   m_ObjectHideFlags: 0
@@ -2589,6 +2634,7 @@ GameObject:
   - component: {fileID: 1476232622}
   - component: {fileID: 1476232621}
   - component: {fileID: 1476232625}
+  - component: {fileID: 1476232626}
   m_Layer: 0
   m_Name: Player
   m_TagString: PLAYER
@@ -2686,11 +2732,32 @@ MonoBehaviour:
   TrackingBullet: {fileID: 6882125527540467668, guid: af3c21d1736055f43b5e9b88157cec83,
     type: 3}
   playerImage: {fileID: 103376035}
+  debugObject: {fileID: 9189020181908253551, guid: b47cacf162b4f2c449f3093a851b3203,
+    type: 3}
   speedMag: 1
   health_Point: 200
   maxHealth: 0
   strength: 0
   defence: 0
+--- !u!95 &1476232626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476232620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22d9f309ec31a9644b2f9dd5943ee4f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1489992834
 GameObject:
   m_ObjectHideFlags: 0

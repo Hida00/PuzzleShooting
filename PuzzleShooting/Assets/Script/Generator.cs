@@ -47,6 +47,11 @@ public class Generator : MonoBehaviour
         string[] info = data.ReadLine().Split(',');
         GameObject.Find("Player").GetComponent<PlayerController>().health_Point = float.Parse(info[3]);
         GameObject.Find("Player").GetComponent<PlayerController>().maxHealth = float.Parse(info[3]);
+
+        if(fileName == "last")
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     void Update()

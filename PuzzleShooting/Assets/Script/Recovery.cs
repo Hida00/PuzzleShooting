@@ -193,8 +193,8 @@ public class Recovery : MonoBehaviour
         _panelController.canskill[_panelController.skillnum] = false;
         _panelController.isSkill = true;
 
-        _panelController.skillSpeed = 1;
         //スキル使用時に遅くなった時間を戻す
+        _panelController.skillSpeed = 1;
         Time.timeScale = 1.0f;
 
         foreach (Transform n in panel.transform)

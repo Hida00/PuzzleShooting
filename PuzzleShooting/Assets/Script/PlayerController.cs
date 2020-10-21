@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public GameObject PlayerBullet;
     public GameObject TrackingBullet;
     public Image playerImage;
+    public GameObject debugObject;
 
     //Shift押下中速度を落とすための補正倍率
     public float speedMag = 1.0f;
@@ -22,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public float strength;
     public float defence;
-    readonly float damage = 25f;
+    public readonly float damage = 25f;
     float moveright = 1f;
     float moveleft = 1f;
     float moveup = 1f;
@@ -47,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.O)) Instantiate(debugObject);
+
         framecount++;
 
         playerImage.transform.position
