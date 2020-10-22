@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerBattery : MonoBehaviour
 {
-    public Camera MainCamera;
     public GameObject bullet;
     public Image image;
 
     Image bossImage;
     GameObject player;
     GameObject canvas;
+    Camera MainCamera;
     private PlayerController _playerController;
 
     int bulletCount = 0;
@@ -26,7 +26,6 @@ public class PlayerBattery : MonoBehaviour
         canvas = GameObject.Find("Canvas");
 
         bossImage = Instantiate(image , canvas.transform);
-
         bossImage.transform.position =
             RectTransformUtility.WorldToScreenPoint(MainCamera , this.transform.position);
         this.transform.position = player.transform.position + new Vector3(2f * num , 0 , 0);

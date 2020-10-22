@@ -109,6 +109,7 @@ MonoBehaviour:
   Placer: {fileID: 903050579784664432, guid: 279559a86b79e5446a11ae483a56d32d, type: 3}
   particle: {fileID: 5566179456618252004, guid: 19ef41b734b7fee4e89c698b0d341c37,
     type: 3}
+  backImage: 
   MoveAngle: 0
   BulletAngle: 0
   rotationCount: 0

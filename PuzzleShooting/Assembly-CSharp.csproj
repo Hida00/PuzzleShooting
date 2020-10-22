@@ -80,6 +80,7 @@
     <Compile Include="Assets\Script\Invisible.cs" />
     <Compile Include="Assets\Script\InvisibleImage.cs" />
     <Compile Include="Assets\Script\IPuzzle.cs" />
+    <Compile Include="Assets\Script\LastBoss.cs" />
     <Compile Include="Assets\Script\MidBoss.cs" />
     <Compile Include="Assets\Script\PanelController.cs" />
     <Compile Include="Assets\Script\Placement.cs" />
