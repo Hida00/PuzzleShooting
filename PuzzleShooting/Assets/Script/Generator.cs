@@ -50,6 +50,7 @@ public class Generator : MonoBehaviour
 
         if(fileName == "last")
         {
+            Instantiate(last_boss);
             this.gameObject.SetActive(false);
         }
     }

@@ -48,8 +48,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O)) Instantiate(debugObject);
-
         framecount++;
 
         playerImage.transform.position

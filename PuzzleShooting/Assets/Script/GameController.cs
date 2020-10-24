@@ -34,6 +34,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+#if UNITY_EDITOR
+        SelectController.volume = 0;
+#endif
         Application.targetFrameRate = 65;
 
         float scale = (Screen.height / 20f) * (40f / Screen.width);

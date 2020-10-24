@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6106503321517164822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6106503321517164827}
+  - component: {fileID: 6106503321517164826}
+  - component: {fileID: 6106503321517164821}
+  - component: {fileID: 6106503321517164820}
+  - component: {fileID: 6106503321517164823}
+  m_Layer: 0
+  m_Name: LastBoss
+  m_TagString: LASTBOSS
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6106503321517164827
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106503321517164822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6106503321517164826
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106503321517164822}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6106503321517164821
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106503321517164822}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: fc57309cf62d07941afb40580c3fea09, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!65 &6106503321517164820
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106503321517164822}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6106503321517164823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106503321517164822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab200c2ca0b4a414aafb209880201f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 8060002617541915621, guid: b143ae9ffcd4e81418d27f5f1b2b2bc2, type: 3}
+  ColorBullets:
+  - {fileID: 4659996882603593358, guid: 71b3e06ab946d1e45ab7159b808264d5, type: 3}
+  - {fileID: 4845851778965720124, guid: 7ec848e64b8e3304784b1e79e8c60df7, type: 3}
+  - {fileID: 5096869673785309770, guid: dbaab1aac92c49f488bc1cf7fdd24897, type: 3}
+  placer: {fileID: 903050579784664432, guid: 279559a86b79e5446a11ae483a56d32d, type: 3}
+  bullet: {fileID: 7414274325956033526, guid: 7f89db974b7098149a36e51e0ad03b97, type: 3}
+  trakingBullet: {fileID: 1814767884590852313, guid: da70d93f91f51094289f36fd40a17eac,
+    type: 3}
+  bomb: {fileID: 4383634776118138503, guid: 2a2b8bbf493f2d74cbf10677c3460923, type: 3}
+  lockOn: {fileID: 8523074591224020698, guid: 4c6ea4e1ad017f04f9085496dc5a3ad8, type: 3}
+  Wall: {fileID: 5913947196094515585, guid: 0553e5ff6fa8c9742889c6c2b769e479, type: 3}
+  bulletPlacer: {fileID: 903050579784664432, guid: 279559a86b79e5446a11ae483a56d32d,
+    type: 3}
+  wave: {fileID: 7771135729592515355, guid: f239d33e63e6dd94c8c800b8a62b8426, type: 3}
+  knife: {fileID: 5308351880255581016, guid: f4cc820ff212abb4ba04476a5afdcdc7, type: 3}
+  damage: 10
+  defencePoint: 10
+  HealthPoint: 10000
+  bulletSpan: 35
