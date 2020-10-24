@@ -311,7 +311,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103376033}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2557,11 +2557,13 @@ MonoBehaviour:
   - {fileID: 1144751985484154454, guid: 0185fbedfbcb42b428f959144b0be7d1, type: 3}
   - {fileID: 27494764824534553, guid: 3e4961c1c0e5bff429ffd6aef4799ad1, type: 3}
   - {fileID: 7464916947351626005, guid: 062917459bd612a449bb08badfac5e00, type: 3}
+  - {fileID: 953358085798100719, guid: 19a4f4179caa0c74ea24c25eb2b1c91a, type: 3}
   finish: {fileID: 800401058}
   difTime: 0
   Skillintervals: []
   skillSpeed: 1
   skillnum: 0
+  isSkill: 0
 --- !u!4 &1318566210
 Transform:
   m_ObjectHideFlags: 0
@@ -2589,6 +2591,7 @@ GameObject:
   - component: {fileID: 1476232622}
   - component: {fileID: 1476232621}
   - component: {fileID: 1476232625}
+  - component: {fileID: 1476232626}
   m_Layer: 0
   m_Name: Player
   m_TagString: PLAYER
@@ -2686,11 +2689,32 @@ MonoBehaviour:
   TrackingBullet: {fileID: 6882125527540467668, guid: af3c21d1736055f43b5e9b88157cec83,
     type: 3}
   playerImage: {fileID: 103376035}
+  debugObject: {fileID: 9189020181908253551, guid: b47cacf162b4f2c449f3093a851b3203,
+    type: 3}
   speedMag: 1
   health_Point: 200
   maxHealth: 0
   strength: 0
   defence: 0
+--- !u!95 &1476232626
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476232620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22d9f309ec31a9644b2f9dd5943ee4f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1489992834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2890,7 +2914,7 @@ MonoBehaviour:
   viran2: {fileID: 1570338655204721647, guid: 2abc4a5dea271704fbd9310558b686d1, type: 3}
   boss: {fileID: 5076038994119031633, guid: fd557ed2cd7ffb646bc0c189d4523f9c, type: 3}
   midBoss: {fileID: 7212248598552030754, guid: 7b7c469ac2a6ebb4ab42591abc910840, type: 3}
-  last_boss: {fileID: 6180642478604040703, guid: 4178275326dc69e40af1aae611350f0f,
+  last_boss: {fileID: 6106503321517164822, guid: 7924f203485f05e49ab69f7695a18e0f,
     type: 3}
   BossAlert: {fileID: 5826046878881403975, guid: 0b946d41dc05a8e42825c07728937451,
     type: 3}

@@ -65,9 +65,12 @@
   <ItemGroup>
     <Compile Include="Assets\Script\AttackSpeed.cs" />
     <Compile Include="Assets\Script\AttackSpeedImage.cs" />
+    <Compile Include="Assets\Script\Battery.cs" />
     <Compile Include="Assets\Script\Boss.cs" />
+    <Compile Include="Assets\Script\BulletBomb.cs" />
     <Compile Include="Assets\Script\BulletController.cs" />
     <Compile Include="Assets\Script\BulletPlacer.cs" />
+    <Compile Include="Assets\Script\CircleBullet.cs" />
     <Compile Include="Assets\Script\CreditController.cs" />
     <Compile Include="Assets\Script\Defeat.cs" />
     <Compile Include="Assets\Script\Defence.cs" />
@@ -78,11 +81,18 @@
     <Compile Include="Assets\Script\HPbarctrl.cs" />
     <Compile Include="Assets\Script\Invisible.cs" />
     <Compile Include="Assets\Script\InvisibleImage.cs" />
+    <Compile Include="Assets\Script\IPuzzle.cs" />
+    <Compile Include="Assets\Script\KnifeController.cs" />
+    <Compile Include="Assets\Script\LastBoss.cs" />
+    <Compile Include="Assets\Script\Lazer.cs" />
+    <Compile Include="Assets\Script\LockOn.cs" />
     <Compile Include="Assets\Script\MidBoss.cs" />
     <Compile Include="Assets\Script\PanelController.cs" />
     <Compile Include="Assets\Script\Placement.cs" />
+    <Compile Include="Assets\Script\PlayerBattery.cs" />
     <Compile Include="Assets\Script\PlayerController.cs" />
     <Compile Include="Assets\Script\PlayerHP.cs" />
+    <Compile Include="Assets\Script\Pointer.cs" />
     <Compile Include="Assets\Script\RateDamage.cs" />
     <Compile Include="Assets\Script\RateDamageImage.cs" />
     <Compile Include="Assets\Script\Recovery.cs" />
@@ -97,6 +107,9 @@
     <Compile Include="Assets\Script\StrengthImage.cs" />
     <Compile Include="Assets\Script\TitleController.cs" />
     <Compile Include="Assets\Script\Viran.cs" />
+    <Compile Include="Assets\Script\Wall.cs" />
+    <Compile Include="Assets\Script\Wave.cs" />
+    <Compile Include="Assets\Script\WaveBullet.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

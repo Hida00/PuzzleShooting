@@ -23,7 +23,7 @@ public class BulletController : MonoBehaviour
 
     public bool isBoss = false;
     public bool isPlayer;
-    public bool isTracking;
+    public bool isTracking; 
 
     void Start()
     {
@@ -84,7 +84,7 @@ public class BulletController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "PLAYER" && !isPlayer)
+        if(other.gameObject.CompareTag("PLAYER") && !isPlayer)
         {
             //ここにプレイヤーが弾に当たった時の処理を書く
             //Debug.Log("Hit!");
@@ -92,7 +92,7 @@ public class BulletController : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(img);
         }
-        if(other.gameObject.tag == "ENEMY" && isPlayer)
+        if(other.gameObject.CompareTag("ENEMY") && isPlayer)
         {
             //Debug.Log("Hit");
             float defense = other.gameObject.GetComponent<Viran>().defensePoint;
@@ -100,17 +100,24 @@ public class BulletController : MonoBehaviour
             Destroy(this.gameObject);
             Destroy(img);
         }
-        if(other.gameObject.tag == "BOSS" && isPlayer)
+        if(other.gameObject.CompareTag("BOSS") && isPlayer)
         {
             float defence = other.gameObject.GetComponent<Boss>().defensePoint;
             other.gameObject.GetComponent<Boss>().bossHealth -= (damagePoint - defence);
             Destroy(this.gameObject);
             Destroy(img);
         }
-        if(other.gameObject.tag == "MIDBOSS" && isPlayer)
+        if(other.gameObject.CompareTag("MIDBOSS") && isPlayer)
         {
             float defence = other.gameObject.GetComponent<MidBoss>().defencePoint;
             other.gameObject.GetComponent<MidBoss>().HealthPoint -= (damagePoint - defence);
+            Destroy(this.gameObject);
+            Destroy(img);
+        }
+        if(other.gameObject.CompareTag("LASTBOSS") && isPlayer)
+        {
+            float defence = other.gameObject.GetComponent<LastBoss>().defencePoint;
+            other.gameObject.GetComponent<LastBoss>().HealthPoint -= ( damagePoint - defence );
             Destroy(this.gameObject);
             Destroy(img);
         }
