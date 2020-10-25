@@ -50,7 +50,7 @@ public class Generator : MonoBehaviour
 
         if(fileName == "last")
         {
-            Instantiate(last_boss);
+            Invoke(nameof(SpawnLast) , 1.0f);
             this.gameObject.SetActive(false);
         }
     }
@@ -214,5 +214,9 @@ public class Generator : MonoBehaviour
             startTime = Time.time;
             wait = true;
         }
+    }
+    void SpawnLast()
+    {
+        Instantiate(last_boss);
     }
 }
