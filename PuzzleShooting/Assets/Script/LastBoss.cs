@@ -22,6 +22,7 @@ public class LastBoss : MonoBehaviour
     GameObject canvas;
     GameObject[] placers;
     Camera MainCamera;
+    PanelController _panelController;
 
     StringReader st;
 
@@ -47,6 +48,7 @@ public class LastBoss : MonoBehaviour
         bossImage = Instantiate(image , canvas.transform);
         bossImage.sprite = Resources.Load<Sprite>(@"Image/Enemy/boss_last");
 
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
         this.transform.localScale *= 3.5f;
@@ -82,7 +84,7 @@ public class LastBoss : MonoBehaviour
             readValues = st.ReadLine().Split(',');
             canRead = false;
         }
-        if(readValues[0] == "0" && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if(readValues[0] == "0" && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
         {
             string[] value = readValues[2].Split(':');
             var obj = Instantiate(bomb , this.transform.position , Quaternion.identity);
@@ -90,21 +92,21 @@ public class LastBoss : MonoBehaviour
             obj.GetComponent<BulletBomb>().abs = int.Parse(readValues[3]);
             canRead = true;
         }
-        if(readValues[0] == "1" && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if(readValues[0] == "1" && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
         {
             var obj = Instantiate(lockOn);
             obj.GetComponent<LockOn>().damage = float.Parse(readValues[2]);
             obj.GetComponent<LockOn>().radius = float.Parse(readValues[3]);
             canRead = true;
 		}
-        if(readValues[0] == "2" && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if(readValues[0] == "2" && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
         {
             var obj = Instantiate(Wall);
             obj.GetComponent<Wall>().damage = float.Parse(readValues[2]);
             obj.GetComponent<Wall>().XPos = float.Parse(readValues[3]);
             canRead = true;
         }
-        if((readValues[0] == "3") && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if((readValues[0] == "3") && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
 		{
             float[] data = new float[] { float.Parse(readValues[6]) , float.Parse(readValues[7]) , float.Parse(readValues[8]) , float.Parse(readValues[9]), float.Parse(readValues[10]) };
             var obj = Instantiate(bulletPlacer);
@@ -117,7 +119,7 @@ public class LastBoss : MonoBehaviour
             canRead = true;
 
         }
-        if(readValues[0] == "4" && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if(readValues[0] == "4" && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
         {
             var obj = Instantiate(wave);
             obj.GetComponent<Wave>().posY = new float[] { float.Parse(readValues[2]) , 0 , -float.Parse(readValues[2]) };
@@ -125,19 +127,19 @@ public class LastBoss : MonoBehaviour
             obj.GetComponent<Wave>().interval = int.Parse(readValues[4]);
             canRead = true;
         }
-        if(readValues[0] == "5" && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if(readValues[0] == "5" && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
         {
             var obj = Instantiate(knife);
             obj.GetComponent<KnifeController>().speed = float.Parse(readValues[2]);
             obj.GetComponent<KnifeController>().damage = float.Parse(readValues[3]);
             canRead = true;
 		}
-        if(readValues[0] == "10" && HealthPoint <= maxHealth * float.Parse(readValues[1]))
+        if(readValues[0] == "10" && HealthPoint <= maxHealth * float.Parse(readValues[1]) && !_panelController.isSkill)
 		{
             isBullet = !isBullet;
             canRead = true;
 		}
-        if(bulletCount >= bulletSpan && isBullet)
+        if(bulletCount >= bulletSpan && isBullet && !_panelController.isSkill)
         {
             var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 180));
             obj.GetComponent<BulletController>().damagePoint = damage * 0.7f;
