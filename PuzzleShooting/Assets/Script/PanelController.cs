@@ -72,7 +72,12 @@ public class PanelController : MonoBehaviour
             skillnum = 0;
             skill = Skill1_num;
 
-            EnemyTimeSet();
+            if(SelectController.SelectName != "last")EnemyTimeSet();
+            else
+            {
+                isSkill = true;
+                skillSpeed = 0;
+            }
             Instantiate(Skills[Skill1_num] , Panel.transform);
             //スキル1の処理はここに書く
         }
@@ -84,7 +89,12 @@ public class PanelController : MonoBehaviour
             skillnum = 1;
             skill = Skill2_num;
 
-            EnemyTimeSet();
+            if (SelectController.SelectName != "last") EnemyTimeSet();
+            else
+            {
+                isSkill = true;
+                skillSpeed = 0;
+            }
             Instantiate(Skills[Skill2_num] , Panel.transform);
             //スキル2の処理はここに書く
         }
@@ -96,7 +106,12 @@ public class PanelController : MonoBehaviour
             skillnum = 2;
             skill = Skill3_num;
 
-            EnemyTimeSet();
+            if (SelectController.SelectName != "last") EnemyTimeSet();
+            else
+            {
+                isSkill = true;
+                skillSpeed = 0;
+            }
             Instantiate(Skills[Skill3_num] , Panel.transform);
             //スキル3の処理はここに書く
         }
@@ -121,8 +136,16 @@ public class PanelController : MonoBehaviour
     }
     public void FinishTimeSet()
     {
-        EnemyTimeSet();
-        GameObject.Find("Generator").GetComponent<Generator>().startTime = Time.time - difTime;
+        if(SelectController.SelectName != "last")
+        {
+            EnemyTimeSet();
+            GameObject.Find("Generator").GetComponent<Generator>().startTime = Time.time - difTime;
+        }
+        else
+        {
+            isSkill = false;
+            skillSpeed = 1;
+        }
     }
     void EnemyTimeSet()
     {
