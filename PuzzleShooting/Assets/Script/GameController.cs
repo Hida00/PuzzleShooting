@@ -224,31 +224,28 @@ public class GameController : MonoBehaviour
     }
     public void PauseClick()
     {
-        if(isPause)
+        if(!_panelController.isSkill)
         {
-            if(!isSkill)
+            if (isPause)
             {
-                _panelController.isSkill = false;
-                _panelController.skillSpeed = 1;
+                _panelController.isPause = false;
+                _panelController.pauseSpeed = 1;
+                BGM.UnPause();
+                Time.timeScale = 1;
+                isPause = false;
+
+                PausePanel.SetActive(false);
             }
+            else
+            {
+                BGM.Pause();
+                Time.timeScale = 0;
+                _panelController.isPause = true;
+                _panelController.pauseSpeed = 0;
 
-            BGM.UnPause();
-            Time.timeScale = 1;
-            isPause = false;
-            
-            PausePanel.SetActive(false);
-        }
-        else
-        {
-            if(_panelController.isSkill) isSkill = true;
-
-            BGM.Pause();
-            Time.timeScale = 0;
-            _panelController.isSkill = true;
-            _panelController.skillSpeed = 0;
-
-            isPause = true;
-            PausePanel.SetActive(true);
+                isPause = true;
+                PausePanel.SetActive(true);
+            }
         }
     }
 }
