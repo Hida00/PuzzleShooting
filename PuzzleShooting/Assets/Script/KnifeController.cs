@@ -10,7 +10,6 @@ public class KnifeController : MonoBehaviour
 
     public float speed;
     public float damage;
-    float angle = -15;
 
     void Start()
     {

@@ -13,9 +13,13 @@ public class SelectController : MonoBehaviour
     public static string StageImage = "image2";
     public static string MusicName = "Stage1";
     public static int[] SetSkills = { 0 , 1 , 2 };
+    public static bool isHardClear = false;
 
     void Start()
     {
+#if UNITY_EDITOR
+        volume = 0;
+#endif
         BGM.volume = volume;
         BGM.loop = true;
         BGM.Play();
@@ -39,6 +43,14 @@ public class SelectController : MonoBehaviour
         BGM.Stop();
         SceneManager.LoadScene("PlayScene");
     }
+    public void Click_Three()
+	{
+        SelectName = "last";
+        StageImage = "image4";
+        MusicName = "BossS";
+        BGM.Stop();
+        SceneManager.LoadScene("PlayScene");
+	}
     public void Click_Setting()
     {
         BGM.Stop();
