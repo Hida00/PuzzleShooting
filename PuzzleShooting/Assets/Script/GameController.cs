@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
     bool[] boolen = new bool[3];
     bool isPause = false;
-    bool isSkill = false;
+    //bool isSkill = false;
 
     void Start()
     {
@@ -121,9 +121,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)) PauseClick();
+        if (Input.GetKeyDown(KeyCode.B)) Debug.Log(_panelController.isSkill);
+        if (Input.GetKeyDown(KeyCode.Escape)) PauseClick();
 
-        if(boolen[0])
+        if (boolen[0])
         {
             float prov = Screen.height / 450f;
             var obj = SkillInterval[0].transform.GetChild(1).GetComponent<Text>();
@@ -224,28 +225,25 @@ public class GameController : MonoBehaviour
     }
     public void PauseClick()
     {
-        if(!_panelController.isSkill)
+        if (isPause)
         {
-            if (isPause)
-            {
-                _panelController.isPause = false;
-                _panelController.pauseSpeed = 1;
-                BGM.UnPause();
-                Time.timeScale = 1;
-                isPause = false;
+            BGM.UnPause();
+            Time.timeScale = 1;
+            _panelController.isPause = false;
+            _panelController.pauseSpeed = 1;
+            this.isPause = false;
 
-                PausePanel.SetActive(false);
-            }
-            else
-            {
-                BGM.Pause();
-                Time.timeScale = 0;
-                _panelController.isPause = true;
-                _panelController.pauseSpeed = 0;
+            PausePanel.SetActive(false);
+        }
+        else
+        {
+            BGM.Pause();
+            Time.timeScale = 0;
+            _panelController.isPause = true;
+            _panelController.pauseSpeed = 0;
 
-                isPause = true;
-                PausePanel.SetActive(true);
-            }
+            this.isPause = true;
+            PausePanel.SetActive(true);
         }
     }
 }
