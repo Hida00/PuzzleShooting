@@ -16,6 +16,7 @@ public class Generator : MonoBehaviour
     public GameObject last_boss;
 
     GameController _gameController;
+    PanelController _panelController;
     public TextMeshProUGUI BossAlert;
 
     public Slider bossHP;
@@ -48,6 +49,8 @@ public class Generator : MonoBehaviour
         GameObject.Find("Player").GetComponent<PlayerController>().health_Point = float.Parse(info[3]);
         GameObject.Find("Player").GetComponent<PlayerController>().maxHealth = float.Parse(info[3]);
 
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
+
         if(fileName == "last")
         {
             Invoke(nameof(SpawnLast) , 1.0f);
@@ -63,10 +66,11 @@ public class Generator : MonoBehaviour
             isReader = false;
         }
 
-        bool isSkill = GameObject.Find("PanelController").GetComponent<PanelController>().isSkill;
+        bool isSkill = _panelController.isSkill;
+        bool isPause = _panelController.isPause;
         float dif = Time.time - startTime;
 
-        if(float.Parse(Data[0]) == 1f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill)
+        if(float.Parse(Data[0]) == 1f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill && !isPause)
         {
             var obj = Instantiate(viran1);
 
@@ -101,7 +105,7 @@ public class Generator : MonoBehaviour
             viranCount++;
             count++;
         }
-        if(float.Parse(Data[0]) == 2f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill)
+        if(float.Parse(Data[0]) == 2f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill && !isPause)
         {
             var obj = Instantiate(viran2);
 
@@ -136,7 +140,7 @@ public class Generator : MonoBehaviour
             viranCount++;
             count++;
         }
-        if(float.Parse(Data[0]) == 3f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill)//Boss
+        if(float.Parse(Data[0]) == 3f && (float.Parse(Data[6]) - dif) <= 0.1f && wait && !isSkill && !isPause)//Boss
         {
             bossHP.gameObject.SetActive(true);
             Destroy(GameObject.Find("BossAlert"));
@@ -168,7 +172,7 @@ public class Generator : MonoBehaviour
             viranCount++;
             count++;
         }
-        if(float.Parse(Data[0]) == 4f && (float.Parse(Data[3]) - dif) <= 0.1f && wait && !isSkill)//MidBoss
+        if(float.Parse(Data[0]) == 4f && (float.Parse(Data[3]) - dif) <= 0.1f && wait && !isSkill && !isPause)//MidBoss
         {
             var obj = Instantiate(midBoss);
 
@@ -191,7 +195,7 @@ public class Generator : MonoBehaviour
                 wait = false;
             }
         }
-        if(float.Parse(Data[0]) == 5f && (dif - float.Parse(Data[4])) <= 0.1f && wait && !isSkill)
+        if(float.Parse(Data[0]) == 5f && (dif - float.Parse(Data[4])) <= 0.1f && wait && !isSkill && !isPause)
         {
             float prov = (float)Screen.height / 450;
 

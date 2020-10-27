@@ -29,11 +29,6 @@ public class RecoveryImage : MonoBehaviour
 
     void Update()
     {
-        //Debug用。Escapeキーを押すとスキルの終了
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            _panelController.isSkill = false;
-        }
         if (Num == 5 && islight == 1 && _panelController.isSkill)
         {
             _recovery.isSuccess = true;
