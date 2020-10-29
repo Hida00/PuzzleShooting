@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CircleBullet : MonoBehaviour
 {
     PlayerController _playerController;
+    PanelController _panelController;
 
     public Image bulletImage;
     Image img;
@@ -37,8 +38,10 @@ public class CircleBullet : MonoBehaviour
 		img.transform.position
 			= RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
-		_playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         moveOverY = ( 19.2f * ( (float)Screen.height / (float)Screen.width ) ) + 1f;
+
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
     }
 
     void Update()
@@ -47,7 +50,10 @@ public class CircleBullet : MonoBehaviour
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
         img.rectTransform.rotation = this.transform.rotation;
 
-        this.transform.position += transform.up * speed * Time.deltaTime * 0.6f;
+        float skill = _panelController.skillSpeed;
+        float pause = _panelController.pauseSpeed;
+
+        this.transform.position += transform.up * speed * Time.deltaTime * 0.6f * skill * pause;
         this.transform.rotation = Quaternion.Euler(0 , 0 , rotate);
 
 		rotate += 1f * abs;

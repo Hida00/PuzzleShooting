@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public Image playerImage;
     public GameObject debugObject;
 
+    PanelController _panelController;
+
     //Shift押下中速度を落とすための補正倍率
     public float speedMag = 1.0f;
     readonly float speed = 0.15f;
@@ -44,6 +46,8 @@ public class PlayerController : MonoBehaviour
         defence = 1.0f;
 
         moveOverY = 19.2f * ((float)Screen.height / (float)Screen.width);
+
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
     }
 
     void Update()
@@ -53,7 +57,7 @@ public class PlayerController : MonoBehaviour
         playerImage.transform.position
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position) + Vector2.up * 2;
 
-        if(framecount >= attackSpeed && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
+        if(framecount >= attackSpeed && !_panelController.isSkill && !_panelController.isPause)
         {
             Vector3 PlayerPosition = GameObject.Find("Player").GetComponent<Transform>().position;
             var one = new Vector3(PlayerPosition.x - 1f , PlayerPosition.y + 0.5f , PlayerPosition.z);
@@ -87,16 +91,17 @@ public class PlayerController : MonoBehaviour
 
             framecount = 0;
         }
-        float skill = GameObject.Find("PanelController").GetComponent<PanelController>().skillSpeed;
+        float skill = _panelController.skillSpeed;
+        float pause = _panelController.pauseSpeed;
         //移動キーの取得
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup * skill;
+            this.transform.position += Vector3.down * -1f * speed * speedMag * moveup * skill * pause;
         if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown * skill;
+            this.transform.position += Vector3.down * +1f * speed * speedMag * movedown * skill * pause;
         if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft * skill;
+            this.transform.position += Vector3.left * +1f * speed * speedMag * moveleft * skill * pause;
         if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright * skill;
+            this.transform.position += Vector3.right * 1f * speed * speedMag * moveright * skill * pause;
 
         if(Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.LeftShift))
         {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class KnifeController : MonoBehaviour
 {
+
     public GameObject bullet;
     public Image image;
 

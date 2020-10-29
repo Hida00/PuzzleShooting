@@ -26,9 +26,11 @@ public class PanelController : MonoBehaviour
     int Skill3_num = 2;
     int skill;
     public int skillSpeed = 1;
+    public int pauseSpeed = 1;
     public int skillnum;
 
     public bool isSkill = false;
+    public bool isPause = false;
     [NonSerialized]
     public bool[] canskill;
 
@@ -72,7 +74,12 @@ public class PanelController : MonoBehaviour
             skillnum = 0;
             skill = Skill1_num;
 
-            EnemyTimeSet();
+            if (SelectController.SelectName != "last") EnemyTimeSet();
+            else
+            {
+                skillSpeed = 0;
+                isSkill = true;
+            }
             Instantiate(Skills[Skill1_num] , Panel.transform);
             //スキル1の処理はここに書く
         }
@@ -84,7 +91,12 @@ public class PanelController : MonoBehaviour
             skillnum = 1;
             skill = Skill2_num;
 
-            EnemyTimeSet();
+            if (SelectController.SelectName != "last") EnemyTimeSet();
+            else
+            {
+                skillSpeed = 0;
+                isSkill = true;
+            }
             Instantiate(Skills[Skill2_num] , Panel.transform);
             //スキル2の処理はここに書く
         }
@@ -96,7 +108,12 @@ public class PanelController : MonoBehaviour
             skillnum = 2;
             skill = Skill3_num;
 
-            EnemyTimeSet();
+            if (SelectController.SelectName != "last") EnemyTimeSet();
+            else
+            {
+                skillSpeed = 0;
+                isSkill = true;
+            }
             Instantiate(Skills[Skill3_num] , Panel.transform);
             //スキル3の処理はここに書く
         }
@@ -121,8 +138,16 @@ public class PanelController : MonoBehaviour
     }
     public void FinishTimeSet()
     {
-        EnemyTimeSet();
-        GameObject.Find("Generator").GetComponent<Generator>().startTime = Time.time - difTime;
+        if (SelectController.SelectName != "last")
+        {
+            EnemyTimeSet();
+            GameObject.Find("Generator").GetComponent<Generator>().startTime = Time.time - difTime;
+        }
+        else
+        {
+            skillSpeed = 1;
+            isSkill = false;
+        }
     }
     void EnemyTimeSet()
     {

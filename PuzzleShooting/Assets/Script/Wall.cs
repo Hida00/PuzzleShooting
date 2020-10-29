@@ -7,6 +7,8 @@ public class Wall : MonoBehaviour
     public GameObject lazer;
     public GameObject bullet;
 
+    PanelController _panelController;
+
     Quaternion right;
     Quaternion left;
 
@@ -24,11 +26,13 @@ public class Wall : MonoBehaviour
 
         right = Quaternion.Euler(0 , 0 , 90);
         left = Quaternion.Euler(0 , 0 , -90);
+
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
     }
 
     void Update()
     {
-        if(Time.time - time >= 0.1f * count)
+        if(Time.time - time >= 0.1f * count && !_panelController.isSkill && !_panelController.isPause)
 		{
             if(count % 2 == 0)
 			{

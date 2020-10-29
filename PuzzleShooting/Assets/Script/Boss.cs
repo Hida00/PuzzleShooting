@@ -150,7 +150,7 @@ public class Boss : MonoBehaviour
             }
             bossHealth = maxHealth;
         }
-        if(frameCount == interval && !_panelController.isSkill && !isPlaceFinish)
+        if(frameCount == interval && !_panelController.isSkill && !isPlaceFinish && !_panelController.isPause)
         {
             BulletAngle = (float)Math.Atan2(this.transform.position.y - _player.transform.position.y , this.transform.position.x - _player.transform.position.x) * 180f / (float)Math.PI;
             var obj = Instantiate(Bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle + 90f));
@@ -164,7 +164,7 @@ public class Boss : MonoBehaviour
             obj.GetComponent<BulletController>().damagePoint = damage;
             frameCount = 0;
         }
-        if(Time.time - StartTime >= timeSpan && !_panelController.isSkill)
+        if(Time.time - StartTime >= timeSpan && !_panelController.isSkill && !_panelController.isPause)
         {
             StartTime = Time.time;
             MoveAngle += 360f / rotationCount;

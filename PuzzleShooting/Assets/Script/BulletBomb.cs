@@ -10,9 +10,12 @@ public class BulletBomb : MonoBehaviour
     public Vector3 explosionPos;
     public Image image;
 
+    PanelController _panelController;
+
     GameObject canvas;
     Camera MainCamera;
     Image bombImage;
+
 
     public float damage = 10f;
     float time;
@@ -33,6 +36,8 @@ public class BulletBomb : MonoBehaviour
         bombImage = Instantiate(image , canvas.transform);
         bombImage.sprite = Resources.Load<Sprite>(@"Image/other/bomb");
         bombImage.transform.localScale *= 0.5f;
+
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
     }
 
     void Update()
@@ -40,14 +45,16 @@ public class BulletBomb : MonoBehaviour
         bombImage.transform.position =
             RectTransformUtility.WorldToScreenPoint(MainCamera , this.transform.position);
 
-        if(Vector3.Distance(this.transform.position , explosionPos) > 0.1f)
+        if(Vector3.Distance(this.transform.position , explosionPos) > 0.1f && !_panelController.isSkill && !_panelController.isPause)
         {
+            float skill = _panelController.skillSpeed;
+            float pause = _panelController.pauseSpeed;
             float _time = speed / (Time.time - time);
             float angle = Mathf.Atan2(explosionPos.y - this.transform.position.y , explosionPos.x - this.transform.position.x);
             this.transform.rotation = Quaternion.Euler(0 , 0 , angle * Mathf.Rad2Deg + 90f);
-            this.transform.position += new Vector3(Mathf.Cos(angle) , Mathf.Sin(angle) , 0) * Time.deltaTime * _time;
+            this.transform.position += new Vector3(Mathf.Cos(angle) , Mathf.Sin(angle) , 0) * Time.deltaTime * _time * skill * pause;
         }
-        else
+        else if(!_panelController.isSkill && !_panelController.isPause)
         {
             if(count % 12 == 0)
             {

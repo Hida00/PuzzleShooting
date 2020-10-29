@@ -80,7 +80,7 @@ public class Viran : MonoBehaviour
         img.rectTransform.position
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
-        if(!_panelController.isSkill) frameCount++;
+        if(!_panelController.isSkill && !_panelController.isPause) frameCount++;
         if(ViranHealth <= 0f)
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
@@ -89,20 +89,19 @@ public class Viran : MonoBehaviour
             Destroy(img);
             Destroy(this.gameObject);
         }
-        if(Time.time - startTime >= changeTime && !_panelController.isSkill)
+        if(Time.time - startTime >= changeTime && !_panelController.isSkill && !_panelController.isPause)
         {
             startTime = Time.time;
             MoveAngle = MoveAngles[count];
             count++;
         }
-        if((Time.time - startTime) >= displaceTime && !_panelController.isSkill)
+        if((Time.time - startTime) >= displaceTime && !_panelController.isSkill && !_panelController.isPause)
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             Destroy(img);
             Destroy(this.gameObject);
         }
-        if(frameCount == interval && Type == 2 && speed != 0
-            && !GameObject.Find("PanelController").GetComponent<PanelController>().isSkill)
+        if(frameCount == interval && Type == 2 && speed != 0 && !_panelController.isSkill && !_panelController.isPause)
         {
             var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0,0,BulletAngle));
             obj.GetComponent<BulletController>().damagePoint = 1f;
@@ -112,7 +111,7 @@ public class Viran : MonoBehaviour
             obj.GetComponent<BulletController>().damagePoint = damage;
             frameCount = 0;
         }
-        if(frameCount == interval && speed == 0 && !_panelController.isSkill)
+        if(frameCount == interval && speed == 0 && !_panelController.isSkill && !_panelController.isPause)
         {
             frameCount = 0;
             Vector3 pos = GameObject.Find("Player").transform.position;
@@ -129,7 +128,7 @@ public class Viran : MonoBehaviour
             obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 ,  40f + angle));
             obj.GetComponent<BulletController>().damagePoint = damage;
         }
-        if(frameCount == interval && Type == 1 && speed != 0 && !_panelController.isSkill)
+        if(frameCount == interval && Type == 1 && speed != 0 && !_panelController.isSkill && !_panelController.isPause)
         {
             var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , BulletAngle));
             obj.GetComponent<BulletController>().damagePoint = damage;
@@ -153,8 +152,11 @@ public class Viran : MonoBehaviour
             Destroy(img);
             Destroy(this.gameObject);
         }
+
         float skill = _panelController.skillSpeed;
-        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * skill;
+        float pause = _panelController.pauseSpeed;
+
+        this.transform.position += new Vector3((float)Math.Sin(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , (float)Math.Cos(MoveAngle * Math.PI / 180) * speed * Time.deltaTime , 0) * skill * pause;
     }
     Vector3 GetworldPos(RectTransform rect)
     {

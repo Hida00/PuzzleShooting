@@ -53,8 +53,8 @@ public class MidBoss : MonoBehaviour
         img.rectTransform.position
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
-        if(!_panelController.isSkill) frameCount++;
-        if(Time.time - startTime >= TimeSpan && !_panelController.isSkill)
+        if(!_panelController.isSkill && !_panelController.isPause) frameCount++;
+        if(Time.time - startTime >= TimeSpan && !_panelController.isSkill && !_panelController.isPause)
         {
             Vector3 pos = GameObject.Find("Player").transform.position;
             float angle = (float)(Math.Atan2(this.transform.position.y - pos.y , this.transform.position.x - pos.x) * 180f / Math.PI);
@@ -68,7 +68,7 @@ public class MidBoss : MonoBehaviour
             obj.GetComponent<BulletController>().bulletImage = Yellow;
             startTime = Time.time;
         }
-        if(frameCount == interval && !_panelController.isSkill)
+        if(frameCount == interval && !_panelController.isSkill && !_panelController.isPause)
         {
             var obj = Instantiate(bullet , this.transform.position , Quaternion.Euler(0 , 0 , 180f + angle));
             obj.GetComponent<BulletController>().damagePoint = damage;
@@ -97,7 +97,7 @@ public class MidBoss : MonoBehaviour
 
             frameCount = 0;
         }
-        if(HealthPoint <= 0f && !_panelController.isSkill)
+        if(HealthPoint <= 0f && !_panelController.isSkill && !_panelController.isPause)
         {
             GameObject.Find("Generator").GetComponent<Generator>().Ecount++;
             Instantiate(particle , this.transform.position , Quaternion.Euler(90 , 0 , 0));

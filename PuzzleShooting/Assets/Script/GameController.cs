@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject DataArea;
     public GameObject[] SkillInterval;
     public Image Pause;
+    public Text CoolTime;
     public GameObject PausePanel;
     Slider bossHP;
     public AudioSource BGM;
@@ -30,7 +31,6 @@ public class GameController : MonoBehaviour
 
     bool[] boolen = new bool[3];
     bool isPause = false;
-    bool isSkill = false;
 
     void Start()
     {
@@ -55,6 +55,10 @@ public class GameController : MonoBehaviour
         scoreText.rectTransform.anchoredPosition -= new Vector2(10f , 5f);
         scoreText.rectTransform.sizeDelta *= prov;
         scoreText.fontSize *= (prov * 3f / 4f);
+
+        CoolTime.rectTransform.anchoredPosition *= prov;
+        CoolTime.rectTransform.sizeDelta *= prov;
+        CoolTime.fontSize = (int)( CoolTime.fontSize * prov );
 
         canvas.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + SelectController.StageImage);
         canvas.GetComponent<Image>().color = new Color(1f , 1f , 1f , 0.7f);
@@ -224,28 +228,22 @@ public class GameController : MonoBehaviour
     }
     public void PauseClick()
     {
-        if(isPause)
+        if(isPause) //Pause中
         {
-            if(!isSkill)
-            {
-                _panelController.isSkill = false;
-                _panelController.skillSpeed = 1;
-            }
-
             BGM.UnPause();
             Time.timeScale = 1;
             isPause = false;
+            _panelController.isPause = false;
+            _panelController.pauseSpeed = 1;
             
             PausePanel.SetActive(false);
         }
-        else
+        else //Pauseしてない時
         {
-            if(_panelController.isSkill) isSkill = true;
-
             BGM.Pause();
             Time.timeScale = 0;
-            _panelController.isSkill = true;
-            _panelController.skillSpeed = 0;
+            _panelController.isPause = true;
+            _panelController.pauseSpeed = 0;
 
             isPause = true;
             PausePanel.SetActive(true);
