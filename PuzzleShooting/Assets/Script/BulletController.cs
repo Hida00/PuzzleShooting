@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class BulletController : MonoBehaviour
 {
     PlayerController _playerController;
+    PanelController _panelController;
 
     public Image bulletImage;
     Image img;
@@ -36,6 +37,7 @@ public class BulletController : MonoBehaviour
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
 
         _playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
         moveOverY = (19.2f * ((float)Screen.height / (float)Screen.width)) + 1f;
     }
 
@@ -45,22 +47,24 @@ public class BulletController : MonoBehaviour
             = RectTransformUtility.WorldToScreenPoint(Camera.main , this.transform.position);
         img.rectTransform.rotation = this.transform.rotation;
 
+        float skill = _panelController.skillSpeed;
+
         if(isTracking)
         {
             if(isPlayer)
             {
-                this.transform.position += transform.up * speed * Time.deltaTime * 0.7f;
+                this.transform.position += transform.up * speed * Time.deltaTime * 0.7f * skill;
                 try
                 {
                     var Enemy = GameObject.FindGameObjectsWithTag("ENEMY");
                     float angle = (float)Math.Atan2(this.transform.position.y - Enemy[0].transform.position.y , this.transform.position.x - Enemy[0].transform.position.x) * 180f / (float)Math.PI;
                     this.transform.rotation = Quaternion.Euler(0 , 0 , angle + 90f);
                     //this.transform.position += new Vector3((float)Math.Sin(angle) * speed * Time.deltaTime , (float)Math.Cos(angle) * speed * Time.deltaTime , 0) * 0.7f;
-                    this.transform.position += transform.up * speed * Time.deltaTime * 0.5f;
+                    this.transform.position += transform.up * speed * Time.deltaTime * 0.5f * skill;
                 }
                 catch
                 {
-                    this.transform.position += transform.up * speed * Time.deltaTime * 0.7f;
+                    this.transform.position += transform.up * speed * Time.deltaTime * 0.7f * skill;
                 }
             }
         }
@@ -68,11 +72,11 @@ public class BulletController : MonoBehaviour
         {
             if(isPlayer)
             {
-                this.transform.position += transform.up * speed * Time.deltaTime * 0.6f;
+                this.transform.position += transform.up * speed * Time.deltaTime * 0.6f * skill;
             }
             else
             {
-                if(!isBoss) this.transform.position += transform.up * speed * Time.deltaTime * 0.3f;
+                if(!isBoss) this.transform.position += transform.up * speed * Time.deltaTime * 0.3f * skill;
             }
         }
 

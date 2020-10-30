@@ -6,6 +6,8 @@ public class Wave : MonoBehaviour
 {
     public GameObject bullet;
 
+    PanelController _panelController;
+
     Quaternion up;
     Quaternion down;
 
@@ -21,11 +23,13 @@ public class Wave : MonoBehaviour
         posX = 9.6f;
         up = Quaternion.Euler(0 , 0 , 0);
         down = Quaternion.Euler(0 , 0 , -180);
+
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
     }
 
     void Update()
     {
-        if(count >= interval)
+        if(count >= interval && !_panelController.isSkill)
 		{
             var obj = Instantiate(bullet , new Vector3(posX , posY[0]) , up);
             obj.GetComponent<WaveBullet>().damagePoint = damage;

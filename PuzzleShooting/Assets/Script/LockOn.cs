@@ -7,6 +7,7 @@ public class LockOn : MonoBehaviour
     public GameObject pointer;
     public GameObject lazer;
 
+    PanelController _panelController;
     GameObject player;
     GameObject[] pointers;
 
@@ -43,13 +44,15 @@ public class LockOn : MonoBehaviour
             pointers[x] = Instantiate(pointer , P_Pos + (new Vector3(Mathf.Cos(60 * x * Mathf.Deg2Rad) , Mathf.Sin(60 * x * Mathf.Deg2Rad) , 0)) * radius , Quaternion.identity);
 		}
 
+        _panelController = GameObject.Find("PanelController").GetComponent<PanelController>();
+
         time = Time.time;
         Invoke(nameof(Finish) , 1.1f);
     }
 
     void Update()
     {
-        if(count < 6 && (Time.time - time - 0.5f) >= 0.10f * count)
+        if(count < 6 && (Time.time - time - 0.5f) >= 0.10f * count && !_panelController.isSkill)
 		{
             Vector3 pos = pointers[count].transform.position;
             float angle = Mathf.Atan2(pos.y - P_Pos.y , pos.x - P_Pos.x) * Mathf.Rad2Deg;

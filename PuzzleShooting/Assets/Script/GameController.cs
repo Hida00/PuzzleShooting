@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject DataArea;
     public GameObject[] SkillInterval;
     public Image Pause;
+    public Text CoolTime;
     public GameObject PausePanel;
     Slider bossHP;
     public AudioSource BGM;
@@ -55,6 +56,10 @@ public class GameController : MonoBehaviour
         scoreText.rectTransform.anchoredPosition -= new Vector2(10f , 5f);
         scoreText.rectTransform.sizeDelta *= prov;
         scoreText.fontSize *= (prov * 3f / 4f);
+
+        CoolTime.rectTransform.anchoredPosition *= prov;
+        CoolTime.rectTransform.sizeDelta *= prov;
+        CoolTime.fontSize = (int)(CoolTime.fontSize * prov);
 
         canvas.GetComponent<Image>().sprite = Resources.Load<Sprite>(@"Image/other/" + SelectController.StageImage);
         canvas.GetComponent<Image>().color = new Color(1f , 1f , 1f , 0.7f);

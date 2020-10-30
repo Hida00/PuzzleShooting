@@ -1,6 +1,6 @@
 Win64
 PlayerPath?
-C:/Users/Hakuyou/Desktop/git/Unity/PuzzleShooting/Debug/2020.10.25(2)/PuzzleShooting.exe
+C:/Users/Hakuyou/Desktop/git/unity/PuzzleShooting/Debug/2020.10.30/PuzzleShooting.exe
 SceneListBegin?
 Assets/Scenes/Title.unity
 Assets/Scenes/Select.unity
@@ -12,7 +12,7 @@ Assets/Scenes/Credit.unity
 Assets/Scenes/HowToPlay.unity
 SceneListEnd?
 3c08375166df118bd1801438fc36b92f Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
-8dfc1eb6f2d2c7a907de027da335c74c Assembly-CSharp.dll:.PanelController
+7198e63581765ea0112f038ce8d53068 Assembly-CSharp.dll:.PanelController
 77c21079ace8d76ce6e941d3dabbfe6e Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -64,8 +64,6 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
 1ef29a75a067b6baaa2353a6471a4e98 Assembly-CSharp.dll:.SkillSelect
 d3c76b14a25eebd3a3323dd43297919c Unity.TextMeshPro.dll:TMPro.TMP_InputField
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
-71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 507174d46dacbc5fe45e28485db5dd1e UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -172,7 +170,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 1028c39545bcfa841aaab54121e69a47 Assembly-CSharp.dll:.PlayerHP
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Defeat
-59ffcd1c30409a4610b2ced477719297 Assembly-CSharp.dll:.GameController
+33abc98720bd7378ee961a474a5fb1bd Assembly-CSharp.dll:.GameController
 35a9693c388776aaf487636491a20f11 Unity.TextMeshPro.dll:TMPro.TMP_FontAsset
 e1300922cc039f41ab46a47f4cb05898 Unity.TextMeshPro.dll:TMPro.TMP_Settings
 fa977b352202c2d8429e5edaf2bfe248 Assembly-CSharp.dll:.DefenceImage
@@ -203,7 +201,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 7a3fe5eb5e1335a1485eb6d6ddb569d2 Assembly-CSharp.dll:.Boss
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.StrengthImage
 1fa3794b977d1beffe3b13195202f631 Assembly-CSharp.dll:.BulletController
-f6c89cd9993663b8e44324bda736802d Assembly-CSharp.dll:.TitleController
+ce48c7f64c207c7304a815a8c2963cf3 Assembly-CSharp.dll:.TitleController
 d791aa6007fa3640be1164ea75bb087d Unity.TextMeshPro.dll:TMPro.TMP_StyleSheet
 6f69c486e1a6313aa828269b80de6b63 Assembly-CSharp.dll:.HowController
 df434544c9f7b33d1cc7e635b180d279 Unity.TextMeshPro.dll:TMPro.TextMeshPro
