@@ -15,7 +15,7 @@ public class TitleController : MonoBehaviour
     
     void Start()
     {
-        float prov = (float)Screen.height / 450;
+        float prov = (float)Screen.width / 450;
 
         //Title.rectTransform.sizeDelta *= prov;
         //Play.rectTransform.sizeDelta *= prov;

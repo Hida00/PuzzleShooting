@@ -11,6 +11,7 @@ public class RateDamage : MonoBehaviour
     public Image[] panels;
     public Text Explanation;
     public Image time;
+    public Image ExImage;
     Image TimeImage;
 
     RateDamageImage[] images;
@@ -65,14 +66,18 @@ public class RateDamage : MonoBehaviour
     {
         int i = 0;
         count = 1;
+        float prov = (float)Screen.height / 450;
         TextAsset csv = Resources.Load(@"CSV/RateDamage/RateDamage") as TextAsset;
         StringReader st = new StringReader(csv.text);
+
+        var eximg = Instantiate(ExImage , panel.transform);
+        eximg.rectTransform.anchoredPosition *= prov;
+        eximg.rectTransform.sizeDelta *= prov;
 
         string[] info = st.ReadLine().Split(',');
         size = int.Parse(info[1]);
         images = new RateDamageImage[size];
         System.Random r = new System.Random();
-        float prov = (float)Screen.height / 450;
 
         Names = st.ReadLine().Split(',');
 

@@ -175,7 +175,7 @@ public class Recovery : MonoBehaviour
     }
     public void Succese()
     {
-        float value = _playerController.maxHealth * 0.15f;
+        float value = _playerController.maxHealth * 0.10f;
         _playerController.health_Point += value;
         Finish();
     }

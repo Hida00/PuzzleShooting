@@ -206,12 +206,12 @@ public class PlayerController : MonoBehaviour
     {
         if(skill)
         {
-            defence /= 2f;
+            defence /= 4f;
             skill = false;
         }
         else
         {
-            defence *= 2f;
+            defence *= 4f;
             skill = true;
             Invoke("Defence" , 15f);
         }
