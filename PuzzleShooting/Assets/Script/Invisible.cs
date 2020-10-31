@@ -72,8 +72,8 @@ public class Invisible : MonoBehaviour
         int i = 0;
 
         var text = Instantiate(Explanation , panel.transform);
-        text.rectTransform.sizeDelta = new Vector2(prov , 90f * prov);
-        text.rectTransform.anchoredPosition = new Vector2(0f , 160f * prov);
+        text.rectTransform.sizeDelta = new Vector2(prov , 100f * prov);
+        text.rectTransform.anchoredPosition = new Vector2(0f , 170f * prov);
         text.fontSize = (int)(text.fontSize * prov);
         text.text = "";
 
